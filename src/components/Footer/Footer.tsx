@@ -1,6 +1,6 @@
 import React from "react";
 export const Footer = () => {
-
+    // @TODO cleanup footer
     return <>
         <footer className="bg-neutral text-neutral-content mt-auto">
             <div className="container mx-auto">
