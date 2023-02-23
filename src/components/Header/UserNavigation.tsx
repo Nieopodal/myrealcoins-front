@@ -1,7 +1,9 @@
 import React from "react";
+import {ThemeChangeSelector} from "./ThemeChangeSelector";
 
 export const UserNavigation = () => (
     <div className="navbar-end">
+        <ThemeChangeSelector/>
         <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

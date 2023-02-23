@@ -5,7 +5,7 @@ import {UserNavigation} from "./UserNavigation";
 
 export const Header = () => {
     return <>
-        <nav className="navbar bg-base-100 border-b-[1px] border-base-200 w-screen md:w-full">
+        <nav className="navbar bg-base-100 border-b-[1px] w-screen md:w-full">
             <MainMenu/>
             <AddOperation/>
             <UserNavigation/>
