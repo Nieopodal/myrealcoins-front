@@ -1,5 +1,6 @@
 import React from "react";
 import {Card} from "../common/Card";
+import {pricifyHandler} from "../../utils/pricify-handler";
 
 export const FinancialCushionCard = () => {
 
@@ -8,7 +9,7 @@ export const FinancialCushionCard = () => {
             <div className="stat-title xl:text-lg font-semibold ">
                 <h3>Poduszka finansowa [PLN]</h3>
             </div>
-            <div className="stat-value">54503,45</div>
+            <div className="stat-value">{pricifyHandler(54503.45)}</div>
         </div>
     </Card>
 };

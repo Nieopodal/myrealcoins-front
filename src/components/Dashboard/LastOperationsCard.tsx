@@ -1,45 +1,48 @@
-import React from "react";
-import {Card} from "../common/Card";
+import React, {useEffect, useState} from "react";
+import {ApiResponse, OperationEntity } from "types";
+import {useDispatch, useSelector} from "react-redux";
+import {setOperations} from "../../features/operations/operations-slice";
+import {RootState} from "../../store";
+import {OperationsTable} from "../common/OperationsTable";
 
-export const LastOperationsCard = () => {
+interface Props {
+    periodId: string;
+}
 
-    return <Card additionalClasses="mx-auto xl:w-[90%] 2xl:w-[80%] pt-4 xl:px-2 text-xs md:text-base" btnDescription="Lista operacji" btnAction={()=>{}}>
-        <h3 className="card-title mx-auto w-fit pt-2">Ostatnie operacje</h3>
-        <div className="overflow-x-auto card-body px-0 w-full rounded-none pb-0">
-            <table className="table table-zebra w-full">
+export const LastOperationsCard = ({periodId}: Props) => {
+    const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
+    const {operations} = useSelector((state: RootState) => state.operations);
 
-                <thead>
-                <tr>
-                    <th>Rodzaj</th>
-                    <th>Kwota</th>
-                    <th>Data</th>
-                    <th>Akcja</th>
-                </tr>
-                </thead>
-                <tbody>
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await fetch(`http://localhost:3001/operation/get-period-operations/${periodId}`);
+                const data: ApiResponse<OperationEntity[] | null> = await res.json();
+                if (data.success) {
+                    if (data.payload === null) {
+                        console.log('Brak aktywnego okresu.');
+                    } else {
+                        console.log('Pobrano okres:', data.payload);
+                        dispatch(setOperations(data.payload));
+                    }
+                } else if (data.error) {
+                    console.log('Serwer informuje o błędzie', data.error);
+                } else {
+                    console.log('Błąd!');
+                }
+            } catch (e) {
+                console.log(`Wystąpił błąd podczas próby wykonania zapytania.`);
+            } finally {
+                setLoading(false);
+            }
+        })();
+    }, [dispatch, periodId]);
 
-                <tr>
-                    <td>Quality Control</td>
-                    <td>-49,90</td>
-                    <td>2023.01.03</td>
-                    <td><a href="/">Szczegóły</a></td>
-                </tr>
+    if (loading) {
+        return <p>Ładowanie danych</p>
+    }
 
-                <tr>
-                    <td>Desktop Support </td>
-                    <td>-49,90</td>
-                    <td>2023.01.03</td>
-                    <td><a href="/">Szczegóły</a></td>
-                </tr>
+    return <OperationsTable operations={operations.slice(0,3)} title="Ostatnie operacje" btnAction={() => {}}/>
 
-                <tr>
-                    <td>Tax Accountant</td>
-                    <td>+49,90</td>
-                    <td>2023.01.03</td>
-                    <td><a href="/">Szczegóły</a></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </Card>
 };

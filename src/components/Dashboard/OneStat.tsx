@@ -3,7 +3,7 @@ import {BtnOutline} from "../common/BtnOutline";
 
 interface Props {
     title: string;
-    value: string | number;
+    value: number | string;
     description?: string;
     btnAction?: () => void;
     btnDescription?: string;

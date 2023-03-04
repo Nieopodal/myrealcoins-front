@@ -1,21 +1,25 @@
-import React from "react";
-import {Doughnut} from "react-chartjs-2";
+import React, {useState} from "react";
+import { PeriodEntity } from "types";
 import {Card} from "../common/Card";
 
-export const MainChartCard = () => {
+import {ChartModal} from "./ChartModal";
+import {Chart} from "../common/Chart";
 
-    const data = {
-        labels: ['Wydatki', 'Oszczędności'],
-        datasets: [{
-            label: 'Kwota',
-            data: [40000.00, 10000.00],
-            backgroundColor: ['#560df6', '#37cbbd'],
-        }],
-    };
+interface Props {
+    actualPeriod: PeriodEntity,
+}
+export const MainChartCard = ({actualPeriod}: Props) => {
 
-    return <Card btnAction={()=>{}} btnDescription="Zobacz szczegóły">
-        <div className=" h-72 sm:h-80 items-center mx-auto pt-5">
-            <Doughnut data={data}/>
-        </div>
+    const [open, setOpen] = useState(false);
+    const handleToggle = () => setOpen((prev) => !prev);
+
+    const {paymentsAmount, freeCashAmount, savingsAmount} = actualPeriod;
+
+    return <Card btnAction={handleToggle} btnDescription="Zobacz strukturę wydatków">
+        <Chart labels={['Wydatki', 'Oszczędności', 'Wolna gotówka']} amounts={[paymentsAmount, savingsAmount, freeCashAmount]} backgroundColors={['#9D3482', '#560df6', '#37cbbd']}/>
+
+        {open && <ChartModal open={open} handleToggle={handleToggle}/>}
+
     </Card>
+
 };
