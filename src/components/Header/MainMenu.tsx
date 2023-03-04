@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 export const MainMenu = () => (
     <div className="navbar-start">
@@ -7,13 +8,14 @@ export const MainMenu = () => (
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
             </label>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><button>Bieżący okres</button></li>
-                <li><button>Archiwum</button></li>
+                <li><NavLink to="/">Bieżący okres</NavLink></li>
+                <li><NavLink to="/operation-list">Lista operacji</NavLink></li>
                 <li><button>Mapa</button></li>
+                <li><button>Archiwum</button></li>
                 <li><button>Konfiguracja budżetu</button></li>
             </ul>
         </div>
-        <button className="btn btn-ghost hidden sm:inline-flex normal-case text-sm sm:text-2xl">MyRealCoins</button>
+        <NavLink to="/" className="btn btn-ghost hidden sm:inline-flex normal-case text-sm sm:text-2xl">MyRealCoins</NavLink>
         <button className="inline-flex sm:hidden">Ikonka!</button>
         {/*@TODO add app icon*/}
     </div>

@@ -19,7 +19,7 @@ export const decodePaymentType = (category: PaymentCategory): string => {
     }
 };
 
-export const encodeOperationSubtype = (category: PaymentCategory, subcategory: PaymentSubcategory) => {
+export const decodeOperationSubtype = (category: PaymentCategory, subcategory: PaymentSubcategory) => {
     if (category === PaymentCategory.BasicNeeds) {
         switch (subcategory) {
             case (BasicNeeds.Supermarket): {

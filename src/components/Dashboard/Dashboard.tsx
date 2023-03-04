@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import {MainChartCard} from "./MainChartCard";
@@ -6,48 +6,35 @@ import {MainStatsCard} from "./MainStatsCard";
 import {FinancialCushionCard} from "./FinancialCushionCard";
 import {LastOperationsCard} from "./LastOperationsCard";
 import {RootState} from "../../store";
-import {ApiResponse, PeriodEntity} from 'types';
+import {PeriodEntity} from 'types';
 import {setActual} from "../../features/period/period-slice";
 import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
+import {useFetch} from "../../hooks/useFetch";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
     const dispatch = useDispatch();
     const {actualPeriod} = useSelector((state: RootState) => state.period);
-    const [loading, setLoading] = useState(true);
+    const [data, error, loading] = useFetch(`period/actual`);
 
     useEffect(() => {
-        (async () => {
-            console.log('starting')
-            try {
-                const res = await fetch(`http://localhost:3001/period/actual`);
-                const data: ApiResponse<PeriodEntity | null> = await res.json();
-                if (data.success) {
-                    if (data.payload === null) {
-                        console.log('Brak aktywnego okresu.');
-                    } else {
-                        console.log('Pobrano okres:', data.payload);
-                        dispatch(setActual(data.payload));
-                    }
-                } else if (data.error) {
-                    console.log('Błąd:', data.error);
-                } else {
-                    console.log('Błąd!');
-                }
-            } catch (e) {
-                console.log(`Wystąpił błąd podczas próby wykonania zapytania.`);
-            } finally {
-                setLoading(false);
-            }
-        })();
-    }, [dispatch]);
+        if (error) {
+            console.log(error);
+        }
+        if (data) {
+            dispatch(setActual(data as PeriodEntity));
+        }
+        //
+        // console.log('actual Period: ', data)
+        console.log('actual period', actualPeriod);
+
+    }, [data, error, dispatch, loading, actualPeriod]);
 
     if (loading) {
         return <p>Ładowanie</p>
     }
 
     if (actualPeriod) {
-
         return <div className="container mx-auto py-8 text-justify md:px-4 block">
                 <h1 className="mx-auto text-4xl font-semibold w-fit mb-2">Aktualny okres</h1>
                 <h2 className="mx-auto text-base pb-8 w-fit">{convertDateToMonthAndYearHandler(actualPeriod.starts, actualPeriod.ends)}</h2>
@@ -58,9 +45,8 @@ export const Dashboard = () => {
                     <MainChartCard actualPeriod={actualPeriod}/>
                     <FinancialCushionCard/>
                 </div>
-                <LastOperationsCard periodId={actualPeriod.id}/>
+            {actualPeriod.id && <LastOperationsCard periodId={actualPeriod.id}/>}
             </div>
-    }
 
-    else return <p>Zacznijmy konfigurację!</p>;
+    } else return <p>Zacznijmy konfigurację!</p>;
 };

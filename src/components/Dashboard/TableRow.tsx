@@ -1,7 +1,9 @@
 import {OperationEntity, OperationType, PaymentCategory, PaymentSubcategory} from "types";
 import {decodeOperationType} from "../../utils/decode-operation-type";
-import {encodeOperationSubtype} from "../../utils/decode-payment-type";
+import {decodeOperationSubtype} from "../../utils/decode-payment-type";
 import {pricifyHandler} from "../../utils/pricify-handler";
+import {NavLink} from "react-router-dom";
+import React from "react";
 
 interface Props {
     operation: OperationEntity;
@@ -15,11 +17,13 @@ export const TableRow = ({operation}: Props) => {
         </td>
         <td className="flex items-center w-full h-8  py-0 text-lg justify-between">
             <div className="uppercase text-bold">
-                <a href={`http://localhost:3001/operation/${operation.id}`}>
+
+                <NavLink to={`/operation/${operation.id}`}>
                     <div className="tooltip tooltip-right" data-tip="szczegóły">
                         <span className="underline">{decodeOperationType(operation.type)}</span>
                     </div>
-                </a>
+                </NavLink>
+
             </div>
             <div>{operation.isRepetitive &&
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
@@ -32,7 +36,7 @@ export const TableRow = ({operation}: Props) => {
         <td className="flex items-center w-full h-10 text-sm pb-6">{operation.type === OperationType.Payment &&
 
             <span
-                className="flex text:sm lowercase font-semibold mr-1">{encodeOperationSubtype(operation.category as PaymentCategory, operation.subcategory as PaymentSubcategory)}</span>}
+                className="flex text:sm lowercase font-semibold mr-1">{decodeOperationSubtype(operation.category as PaymentCategory, operation.subcategory as PaymentSubcategory)}</span>}
             {operation.description && <span>opis: {operation.description}</span>}
         </td>
     </tr>

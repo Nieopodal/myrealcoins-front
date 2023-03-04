@@ -14,7 +14,7 @@ interface PeriodState {
     createdAt: string;
 }
 
-const initialState = {
+export const periodInitialState = {
     actualPeriod: {
         id: '',
         userId: '',
@@ -34,7 +34,7 @@ interface SetActual {
 }
 export const periodSlice = createSlice({
     name: 'period',
-    initialState: initialState,
+    initialState: periodInitialState,
     reducers: {
         setActual: (state, action: SetActual) => {
             state.actualPeriod = action.payload;

@@ -14,7 +14,7 @@ export const Card = (props: CardProps) => {
         {children}
         {btnDescription && btnAction && <div className="card-actions justify-end p-5">
             <BtnOutline btnAction={btnAction} btnDescription={btnDescription}/>
-        </div>
-        }
+        </div>}
+        {!btnDescription && !btnAction && <div className="p-5"></div>}
     </div>;
 };
