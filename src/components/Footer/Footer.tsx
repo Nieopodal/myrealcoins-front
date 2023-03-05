@@ -2,7 +2,7 @@ import React from "react";
 export const Footer = () => {
     // @TODO cleanup footer
     return <>
-        <footer className="bg-neutral text-neutral-content mt-auto">
+        <footer className="bg-neutral text-neutral-content mt-auto pt-0 xl:mt-10">
             <div className="container mx-auto">
                 <div className="footer p-10 flex justify-evenly ">
                     <div>

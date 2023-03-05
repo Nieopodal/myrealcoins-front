@@ -14,7 +14,6 @@ export const OneOperation = () => {
     const [data, error, loading] = useFetch(`operation/${operationId}`);
 
     useEffect(() => {
-
         if (error) {
             console.log(error);
         }
@@ -27,8 +26,8 @@ export const OneOperation = () => {
 
     return <>
         <Card
-            additionalClasses="mx-auto lg:w-[50%] mt-10 xl:px-2 text-xs md:text-base">
-            <h3 className="card-title mx-auto w-fit pt-10 pb-5">Szczegóły operacji</h3>
+            additionalClasses="mx-auto lg:w-[50%] mt-10 px-0 xl:px-2 text-xs md:text-base pt-5">
+            <h3 className="card-title mx-auto w-fit  pb-5">Szczegóły operacji</h3>
 
             {(data && operation)
 
@@ -65,7 +64,7 @@ export const OneOperation = () => {
                     </tr>
 
                     <tr>
-                        <th>Zdjęcie paragonu</th>
+                        <th>Paragon</th>
                         <td>{operation.imgUrl ? `Wyświetl` : `brak`}</td>
                     </tr>
                     <tr>
@@ -108,7 +107,5 @@ export const OneOperation = () => {
                 <p className="mx-auto w-fit pt-10">Operacja nie została odnaleziona.</p>
             }
         </Card>;
-
-        <div className="h-5"/>
     </>
 };

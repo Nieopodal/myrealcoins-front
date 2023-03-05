@@ -34,8 +34,10 @@ export const Dashboard = () => {
         return <p>Ładowanie</p>
     }
 
+
+
     if (actualPeriod) {
-        return <div className="container mx-auto py-8 text-justify md:px-4 block">
+        return <div className="container mx-auto pt-8 text-justify md:px-4 block">
                 <h1 className="mx-auto text-4xl font-semibold w-fit mb-2">Aktualny okres</h1>
                 <h2 className="mx-auto text-base pb-8 w-fit">{convertDateToMonthAndYearHandler(actualPeriod.starts, actualPeriod.ends)}</h2>
 

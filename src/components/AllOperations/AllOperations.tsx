@@ -25,7 +25,7 @@ export const AllOperations = () => {
     if (loading) {
         return <p>Ładowanie danych</p>
     }
-    return <div className="py-10">
-    <OperationsTable operations={operations ?? []} title="Lista operacji w obecnym okresie"/>;
+    return <div className="pt-10 pb:10 xl:pb-0">
+    <OperationsTable operations={operations ?? []} title="Lista operacji w obecnym okresie"/>
     </div>
 };
