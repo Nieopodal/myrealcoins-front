@@ -4,6 +4,7 @@ import {Chart} from "../common/Chart";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {getPaymentsCategoriesAndAmountsHandler} from "../../utils/get-payment-categories-amounts-handler";
+import ThreeDots from "../common/Loader";
 
 interface Props {
     open: boolean;
@@ -42,7 +43,7 @@ export const ChartModal = ({open, handleToggle}: Props) => {
             </h3>
 
             <div className="py-4 w-fit mx-auto">
-                {loading && <p>Ładowanie</p>}
+                {loading && <ThreeDots/>}
 
                 {!loading &&<Chart labels={categories} amounts={amounts}
                        backgroundColors={colors}/>}

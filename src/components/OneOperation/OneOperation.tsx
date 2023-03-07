@@ -7,6 +7,7 @@ import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-paym
 import {pricifyHandler} from "../../utils/pricify-handler";
 import {useParams} from "react-router-dom";
 import {BtnOutline} from "../common/BtnOutline";
+import ThreeDots from "../common/Loader";
 
 export const OneOperation = () => {
     const {operationId} = useParams();
@@ -22,13 +23,15 @@ export const OneOperation = () => {
         }
     }, [data, error, loading]);
 
-    if (loading) return <p>Ładowanie danych</p>;
+
 
     return <>
         <Card
             additionalClasses="mx-auto lg:w-[50%] mt-10 px-0 xl:px-2 text-xs md:text-base pt-5">
             <h3 className="card-title mx-auto w-fit  pb-5">Szczegóły operacji</h3>
 
+            {loading && <ThreeDots/>}
+            {!loading && <div>
             {(data && operation)
 
                 ?
@@ -74,28 +77,40 @@ export const OneOperation = () => {
                     <tr>
                         <th>Akcje</th>
                         <td>
-                            <BtnOutline btnAction={() => {
-                            }} btnDescription="Modyfikuj"/>
-
-                            &nbsp;
-
                             {
-                                !operation.isRepetitive &&
+                                !operation.isRepetitive && <div>
+
+                                <BtnOutline btnAction={() => {
+                                }} btnDescription="Modyfikuj"/>
+                                    &nbsp;
                                 <BtnOutline btnAction={() => {
                                 }} btnDescription="Usuń"/>
+                                </div>
                             }
                             {
-                                operation.isRepetitive &&
+                                operation.isRepetitive && <div>
+                                <div className="dropdown dropdown-top dropdown-end">
+                                    <label tabIndex={0}
+                                           className="btn btn-outline btn-xs text-sm rounded-btn text-xs xl:text-sm mx-auto sm:mx-0 w-fit sm:w-auto">Modyfikuj</label>
+                                    <ul tabIndex={0}
+                                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-fit">
+                                        <li><a>Modyfikuj tę operację</a></li>
+                                        <li><a>Modyfikuj schemat</a></li>
+                                        <li><a>Modyfikuj operację i schemat</a></li>
+                                    </ul>
+                                </div>
+                                    &nbsp;
                                 <div className="dropdown dropdown-top dropdown-end">
                                     <label tabIndex={0}
                                            className="btn btn-outline btn-xs text-sm rounded-btn text-xs xl:text-sm mx-auto sm:mx-0 w-fit sm:w-auto">Opcje
                                         usuwania</label>
                                     <ul tabIndex={0}
-                                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                                        className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-fit">
                                         <li><a>Usuń tę operację</a></li>
                                         <li><a>Usuń schemat</a></li>
                                         <li><a>Usuń operację i schemat</a></li>
                                     </ul>
+                                </div>
                                 </div>
                             }
                         </td>
@@ -104,8 +119,9 @@ export const OneOperation = () => {
                 </table>
 
                 :
-                <p className="mx-auto w-fit pt-10">Operacja nie została odnaleziona.</p>
+                <p className="mx-auto w-fit py-10">Operacja nie została odnaleziona.</p>
             }
+            </div>}
         </Card>;
     </>
 };

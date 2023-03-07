@@ -35,8 +35,7 @@ export const LastOperationsCard = ({periodId}: Props) => {
 
     }, [data, error, loading, dispatch]);
 
-    if (loading) return <p>Ładowanie danych</p>;
 
     return <OperationsTable operations={operations ? operations.slice(0, 3) : []} title="Ostatnie operacje"
-                            btnAction={() => routeChange(`/operation-list`)} btnDescription="Pełna lista operacji"/>;
+                            btnAction={() => routeChange(`/operation-list`)} loading={loading as boolean} btnDescription="Pełna lista operacji"/>;
 };

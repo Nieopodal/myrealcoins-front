@@ -4,15 +4,15 @@ import {Provider} from "react-redux";
 import {Header} from "../Header/Header";
 import {Dashboard} from "../Dashboard/Dashboard";
 import {Footer} from "../Footer/Footer";
-import {store} from "../../store";
+import {OneOperation} from "../OneOperation/OneOperation";
 import {AllOperations} from "../AllOperations/AllOperations";
+import {store} from "../../store";
 
 import './App.css';
-import {OneOperation} from "../OneOperation/OneOperation";
 
 export const App = () => {
 
-    return <>
+    return <div className="">
 
         <Header/>
         <Provider store={store}>
@@ -23,5 +23,5 @@ export const App = () => {
             </Routes>
         </Provider>
         <Footer/>
-    </>
+    </div>
 };

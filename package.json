@@ -1,6 +1,6 @@
 {
   "name": "financials-front",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -17,7 +17,9 @@
     "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
+    "react-content-loader": "^6.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.5",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",

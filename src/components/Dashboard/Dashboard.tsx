@@ -10,6 +10,7 @@ import {PeriodEntity} from 'types';
 import {setActual} from "../../features/period/period-slice";
 import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
 import {useFetch} from "../../hooks/useFetch";
+import ThreeDots from "../common/Loader";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
@@ -31,7 +32,9 @@ export const Dashboard = () => {
     }, [data, error, dispatch, loading, actualPeriod]);
 
     if (loading) {
-        return <p>Ładowanie</p>
+        return <div className="min-h-[50vh] content-center flex">
+            <ThreeDots/>
+        </div>
     }
 
 
