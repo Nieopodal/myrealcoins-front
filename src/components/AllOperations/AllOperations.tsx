@@ -4,6 +4,7 @@ import {OperationEntity, PeriodEntity } from "types";
 import {useFetch} from "../../hooks/useFetch";
 import {usePeriods} from "../../hooks/usePeriods";
 import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
+import {showToast, Toast} from "../../utils/show-toast";
 
 export const AllOperations = () => {
 
@@ -13,9 +14,8 @@ export const AllOperations = () => {
     const [data, error, loading] = useFetch(`operation/get-period-operations/${selectedPeriod}`);
 
     useEffect(() => {
-        console.log(selectedPeriod);
         if (error) {
-            console.log('błąd', error);
+            showToast(Toast.Error, error as string);
         }
         if (data === null) {
             setOperations([]);

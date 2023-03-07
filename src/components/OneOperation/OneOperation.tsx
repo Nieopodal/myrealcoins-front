@@ -8,6 +8,7 @@ import {pricifyHandler} from "../../utils/pricify-handler";
 import {useParams} from "react-router-dom";
 import {BtnOutline} from "../common/BtnOutline";
 import ThreeDots from "../common/Loader";
+import {showToast, Toast} from "../../utils/show-toast";
 
 export const OneOperation = () => {
     const {operationId} = useParams();
@@ -16,14 +17,12 @@ export const OneOperation = () => {
 
     useEffect(() => {
         if (error) {
-            console.log(error);
+            showToast(Toast.Error, error as string);
         }
         if (data) {
             setOperation(data as OperationEntity);
         }
     }, [data, error, loading]);
-
-
 
     return <>
         <Card

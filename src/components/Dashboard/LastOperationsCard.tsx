@@ -6,6 +6,7 @@ import {RootState} from "../../store";
 import {OperationsTable} from "../common/OperationsTable";
 import {useFetch} from "../../hooks/useFetch";
 import {useNavigate} from "react-router-dom";
+import {showToast, Toast} from "../../utils/show-toast";
 
 interface Props {
     periodId: string;
@@ -26,7 +27,7 @@ export const LastOperationsCard = ({periodId}: Props) => {
     useEffect(() => {
 
         if (error) {
-            console.log(error);
+            showToast(Toast.Error, error as string);
         }
         if (data === null) {
             dispatch(setOperations([]));

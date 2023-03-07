@@ -1,6 +1,7 @@
 import {useFetch} from "./useFetch";
 import {useEffect, useState} from "react";
 import { PeriodEntity } from "types";
+import {showToast, Toast} from "../utils/show-toast";
 
 export const usePeriods = () => {
     const [data, error, loading] = useFetch(`period`);
@@ -10,7 +11,7 @@ export const usePeriods = () => {
     useEffect(() => {
         (async () => {
             if (error) {
-                console.log('błąd', error);
+                showToast(Toast.Error, error as string);
             } else if (data === null) {
                 setPeriodList(([]));
             } else if (data) {

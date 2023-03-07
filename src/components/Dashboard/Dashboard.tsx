@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
+import {ArcElement, Chart as ChartJS, Legend, Tooltip} from 'chart.js';
 import {MainChartCard} from "./MainChartCard";
 import {MainStatsCard} from "./MainStatsCard";
 import {FinancialCushionCard} from "./FinancialCushionCard";
@@ -11,6 +11,7 @@ import {setActual} from "../../features/period/period-slice";
 import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
 import {useFetch} from "../../hooks/useFetch";
 import ThreeDots from "../common/Loader";
+import {showToast, Toast} from "../../utils/show-toast";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
@@ -20,13 +21,11 @@ export const Dashboard = () => {
 
     useEffect(() => {
         if (error) {
-            console.log(error);
+            showToast(Toast.Error, error as string);
         }
         if (data) {
             dispatch(setActual(data as PeriodEntity));
         }
-        //
-        // console.log('actual Period: ', data)
         console.log('actual period', actualPeriod);
 
     }, [data, error, dispatch, loading, actualPeriod]);
@@ -36,8 +35,6 @@ export const Dashboard = () => {
             <ThreeDots/>
         </div>
     }
-
-
 
     if (actualPeriod) {
         return <div className="container mx-auto pt-8 text-justify md:px-4 block">
