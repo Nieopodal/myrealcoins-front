@@ -1,44 +1,40 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React from "react";
 import {ArcElement, Chart as ChartJS, Legend, Tooltip} from 'chart.js';
 import {MainChartCard} from "./MainChartCard";
 import {MainStatsCard} from "./MainStatsCard";
 import {FinancialCushionCard} from "./FinancialCushionCard";
 import {LastOperationsCard} from "./LastOperationsCard";
-import {RootState} from "../../store";
 import {PeriodEntity} from 'types';
-import {setActual} from "../../features/period/period-slice";
 import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
-import {useFetch} from "../../hooks/useFetch";
 import ThreeDots from "../common/Loader";
-import {showToast, Toast} from "../../utils/show-toast";
+import {PageHeader} from "../common/PageHeader";
+import {PageContainer} from "../common/PageContainer";
+import {useActualPeriod} from "../../hooks/useActualPeriod";
+import {ErrorMessage} from "../common/ErrorMessage";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
-    const dispatch = useDispatch();
-    const {actualPeriod} = useSelector((state: RootState) => state.period);
-    const [data, error, loading] = useFetch(`period/actual`);
-
-    useEffect(() => {
-        if (error) {
-            showToast(Toast.Error, error as string);
-        }
-        if (data) {
-            dispatch(setActual(data as PeriodEntity));
-        }
-        console.log('actual period', actualPeriod);
-
-    }, [data, error, dispatch, loading, actualPeriod]);
+    const actualPeriod = useActualPeriod()[0] as PeriodEntity;
+    const loading = useActualPeriod()[1];
+    const error = useActualPeriod()[2];
 
     if (loading) {
-        return <div className="min-h-[50vh] content-center flex">
+        return <PageContainer classes="min-h-[60vh] content-center flex">
             <ThreeDots/>
-        </div>
+        </PageContainer>
+    }
+
+    if (error) {
+        return <PageContainer>
+            <PageHeader text="Aktualny okres"/>
+            <ErrorMessage/>
+        </PageContainer>
     }
 
     if (actualPeriod) {
-        return <div className="container mx-auto pt-8 text-justify md:px-4 block">
-                <h1 className="mx-auto text-4xl font-semibold w-fit mb-2">Aktualny okres</h1>
+        return <PageContainer>
+
+                <PageHeader text="Aktualny okres"/>
                 <h2 className="mx-auto text-base pb-8 w-fit">{convertDateToMonthAndYearHandler(actualPeriod.starts, actualPeriod.ends)}</h2>
 
                 <div
@@ -48,7 +44,12 @@ export const Dashboard = () => {
                     <FinancialCushionCard/>
                 </div>
             {actualPeriod.id && <LastOperationsCard periodId={actualPeriod.id}/>}
-            </div>
+            </PageContainer>
 
-    } else return <p>Zacznijmy konfigurację!</p>;
+    }
+
+    if (actualPeriod === null) {
+        return <p>Zacznijmy konfigurację</p>
+    }
+    return null;
 };
