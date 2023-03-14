@@ -5,7 +5,7 @@ import {MainStatsCard} from "./MainStatsCard";
 import {FinancialCushionCard} from "./FinancialCushionCard";
 import {LastOperationsCard} from "./LastOperationsCard";
 import {PeriodEntity} from 'types';
-import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
+import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
 import ThreeDots from "../common/Loader";
 import {PageHeader} from "../common/PageHeader";
 import {PageContainer} from "../common/PageContainer";

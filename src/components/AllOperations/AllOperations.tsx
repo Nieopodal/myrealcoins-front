@@ -3,7 +3,7 @@ import {OperationsTable} from "../common/OperationsTable";
 import {OperationEntity, PeriodEntity } from "types";
 import {useFetch} from "../../hooks/useFetch";
 import {usePeriods} from "../../hooks/usePeriods";
-import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
+import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
 import {showToast, Toast} from "../../utils/show-toast";
 
 export const AllOperations = () => {

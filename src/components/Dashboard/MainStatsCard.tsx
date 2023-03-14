@@ -4,7 +4,7 @@ import {Card} from "../common/Card";
 import {PeriodEntity} from 'types';
 import {convertToPercentageHandler} from "../../utils/convert-to-percentage-handler";
 import {pricifyHandler} from "../../utils/pricify-handler";
-import {convertDateToMonthAndYearHandler} from "../../utils/convertDateToMonthAndYearHandler";
+import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
 
 interface Props {
     actualPeriod: PeriodEntity;
