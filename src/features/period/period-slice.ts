@@ -1,36 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {PeriodEntity} from 'types';
 
-interface PeriodState {
-    id: string;
-    userId: string;
-    isActive: boolean;
-    starts: string;
-    ends: string;
-    budgetAmount: number;
-    paymentsAmount: number;
-    savingsAmount: number;
-    freeCashAmount: number;
-    createdAt: string;
+interface periodState {
+    actualPeriod: PeriodEntity | null
 }
-
-export const periodInitialState = {
-    actualPeriod: {
-        id: '',
-        userId: '',
-        isActive: false,
-        starts: '',
-        ends: '',
-        budgetAmount: 0,
-        paymentsAmount: 0,
-        savingsAmount: 0,
-        freeCashAmount: 0,
-        createdAt: '',
-    } as PeriodState | null,
+export const periodInitialState: periodState = {
+    actualPeriod: null,
 };
 
 interface SetActual {
-    payload: PeriodEntity | null
+    payload: PeriodEntity
 }
 export const periodSlice = createSlice({
     name: 'period',
