@@ -9,11 +9,22 @@ import {useParams} from "react-router-dom";
 import {BtnOutline} from "../common/BtnOutline";
 import ThreeDots from "../common/Loader";
 import {showToast, Toast} from "../../utils/show-toast";
+import {DeleteModal} from "./DeleteModal";
 
 export const OneOperation = () => {
     const {operationId} = useParams();
     const [operation, setOperation] = useState<OperationEntity | null>(null);
+    const [openDelete, setOpenDelete] = useState(false);
     const [data, error, loading] = useFetch(`operation/${operationId}`);
+    const [deleteOperation, setDeleteOperation] = useState<boolean>(false);
+    const [deleteSchema, setDeleteSchema] = useState<boolean>(false);
+
+    const deleteOperationHandler = (deleteOne: boolean, deleteSchema: boolean) => {
+        deleteOne ? setDeleteOperation(true) : setDeleteOperation(false);
+        deleteSchema ? setDeleteSchema(true) : setDeleteSchema(false);
+        handleToggleDeleteModal();
+    }
+    const handleToggleDeleteModal = () => setOpenDelete((prev) => !prev);
 
     useEffect(() => {
         if (error) {
@@ -22,9 +33,10 @@ export const OneOperation = () => {
         if (data) {
             setOperation(data as OperationEntity);
         }
-    }, [data, error, loading]);
+    }, [data, error, loading, deleteOperation, deleteSchema, setDeleteOperation, setDeleteSchema]);
 
     return <>
+        {openDelete && <DeleteModal deleteOperation={deleteOperation} deleteSchema={deleteSchema} open={openDelete} id={operationId!} originId={operation!.originId as string} handleToggle={handleToggleDeleteModal}/>}
         <Card
             additionalClasses="mx-auto lg:w-[50%] mt-10 px-0 xl:px-2 text-xs md:text-base pt-5">
             <h3 className="card-title mx-auto w-fit  pb-5">Szczegóły operacji</h3>
@@ -82,8 +94,7 @@ export const OneOperation = () => {
                                 <BtnOutline btnAction={() => {
                                 }} btnDescription="Modyfikuj"/>
                                     &nbsp;
-                                <BtnOutline btnAction={() => {
-                                }} btnDescription="Usuń"/>
+                                <BtnOutline btnAction={() => deleteOperationHandler(true, false)} btnDescription="Usuń"/>
                                 </div>
                             }
                             {
@@ -93,9 +104,8 @@ export const OneOperation = () => {
                                            className="btn btn-outline btn-xs text-sm rounded-btn text-xs xl:text-sm mx-auto sm:mx-0 w-fit sm:w-auto">Modyfikuj</label>
                                     <ul tabIndex={0}
                                         className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-fit">
-                                        <li><a>Modyfikuj tę operację</a></li>
-                                        <li><a>Modyfikuj schemat</a></li>
-                                        <li><a>Modyfikuj operację i schemat</a></li>
+                                        <li><button onClick={() =>{}}>Modyfikuj tę operację</button></li>
+                                        <li><button onClick={() =>{}}>Modyfikuj schemat</button></li>
                                     </ul>
                                 </div>
                                     &nbsp;
@@ -105,9 +115,9 @@ export const OneOperation = () => {
                                         usuwania</label>
                                     <ul tabIndex={0}
                                         className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-fit">
-                                        <li><a>Usuń tę operację</a></li>
-                                        <li><a>Usuń schemat</a></li>
-                                        <li><a>Usuń operację i schemat</a></li>
+                                        <li><button onClick={() => deleteOperationHandler(true, false)}>Usuń tę operację</button></li>
+                                        <li><button onClick={() => deleteOperationHandler(false, true)}>Usuń schemat</button></li>
+                                        <li><button onClick={() => deleteOperationHandler(true, true)}>Usuń operację i schemat</button></li>
                                     </ul>
                                 </div>
                                 </div>
