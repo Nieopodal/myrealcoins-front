@@ -14,7 +14,6 @@ export const TableRow = ({operation}: Props) => {
     return <tr className="w-full border-[1px] my-2 max-h-28 content-evenly hover">
         <td>
             <NavLink to={`/operation/${operation.id}`}>
-                <div className="tooltip tooltip-top  w-full" data-tip="szczegóły">
                     <div className="flex items-center w-full text-xs py-0 h-10">{operation.createdAt}
                     </div>
                     <div className="flex items-center w-full h-8  py-0 text-lg justify-between">
@@ -36,7 +35,6 @@ export const TableRow = ({operation}: Props) => {
                         {operation.description && <span>opis: {operation.description}
                     </span>}
                     </div>
-                </div>
             </NavLink>
         </td>
     </tr>

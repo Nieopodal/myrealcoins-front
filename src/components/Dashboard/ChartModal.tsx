@@ -17,8 +17,8 @@ export const ChartModal = ({open, handleToggle}: Props) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [categories, setCategories] = useState<string[]>([]);
     const [amounts, setAmounts] = useState<number[]>([]);
-    const [colors, setColors] = useState<string[]>(['#0066FF', '#FF0074', '#FF7244', '#FFBE3A', '#4C8076', '#D70000', '#7C7484', '#372B47', '#E5F3FA', '#560DF6']);
-
+    const [colors, setColors] = useState<string[]>(['#0066FF', '#FF0074', '#FF7244', '#FFBE3A',]);
+    // '#4C8076', '#D70000', '#7C7484', '#372B47', '#E5F3FA', '#560DF6'
     useEffect(() => {
         try {
             const result = getPaymentsCategoriesAndAmountsHandler(operations);

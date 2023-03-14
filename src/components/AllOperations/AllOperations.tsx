@@ -28,7 +28,7 @@ export const AllOperations = () => {
     return <div className="pt-10 pb:10 xl:pb-0">
 
         {!loadingPeriods && <div className="mx-auto w-fit pb-10">
-            <span className="text-sm xl:text-base font-semibold mr-2">Wybrany okres</span>
+            <span className="text-sm xl:text-base font-semibold mr-2">Wybierz okres</span>
 
             <select className="select select-primary select-xs xl:select-sm" defaultValue="" onChange={e => setSelectedPeriod(e.target.value)}>
                 <option value="" disabled>Brak</option>
