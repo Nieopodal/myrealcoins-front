@@ -1,4 +1,5 @@
 import {useEffect, useState} from "react";
+import { FileTransferResponse } from "types";
 
 export const useFetchImage = (operationId: string) => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -14,8 +15,7 @@ export const useFetchImage = (operationId: string) => {
                 if (!res.ok) {
                     setError("Podczas pobierania pliku wystąpił błąd.");
                 }
-
-                const blob = await res.blob();
+                const blob: FileTransferResponse = await res.blob();
                 const theImage = URL.createObjectURL(blob);
                 setImage(theImage);
             } catch (e) {
