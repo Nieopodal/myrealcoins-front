@@ -1,11 +1,15 @@
 import ContentLoader from 'react-content-loader'
 
-const ThreeDots = () => (
-    <div className="w-fit mx-auto my-auto">
+interface Props {
+    smallerDisplay?: boolean;
+}
+
+const ThreeDots = ({smallerDisplay}: Props) => (
+    <div className="w-fit mx-auto my-auto ">
     <ContentLoader
         viewBox="0 0 400 160"
         height={160}
-        width={400}
+        width={smallerDisplay ? 300 : 400}
         backgroundColor="transparent"
     >
         <circle cx="150" cy="86" r="8" />

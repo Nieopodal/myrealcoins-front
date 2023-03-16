@@ -22,11 +22,11 @@ export const FileInput = () => {
                     validate: (files) => {
                         if (!files[0] && getValues("localizationSource") === "2") return "Wymagane!";
                         if (files[0] && files[0].type !== "image/jpeg") return "Wymagany plik .JPG!";
-                        if (files[0] && files[0].size > 5000000) return "Maksymalna waga pliku to 5MB!";
+                        if (files[0] && files[0].size > 7000000) return "Maksymalna waga pliku to 7MB!";
                         return true;
                     }
                 })}/>
-                <span className="label-text-alt">.JPG, MAX 5MB</span>
+                <span className="label-text-alt">.JPG, MAX 7MB</span>
                 {/*    @TODO how many bytes?*/}
             </label>
         </div>

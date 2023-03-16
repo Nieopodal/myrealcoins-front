@@ -10,11 +10,13 @@ import {BtnOutline} from "../common/BtnOutline";
 import ThreeDots from "../common/Loader";
 import {showToast, Toast} from "../../utils/show-toast";
 import {DeleteModal} from "./DeleteModal";
+import {ReceiptModal} from "./ReceiptModal";
 
 export const OneOperation = () => {
     const {operationId} = useParams();
     const [operation, setOperation] = useState<OperationEntity | null>(null);
     const [openDelete, setOpenDelete] = useState(false);
+    const [openReceipt, setOpenReceipt] = useState(false);
     const [data, error, loading] = useFetch(`operation/${operationId}`);
     const [deleteOperation, setDeleteOperation] = useState<boolean>(false);
     const [deleteSchema, setDeleteSchema] = useState<boolean>(false);
@@ -25,6 +27,7 @@ export const OneOperation = () => {
         handleToggleDeleteModal();
     }
     const handleToggleDeleteModal = () => setOpenDelete((prev) => !prev);
+    const handleToggleReceiptModal = () => setOpenReceipt((prev) => !prev);
 
     useEffect(() => {
         if (error) {
@@ -37,6 +40,8 @@ export const OneOperation = () => {
 
     return <>
         {openDelete && <DeleteModal deleteOperation={deleteOperation} deleteSchema={deleteSchema} open={openDelete} id={operationId!} originId={operation!.originId as string} handleToggle={handleToggleDeleteModal}/>}
+
+        {openReceipt && <ReceiptModal operationId={operationId!} handleToggle={handleToggleReceiptModal} open={openReceipt}/>}
         <Card
             additionalClasses="mx-auto lg:w-[50%] mt-10 px-0 xl:px-2 text-xs md:text-base pt-5">
             <h3 className="card-title mx-auto w-fit  pb-5">Szczegóły operacji</h3>
@@ -79,7 +84,7 @@ export const OneOperation = () => {
 
                     <tr>
                         <th>Paragon</th>
-                        <td>{operation.imgUrl ? `Wyświetl` : `brak`}</td>
+                        <td>{operation.imgUrl ? <BtnOutline btnAction={handleToggleReceiptModal} btnDescription="Wyświetl"/> : `brak`}</td>
                     </tr>
                     <tr>
                         <th>Lokalizacja</th>
