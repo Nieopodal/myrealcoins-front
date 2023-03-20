@@ -5,6 +5,7 @@ import {useSelector} from "react-redux";
 import {RootState} from "../../store";
 import {getPaymentsCategoriesAndAmountsHandler} from "../../utils/get-payment-categories-amounts-handler";
 import ThreeDots from "../common/Loader";
+import {chartColorHandler} from "../../utils/chart-color-handler";
 
 interface Props {
     open: boolean;
@@ -18,7 +19,7 @@ export const ChartModal = ({open, handleToggle}: Props) => {
     const [categories, setCategories] = useState<string[]>([]);
     const [amounts, setAmounts] = useState<number[]>([]);
     const [colors, setColors] = useState<string[]>(['#0066FF', '#FF0074', '#FF7244', '#FFBE3A',]);
-    // '#4C8076', '#D70000', '#7C7484', '#372B47', '#E5F3FA', '#560DF6'
+
     const neutral = window.getComputedStyle(document.body).getPropertyValue('--n');
     const primary = window.getComputedStyle(document.body).getPropertyValue('--p');
     const warning = window.getComputedStyle(document.body).getPropertyValue('--wa');
@@ -30,28 +31,25 @@ export const ChartModal = ({open, handleToggle}: Props) => {
     const successRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        const result = getPaymentsCategoriesAndAmountsHandler(operations);
+        setCategories(result.categories);
+        setAmounts(result.amounts);
+
         try {
             if (neutralRef.current &&
                 primaryRef.current &&
                 warningRef.current &&
                 successRef.current
             ) {
-                setColors([
-                    neutralRef.current.style.backgroundColor,
-                    primaryRef.current.style.backgroundColor,
-                    warningRef.current.style.backgroundColor,
-                    successRef.current.style.backgroundColor,
-                ]);
+                const sortedColors = chartColorHandler(
+                    result.colors,
+                    neutralRef.current!.style.backgroundColor,
+                    primaryRef.current!.style.backgroundColor,
+                    warningRef.current!.style.backgroundColor,
+                    successRef.current!.style.backgroundColor
+                )
+                setColors(sortedColors);
             }
-            const result = getPaymentsCategoriesAndAmountsHandler(operations);
-            setAmounts(result.amounts);
-            setCategories(result.categories);
-            const categoriesLength = result.categories.length;
-            setColors(prev => {
-                const newColors = [...prev];
-                newColors.length = categoriesLength;
-                return newColors;
-            });
         } finally {
             setLoading(false);
         }
@@ -64,28 +62,29 @@ export const ChartModal = ({open, handleToggle}: Props) => {
                 Struktura wydatków
             </h3>
             <div className="hidden">
-            <div ref={neutralRef} style={{
-                background: `hsl(${neutral})`,
-            }}>
-            </div>
-            <div ref={primaryRef} style={{
-                background: `hsl(${primary})`,
-            }}>
-            </div>
-            <div ref={warningRef} style={{
-                background: `hsl(${warning})`,
-            }}>
-            </div>
-            <div ref={successRef} style={{
-                background: `hsl(${success})`,
-            }}>
-            </div>
+                <div ref={neutralRef} style={{
+                    background: `hsl(${neutral})`,
+                }}>
+                </div>
+                <div ref={primaryRef} style={{
+                    background: `hsl(${primary})`,
+                }}>
+                </div>
+                <div ref={warningRef} style={{
+                    background: `hsl(${warning})`,
+                }}>
+                </div>
+                <div ref={successRef} style={{
+                    background: `hsl(${success})`,
+                }}>
+                </div>
             </div>
 
             <div className="py-4 w-fit mx-auto">
                 {loading && <ThreeDots/>}
 
-                {(!loading && operations.length === 0) && <p className="w-fit mx-auto">Brak operacji do wyświetlenia.</p>}
+                {(!loading && operations.length === 0) &&
+                    <p className="w-fit mx-auto">Brak operacji do wyświetlenia.</p>}
                 {!loading && <Chart labels={categories} amounts={amounts}
                                     backgroundColors={colors}/>}
             </div>

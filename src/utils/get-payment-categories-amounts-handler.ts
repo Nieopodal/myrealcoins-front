@@ -13,6 +13,7 @@ export const getPaymentsCategoriesAndAmountsHandler = (operations: OperationEnti
 
     const categories: string[] = [];
     const amounts: number[] = [];
+    const colors: string[] = [];
 
     const paymentOperations = operations.filter(op => op.type === OperationType.Payment);
 
@@ -20,24 +21,29 @@ export const getPaymentsCategoriesAndAmountsHandler = (operations: OperationEnti
     if (basicNeeds.length > 0) {
         categories.push(decodePaymentType(PaymentCategory.BasicNeeds));
         amounts.push(sum(basicNeeds));
+        colors.push('neutral');
     }
     const additional = filterPayments(paymentOperations, PaymentCategory.Additional);
     if (additional.length > 0) {
         categories.push(decodePaymentType(PaymentCategory.Additional));
         amounts.push(sum(additional));
+        colors.push('primary');
     }
     const freeTime = filterPayments(paymentOperations, PaymentCategory.FreeTime);
     if (freeTime.length > 0) {
         categories.push(decodePaymentType(PaymentCategory.FreeTime));
         amounts.push(sum(freeTime));
+        colors.push('warning');
     }
     const unexpected = filterPayments(paymentOperations, PaymentCategory.Unexpected);
     if (unexpected.length > 0) {
         categories.push(decodePaymentType(PaymentCategory.Unexpected));
         amounts.push(sum(unexpected));
+        colors.push('success');
     }
     return {
         categories,
         amounts,
+        colors,
     };
 };
