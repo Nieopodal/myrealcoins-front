@@ -1,37 +1,47 @@
-import {ApiResponse, OperationType} from "types";
+import {ApiResponse} from "types";
 import {FieldValues} from "react-hook-form";
+import {
+    checkAmountSign,
+    checkLocalization,
+    checkOperationType,
+    isPayment
+} from "./check-values-before-fetching-handlers";
 
-const checkAmountSign = (amount: number, operationType: OperationType): number => {
-    if (operationType === OperationType.AddToBudget ||
-        operationType === OperationType.AddFromSavings ||
-        operationType === OperationType.AddFromCushion
-    ) return amount;
-    else return amount * -1;
-};
+export const fetchForm = async (inputData: FieldValues) => {
+    const {latFromForm, lonFromForm} = checkLocalization(
+        inputData.localization,
+        inputData.localizationSource,
+        inputData.latFromDevice,
+        inputData.lonFromDevice,
+        inputData.latFromImage,
+        inputData.lonFromImage
+    );
 
-const checkOperationType = (type: string, otherType: string): number => {
-    return Number(type) === 9 ? Number(otherType) : Number(type);
-};
+    const inputDataObj = {
+            type: checkOperationType(inputData.type, inputData.otherType),
+            description: inputData.description,
+            isRepetitive: inputData.isRepetitive,
+            amount: checkAmountSign(inputData.amount, checkOperationType(inputData.type, inputData.otherType)),
+            category: isPayment(inputData.type) ? Number(inputData.category[0]) : '',
+            subcategory: isPayment(inputData.type) ? Number(inputData.category[2]) : '',
+            lat: isPayment(inputData.type) ? (latFromForm ?? '') : '',
+            lon: isPayment(inputData.type) ? (lonFromForm  ?? '') : '',
+    };
 
-const isPayment = (type: string): boolean => Number(type) === OperationType.Payment;
-export const fetchForm = async (inputData: FieldValues): Promise<ApiResponse<string> | null> => {
     try {
+        const formData = new FormData();
+        if (inputData.image[0]) {
+            formData.append("image", inputData.image[0]);
+        }
+
+        for (const [key, value] of Object.entries(inputDataObj)) {
+            formData.append(key, value);
+        }
+
         const res = await fetch(`http://localhost:3001/operation${inputData.isRepetitive ? `/repetitive-operation` : `/`}`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                type: checkOperationType(inputData.type, inputData.otherType),
-                description: inputData.description,
-                isRepetitive: inputData.isRepetitive,
-                amount: checkAmountSign(inputData.amount, checkOperationType(inputData.type, inputData.otherType)),
-                category: isPayment(inputData.type) ? Number(inputData.category[0]) : undefined,
-                subcategory: isPayment(inputData.type) ? Number(inputData.category[2]) : undefined,
-                imgUrl: isPayment(inputData.type) ? 'jest' : undefined, //@TODO change when file uploading is ready!
-                lat: isPayment(inputData.type) ? inputData.lat : undefined,
-                lon: isPayment(inputData.type) ? inputData.lon : undefined,
-            }),
+            headers: {},
+            body: formData,
         });
 
         const data: ApiResponse<string> = await res.json();

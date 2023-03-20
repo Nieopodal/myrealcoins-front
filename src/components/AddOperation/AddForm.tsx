@@ -12,49 +12,63 @@ import {showToast, Toast} from "../../utils/show-toast";
 import {useNavigate} from "react-router-dom";
 
 export const AddForm = () => {
-    const {handleSubmit} = useFormContext();
+    const {handleSubmit, formState: {errors: formErrors}} = useFormContext();
     const [actualPeriod, loading] = useActualPeriod();
 
     const [output, setOutput] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [errors, setErrors] = useState<string | null>(null);
 
     const [waitToSend, setWaitToSend] = useState<boolean>(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (error) showToast(Toast.Error, error);
+
+        const firstErrorKey = Object.keys(formErrors).find((key) => formErrors[key]);
+        if (firstErrorKey) {
+            (document.querySelector(
+                `input[name="${firstErrorKey}"]`
+            ) as HTMLInputElement | null)?.focus();
+        }
+
+        if (errors) {
+            showToast(Toast.Error, errors);
+            setErrors(null);
+        }
         if (output) showToast(Toast.Success, 'Pomyślnie dodano nową operację.');
         if (output) navigate('/', {replace: true});
-    }, [error, output]);
+    }, [errors, output, Object.keys(formErrors)]);
 
     if (loading || waitToSend || output) return (
         <Card additionalClasses="mt-10">
             <ThreeDots/>
         </Card>);
 
-    if (actualPeriod !== null) return <form noValidate className="mx-auto container justify-center xl:w-[80%]"
-                                            onSubmit={handleSubmit((data) => {
-                                                (async () => {
-                                                    setWaitToSend(true);
-                                                    const outputData = await fetchForm(data);
-                                                    try {
-                                                        if (outputData) {
-                                                            if (outputData.success) {
-                                                                setOutput(outputData.payload);
-                                                            } else if (outputData.error) {
-                                                                setError(outputData.error);
-                                                            } else {
-                                                                setError('Wystąpił nieznany błąd serwera. Spróbuj później.');
-                                                            }
-                                                        }
-                                                    } catch (e) {
-                                                        setError(`Wystąpił błąd podczas próby wykonania zapytania.`);
-                                                    } finally {
-                                                        setWaitToSend(false);
-                                                    }
-                                                })();
-                                            })
-                                            }>
+    if (actualPeriod !== null) return <form
+        noValidate className="mx-auto container justify-center xl:w-[80%]"
+        onSubmit={handleSubmit((data) => {
+            (async () => {
+                setWaitToSend(true);
+                console.log({data});
+                const outputData = await fetchForm(data);
+                try {
+                    if (outputData) {
+                        if (outputData.success) {
+                            setOutput(outputData.payload);
+                        } else if (outputData.error) {
+                            setErrors(outputData.error);
+                        } else {
+                            setErrors('Wystąpił nieznany błąd serwera. Spróbuj później.');
+                        }
+                    }
+                } catch (e) {
+                    setErrors(`Wystąpił błąd podczas próby wykonania zapytania.`);
+                } finally {
+                    setWaitToSend(false);
+                }
+
+            })();
+        })
+        }>
         <Card additionalClasses="mt-10">
             <StepOneForm/>
             <StepTwoForm/>

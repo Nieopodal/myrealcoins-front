@@ -16,8 +16,9 @@ export const RadioInput = forwardRef(({value, title, radioColor, name, required}
         <label className="label cursor-pointer">
             <span className="label-text">{title}</span>
             <input type="radio" {...register(name, {
+                valueAsNumber: true,
                 required: required,
-            })} value={value}
+            })} value={Number(value)}
                    className={`radio checked:bg-${radioColor}-500`}/>
         </label>
     </div>

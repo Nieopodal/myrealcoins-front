@@ -13,17 +13,15 @@ export interface FormData {
     otherType: string;
     category: string;
     amount: number;
-    description: string,
-    isRepetitive: boolean,
-    localization: boolean,
-    localizationSource: LocalizationSource,
-    country: string,
-    city: string,
-    zip: string,
-    "street-and-number": string,
+    description: string;
+    isRepetitive: boolean;
+    localization: boolean;
+    localizationSource: LocalizationSource;
     image: File[];
-    lat: number;
-    lon: number;
+    latFromDevice: number;
+    lonFromDevice: number;
+    latFromImage: number;
+    lonFromImage: number;
 }
 
 export const AddOperation = () => {
@@ -40,17 +38,15 @@ export const AddOperation = () => {
             isRepetitive: false,
             localization: actualUser.addLocalizationByDefault,
             localizationSource: actualUser.localizationSource,
-            country: 'Polska',
-            city: '',
-            zip: '',
-            "street-and-number": '',
             image: [] as File[],
-            lat: 0,
-            lon: 0,
+            latFromDevice: 0,
+            lonFromDevice: 0,
+            latFromImage: 0,
+            lonFromImage: 0,
         },
     });
 
-    const {handleSubmit, getValues, setValue, watch} = methods;
+    const { getValues, watch} = methods;
 
     watch(["type", "localization", "localizationSource", "amount"]);
     const [progress, setProgress] = useState<number>(1);
