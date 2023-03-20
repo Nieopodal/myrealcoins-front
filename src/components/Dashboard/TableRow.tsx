@@ -48,7 +48,7 @@ export const TableRow = ({operation}: Props) => {
                     <div className="flex items-center w-full text-xs py-0 h-10">{operation.createdAt}
                     </div>
                     <div className="flex items-center w-full h-8  py-0 text-lg justify-between">
-                        <div className="uppercase text-bold underline">
+                        <div className="uppercase text-bold">
                             {decodeOperationType(operation.type)}
                         </div>
                         <div>{operation.isRepetitive &&

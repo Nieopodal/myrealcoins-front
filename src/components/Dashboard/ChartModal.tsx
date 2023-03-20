@@ -6,7 +6,6 @@ import {RootState} from "../../store";
 import {getPaymentsCategoriesAndAmountsHandler} from "../../utils/get-payment-categories-amounts-handler";
 import ThreeDots from "../common/Loader";
 
-
 interface Props {
     open: boolean;
     handleToggle: () => void;
@@ -30,7 +29,6 @@ export const ChartModal = ({open, handleToggle}: Props) => {
     const warningRef = useRef<HTMLDivElement>(null);
     const successRef = useRef<HTMLDivElement>(null);
 
-
     useEffect(() => {
         try {
             if (neutralRef.current &&
@@ -43,10 +41,8 @@ export const ChartModal = ({open, handleToggle}: Props) => {
                     primaryRef.current.style.backgroundColor,
                     warningRef.current.style.backgroundColor,
                     successRef.current.style.backgroundColor,
-                ])
+                ]);
             }
-
-
             const result = getPaymentsCategoriesAndAmountsHandler(operations);
             setAmounts(result.amounts);
             setCategories(result.categories);
@@ -86,10 +82,10 @@ export const ChartModal = ({open, handleToggle}: Props) => {
             </div>
             </div>
 
-
             <div className="py-4 w-fit mx-auto">
                 {loading && <ThreeDots/>}
 
+                {(!loading && operations.length === 0) && <p className="w-fit mx-auto">Brak operacji do wyświetlenia.</p>}
                 {!loading && <Chart labels={categories} amounts={amounts}
                                     backgroundColors={colors}/>}
             </div>

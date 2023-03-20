@@ -13,12 +13,12 @@ interface Props {
 export const ReceiptModal = ({operationId, handleToggle, open}: Props) => {
     const [image, error, loading] = useFetchImage(operationId);
 
-    return <Modal open={open}>
+    return <Modal open={open} biggerSize>
         {loading && <ThreeDots smallerDisplay/>}
 
         {error && <ErrorMessage text={error as string}/>}
 
-        {image && <img className="p-2 md:p-5" src={image as string} alt="paragon fiskalny"/>}
+        {image && <img className="p-2 md:p-5 w-fit mx-auto" src={image as string} alt="paragon fiskalny"/>}
 
         <div className="modal-action justify-center">
             <button className="btn btn-outline" onClick={handleToggle}>
