@@ -1,8 +1,11 @@
 import {Modal} from "../common/Modal";
 import React, {useEffect, useState} from "react";
-import { ApiResponse } from "types";
+import {ApiResponse} from "types";
 import {showToast, Toast} from "../../utils/show-toast";
 import {useNavigate} from "react-router-dom";
+import {ModalAction} from "../common/ModalAction";
+import {SuccessSvg} from "../common/SuccessSvg";
+import {ErrorSvg} from "../common/ErrorSvg";
 
 interface Props {
     id: string;
@@ -35,7 +38,7 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
     const formSubmitHandler = async (deleteOperation: boolean, deleteSchema: boolean) => {
         setLoading(true);
         if (deleteSchema) {
-            const outputSchema =  await fetchDelete(`${originId}/${id}`);
+            const outputSchema = await fetchDelete(`${originId}/${id}`);
             try {
                 if (outputSchema) {
                     if (outputSchema.success) {
@@ -54,7 +57,7 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
         }
         if (deleteOperation) {
             setLoading(true);
-            const outputData =  await fetchDelete(id);
+            const outputData = await fetchDelete(id);
             try {
                 if (outputData) {
                     if (outputData.success) {
@@ -112,31 +115,24 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
 
         <div>
             <ul className="w-fit list-disc mx-auto py-4">
-                {deleteOperation && <li>usunięcie pojedynczej operacji {output && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-green-700 inline-block">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg> } {!output && error && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-700 inline-block">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                </svg>
-                }
-                </li> }
-                {deleteSchema && <li>usunięcie schematu {outputSchema && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-green-700 inline-block">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>} {!outputSchema && errorSchema && <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-700 inline-block">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                </svg>
-                }
-                </li> }
+                {deleteOperation &&
+                    <li>usunięcie pojedynczej operacji {output && <SuccessSvg/>} {!output && error && <ErrorSvg/>}
+                    </li>}
+                {deleteSchema &&
+                    <li>usunięcie schematu {outputSchema && <SuccessSvg/>} {!outputSchema && errorSchema && <ErrorSvg/>
+                    }
+                    </li>}
             </ul>
-
         </div>
 
-        <div className="modal-action justify-center">
-            <button disabled={!!(loading || (!errorSchema && !error && (output || outputSchema)))} className={`btn btn-primary ${loading ? 'loading' : ``}`} onClick={() => formSubmitHandler(deleteOperation, deleteSchema)}>
-                {loading ? `Proszę czekać` : `Usuń`}
-            </button>
-            <button disabled={loading} className="btn btn-outline" onClick={handleToggle}>
-                Anuluj
-            </button>
-        </div>
+        <ModalAction
+            primaryBtnTitle='Usuń'
+            primaryBtnDisabled={!!(loading || (!errorSchema && !error && (output || outputSchema)))}
+            primaryBtnHandler={() => formSubmitHandler(deleteOperation, deleteSchema)}
+            cancelBtnDisabled={loading}
+            cancelBtnHandler={handleToggle}
+            loading={loading}
+        />
+
     </Modal>
-}
+};

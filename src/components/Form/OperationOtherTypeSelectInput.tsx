@@ -12,7 +12,6 @@ export const OperationOtherTypeSelectInput = () => {
 
     return <div className="mx-auto pt-4 w-fit">
         <InputErrorMessage errorMessage={errors.otherType?.message as string}/>
-
         <select
             className="select select-bordered w-full max-w-xs"
             {...register("otherType", {
@@ -26,6 +25,5 @@ export const OperationOtherTypeSelectInput = () => {
             <option value={6}>Redukcja budżetu</option>
             <option value={5}>Wypłata z poduszki finansowej</option>
         </select>
-
     </div>
 };

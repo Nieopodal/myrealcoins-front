@@ -2,13 +2,15 @@ import {useEffect, useState} from "react";
 import { ApiResponse, OperationEntity, PeriodEntity } from "types";
 
 type FetchedData = OperationEntity | OperationEntity[] | PeriodEntity[] | PeriodEntity;
-export const useFetch = (url: string) => {
+
+export const useFetch = (url: string, reload?: boolean) => {
 
     const [data, setData] = useState<FetchedData | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
+        console.log('reloaded usefetch');
         (async () => {
             try {
                 setLoading(true);
@@ -32,7 +34,7 @@ export const useFetch = (url: string) => {
                 setLoading(false);
             }
         })();
-    }, [url]);
+    }, [url, reload]);
 
     return [data, error, loading];
 };

@@ -30,7 +30,7 @@ export const App = () => {
                 <Route path="/" element={<Dashboard/>}/>
                 <Route path="/add-operation" element={<AddOperation/>}/>
                 <Route path="/operation-list" element={<AllOperations/>}/>
-                <Route path="/operation/:operationId" element={<OneOperation/>}/>
+                <Route path="/operation/:operationId/:edit?" element={<OneOperation/>}/>
             </Routes>
 
 

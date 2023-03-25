@@ -48,8 +48,7 @@ export const AddForm = () => {
         onSubmit={handleSubmit((data) => {
             (async () => {
                 setWaitToSend(true);
-                console.log({data});
-                const outputData = await fetchForm(data);
+                const outputData = await fetchForm(data, false);
                 try {
                     if (outputData) {
                         if (outputData.success) {

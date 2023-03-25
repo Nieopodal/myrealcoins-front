@@ -4,6 +4,7 @@ import {decodeOperationSubtype} from "../../utils/decode-payment-type";
 import {pricifyHandler} from "../../utils/pricify-handler";
 import {NavLink} from "react-router-dom";
 import React, {useEffect, useState} from "react";
+import {operationColorHandler} from "../../utils/operation-color-handler";
 
 interface Props {
     operation: OperationEntity;
@@ -13,34 +14,10 @@ export const TableRow = ({operation}: Props) => {
 
     const [color, setColor] = useState('');
 
-    const operationColorHandler = () => {
-        if (operation.type === OperationType.Payment) {
-            switch (operation.category) {
-                case (PaymentCategory.BasicNeeds): {
-                    setColor('');
-                    break;
-                }
-                case (PaymentCategory.Additional): {
-                    setColor( 'btn-primary');
-                    break;
-                }
-                case (PaymentCategory.FreeTime): {
-                    setColor('btn-warning');
-                    break;
-                }
-                case (PaymentCategory.Unexpected) :{
-                    setColor('btn-success');
-                    break;
-                }
-                default: setColor('');
-                    break;
-            }
-        }
-    };
-
- useEffect(() => {
-     operationColorHandler();
- }, []);
+    useEffect(() => {
+        const operationColor = operationColorHandler(operation);
+        if (operationColor) setColor(operationColor);
+    }, [operationColorHandler]);
 
     return <tr className="w-full border-[1px] my-2 max-h-28 content-evenly hover">
         <td>
@@ -62,7 +39,7 @@ export const TableRow = ({operation}: Props) => {
                     <div
                         className="flex items-center pt-1 w-full h-10 text-sm pb-6">{operation.type === OperationType.Payment &&
                         <span
-                            className={`flex text:sm font-semibold mr-1 btn btn-xs p-0.5  ${color}`}>{decodeOperationSubtype(operation.category as PaymentCategory, operation.subcategory as PaymentSubcategory).toUpperCase()}</span>}
+                            className={`flex ${color}`}>{decodeOperationSubtype(operation.category as PaymentCategory, operation.subcategory as PaymentSubcategory).toUpperCase()}</span>}
                         {operation.description && <span>opis: {operation.description}
                     </span>}
                     </div>
