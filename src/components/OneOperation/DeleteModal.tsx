@@ -1,11 +1,11 @@
-import {Modal} from "../common/Modal";
 import React, {useEffect, useState} from "react";
-import {ApiResponse} from "types";
-import {showToast, Toast} from "../../utils/show-toast";
 import {useNavigate} from "react-router-dom";
+import {Modal} from "../common/Modal";
+import {showToast, Toast} from "../../utils/show-toast";
 import {ModalAction} from "../common/ModalAction";
 import {SuccessSvg} from "../common/SuccessSvg";
 import {ErrorSvg} from "../common/ErrorSvg";
+import {fetchDelete} from "../../utils/fetch-delete";
 
 interface Props {
     id: string;
@@ -15,23 +15,6 @@ interface Props {
     deleteSchema: boolean;
     deleteOperation: boolean;
 }
-
-const fetchDelete = async (id: string) => {
-    try {
-        const res = await fetch(`http://localhost:3001/operation/${id}`, {
-            method: 'DELETE',
-        });
-        const data: ApiResponse<boolean> = await res.json();
-
-        if (data) {
-            return data;
-        } else {
-            return null;
-        }
-    } catch {
-        return null;
-    }
-};
 
 export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperation, originId}: Props) => {
     const navigate = useNavigate();
@@ -116,12 +99,21 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
         <div>
             <ul className="w-fit list-disc mx-auto py-4">
                 {deleteOperation &&
-                    <li>usunięcie pojedynczej operacji {output && <SuccessSvg/>} {!output && error && <ErrorSvg/>}
-                    </li>}
-                {deleteSchema &&
-                    <li>usunięcie schematu {outputSchema && <SuccessSvg/>} {!outputSchema && errorSchema && <ErrorSvg/>
+                    <li>usunięcie pojedynczej operacji {output && <SuccessSvg/>
                     }
-                    </li>}
+                        {
+                            !output && error && <ErrorSvg/>
+                        }
+                    </li>
+                }
+                {deleteSchema &&
+                    <li>usunięcie schematu {outputSchema && <SuccessSvg/>
+                    }
+                        {
+                            !outputSchema && errorSchema && <ErrorSvg/>
+                        }
+                    </li>
+                }
             </ul>
         </div>
 

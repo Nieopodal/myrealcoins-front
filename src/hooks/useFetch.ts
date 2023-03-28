@@ -3,7 +3,7 @@ import { ApiResponse, OperationEntity, PeriodEntity } from "types";
 
 type FetchedData = OperationEntity | OperationEntity[] | PeriodEntity[] | PeriodEntity;
 
-export const useFetch = (url: string, reload?: boolean) => {
+export const useFetch = (url: string, reload?: boolean): [FetchedData | null, string | null, boolean]  => {
 
     const [data, setData] = useState<FetchedData | null>(null);
     const [error, setError] = useState<string | null>(null);

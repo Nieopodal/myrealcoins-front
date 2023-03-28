@@ -6,14 +6,13 @@ import {Header} from "../Header/Header";
 import {Dashboard} from "../Dashboard/Dashboard";
 import {Footer} from "../Footer/Footer";
 import {OneOperation} from "../OneOperation/OneOperation";
-import {AllOperations} from "../AllOperations/AllOperations";
 import {AddOperation} from "../AddOperation/AddOperation";
+import {setDefaultBudgetAmount, setFinancialCushion} from "../../features/user/user-slice";
+import {AllOperationList} from "../AllOperations/AllOperationList";
+import {ContainerForMap} from "../Map/ContainerForMap";
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import {setDefaultBudgetAmount, setFinancialCushion} from "../../features/user/user-slice";
-import {Map} from "../Map/Map";
-
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -31,9 +30,9 @@ export const App = () => {
             <Routes>
                 <Route path="/" element={<Dashboard/>}/>
                 <Route path="/add-operation" element={<AddOperation/>}/>
-                <Route path="/operation-list" element={<AllOperations/>}/>
-                <Route path="/map" element={<Map/>}/>
-                <Route path="/operation/:operationId/:edit?" element={<OneOperation/>}/>
+                <Route path="/operation-list" element={<AllOperationList/>}/>
+                <Route path="/map" element={<ContainerForMap/>}/>
+                <Route path="/operation/:operationId" element={<OneOperation/>}/>
             </Routes>
 
 

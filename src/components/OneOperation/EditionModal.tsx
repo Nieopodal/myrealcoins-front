@@ -80,7 +80,7 @@ export const EditionModal = ({isOperationSchema, operationId, open, handleToggle
 
     return <FormProvider {...methods}>
         <Modal open={open}>
-            <form className="w-fit mx-auto" onSubmit={handleSubmit(async data => {
+            <form className="w-fit mx-auto whitespace-normal" onSubmit={handleSubmit(async data => {
                 setError(null);
                 setLoading(true);
                 const outputData = (await fetchForm(data, true, operationId));
@@ -127,7 +127,9 @@ export const EditionModal = ({isOperationSchema, operationId, open, handleToggle
                     </CollapseContent>
 
                     <CollapseContent title="Zmień opis">
-                        <DescriptionInput/>
+                        <div className="mx-auto w-fit">
+                            <DescriptionInput/>
+                        </div>
                     </CollapseContent>
                 </div>
                 }
