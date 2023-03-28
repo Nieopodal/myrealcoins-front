@@ -1,12 +1,16 @@
 import React, {useEffect, useState} from "react";
-import {OperationsTable} from "../common/OperationsTable";
-import {OperationEntity, PeriodEntity } from "types";
+import {OperationEntity, PeriodEntity} from "types";
 import {useFetch} from "../../hooks/useFetch";
 import {usePeriods} from "../../hooks/usePeriods";
-import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
 import {showToast, Toast} from "../../utils/show-toast";
+import {SelectPeriod} from "../common/SelectPeriod";
+import {AllOperationsContext} from "../../contexts/all-operations.context";
 
-export const AllOperations = () => {
+interface Props {
+    children: React.ReactNode;
+}
+
+export const AllOperations = ({children}: Props) => {
 
     const [periodsList, , loadingPeriods] = usePeriods();
     const [selectedPeriod, setSelectedPeriod] = useState<string>('');
@@ -24,21 +28,21 @@ export const AllOperations = () => {
 
     }, [data, error, loading, loadingPeriods, selectedPeriod]);
 
-
     return <div className="pt-10 pb:10 xl:pb-0">
 
-        {!loadingPeriods && <div className="mx-auto w-fit pb-10">
-            <span className="text-sm xl:text-base font-semibold mr-2">Wybierz okres</span>
-
-            <select className="select select-primary select-xs xl:select-sm" defaultValue="" onChange={e => setSelectedPeriod(e.target.value)}>
-                <option value="" disabled>Brak</option>
-                {
-                    periodsList && (periodsList as PeriodEntity[]).map(period => <option key={period.id} value={period.id}>{convertDateToMonthAndYearHandler(period.starts, period.ends)}</option> )
-                }
-            </select>
-        </div>
+        {!loadingPeriods &&
+            <SelectPeriod
+                selectedPeriod={selectedPeriod}
+                setSelectedPeriod={setSelectedPeriod}
+                periodsList={periodsList as PeriodEntity[]}
+            />
         }
 
-        {<OperationsTable operations={operations ?? []} title={`Lista operacji`} loading={loading as boolean}/>}
+        <AllOperationsContext.Provider value={{
+            operations,
+            loading,
+        }}>
+            {children}
+        </AllOperationsContext.Provider>
     </div>
 };

@@ -19,7 +19,7 @@ export const PaymentCategoryRadio = ({title, btnClass, paymentSubcategoryList, p
         return true;
     };
 
-    return <Card additionalClasses="p-4 mb-2">
+    return <Card additionalClasses="p-4 mb-2 overflow-visible flex-wrap ">
         <h4 className="font-semibold py-2">{title}</h4>
         <div>
             {paymentSubcategoryList.map(subcategory => (
