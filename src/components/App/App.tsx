@@ -12,6 +12,8 @@ import {AddOperation} from "../AddOperation/AddOperation";
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {setDefaultBudgetAmount, setFinancialCushion} from "../../features/user/user-slice";
+import {Map} from "../Map/Map";
+
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -30,6 +32,7 @@ export const App = () => {
                 <Route path="/" element={<Dashboard/>}/>
                 <Route path="/add-operation" element={<AddOperation/>}/>
                 <Route path="/operation-list" element={<AllOperations/>}/>
+                <Route path="/map" element={<Map/>}/>
                 <Route path="/operation/:operationId/:edit?" element={<OneOperation/>}/>
             </Routes>
 

@@ -10,7 +10,7 @@ export const MainMenu = () => (
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <li><NavLink to="/">Bieżący okres</NavLink></li>
                 <li><NavLink to="/operation-list">Lista operacji</NavLink></li>
-                <li><button>Mapa</button></li>
+                <li><NavLink to="/map">Mapa</NavLink></li>
                 <li><button>Archiwum</button></li>
                 <li><button>Konfiguracja budżetu</button></li>
             </ul>
