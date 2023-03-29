@@ -37,9 +37,9 @@ export const ContainerForMap = () => {
                 enableHighAccuracy: true,
                 timeout: 5000,
             });
-    }, [userGeolocation]);
+    }, [userGeolocation, setUserGeolocation]);
 
     return <AllOperations>
-        <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/>
+        {userGeolocation && <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/> }
     </AllOperations>
 };
