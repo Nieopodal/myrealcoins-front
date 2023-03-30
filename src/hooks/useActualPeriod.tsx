@@ -20,7 +20,7 @@ export const useActualPeriod = () => {
         }
         console.log('actual period', actualPeriod);
 
-    }, [data, error, dispatch, loading, actualPeriod]);
+    }, [data]);
 
     return [actualPeriod, loading, error];
 }

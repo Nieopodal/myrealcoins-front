@@ -10,9 +10,10 @@ import {showToast, Toast} from "../../utils/show-toast";
 
 interface Props {
     periodId: string;
+    isPast?: boolean;
 }
 
-export const LastOperationsCard = ({periodId}: Props) => {
+export const LastOperationsCard = ({periodId, isPast}: Props) => {
 
     let navigate = useNavigate();
     const routeChange = (path: string) => {
@@ -37,6 +38,6 @@ export const LastOperationsCard = ({periodId}: Props) => {
     }, [data, error, loading, dispatch]);
 
 
-    return <OperationsTable operations={operations ? operations.slice(0, 3) : []} title="Ostatnie operacje"
+    return <OperationsTable operations={operations ? operations.slice(0, 3) : []} title={`Ostatnie operacje ${isPast && `okresu`}`}
                             btnAction={() => routeChange(`/operation-list`)} loading={loading as boolean} btnDescription="Pełna lista operacji"/>;
 };

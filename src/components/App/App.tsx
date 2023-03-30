@@ -13,6 +13,7 @@ import {ContainerForMap} from "../Map/ContainerForMap";
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import {PastPeriods} from "../PastPeriods/PastPeriods";
 
 export const App = () => {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ export const App = () => {
                 <Route path="/operation-list" element={<AllOperationList/>}/>
                 <Route path="/map" element={<ContainerForMap/>}/>
                 <Route path="/operation/:operationId" element={<OneOperation/>}/>
+                <Route path="/past-periods" element={<PastPeriods/>}/>
             </Routes>
 
 
