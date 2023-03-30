@@ -7,6 +7,7 @@ import {EditOperation} from "./EditOperation";
 import {DeleteOperation} from "./DeleteOperation";
 import React from "react";
 import {OperationEntity, OperationType, PaymentCategory, PaymentSubcategory} from "types";
+import {OperationMap} from "./OperationMap";
 
 interface Props {
     operation: OperationEntity;
@@ -53,7 +54,7 @@ export const OneOperationTable = ({operation, color, handleSetReload}: Props) =>
             </DetailsTableRow>
 
             <DetailsTableRow title="Lokalizacja">
-                {(operation.lat && operation.lon) ? `Wyświetl` : `brak`}
+                {(operation.lat && operation.lon) ? <OperationMap operation={operation}/> : `brak`}
             </DetailsTableRow>
 
             <DetailsTableRow title="Akcje">
