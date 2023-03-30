@@ -26,7 +26,7 @@ export const OneOperation = () => {
         if (data) {
             setOperation(data as OperationEntity);
         }
-    }, [data, error, loading, color, operation]);
+    }, [data, error, color, operation]);
 
     return <>
         <Card
