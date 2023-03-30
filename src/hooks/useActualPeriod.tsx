@@ -23,4 +23,4 @@ export const useActualPeriod = () => {
     }, [data]);
 
     return [actualPeriod, loading, error];
-}
+};

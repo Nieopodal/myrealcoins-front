@@ -21,7 +21,7 @@ export const AllMainCards = ({actualPeriod, isPast}: Props) => {
         <div
             className=" xl:grid xl:grid-cols-2 gap-10 w-full pb-0 xl:pb-10 xl:w-[90%] 2xl:w-[80%] mx-auto flex-nowrap">
             <MainStatsCard actualPeriod={actualPeriod} isPast={isPast}/>
-            <MainChartCard actualPeriod={actualPeriod} isPast={isPast}/>
+            <MainChartCard actualPeriod={actualPeriod}/>
             {<FinancialCushionCard previousPeriod={isPast ? actualPeriod : null}/>}
         </div>
         {actualPeriod.id && <LastOperationsCard periodId={actualPeriod.id} isPast={isPast}/>}
