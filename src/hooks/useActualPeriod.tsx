@@ -4,7 +4,7 @@ import {showToast, Toast} from "../utils/show-toast";
 import {setActual} from "../features/period/period-slice";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store";
-import { PeriodEntity } from "types";
+import {PeriodEntity} from "types";
 
 export const useActualPeriod = () => {
     const dispatch = useDispatch();

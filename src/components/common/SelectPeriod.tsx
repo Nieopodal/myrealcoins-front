@@ -9,6 +9,8 @@ interface Props {
     disableActual?: boolean;
     actualPeriodId?: string;
     additionalClasses?: string;
+    countOperationsWithGps?: number;
+    onlyWithGps?: boolean;
 }
 
 export const SelectPeriod = ({
@@ -17,7 +19,9 @@ export const SelectPeriod = ({
                                  selectedPeriod,
                                  disableActual,
                                  actualPeriodId,
-                                 additionalClasses
+                                 additionalClasses,
+                                 countOperationsWithGps,
+                                 onlyWithGps,
                              }: Props) => {
 
     return <div className={`mx-auto w-fit pb-10 ${additionalClasses}`}>
@@ -37,5 +41,7 @@ export const SelectPeriod = ({
         </select>
 
         {selectedPeriod === '' && <p className="text-red-600 font-semibold mx-auto w-fit mt-2">Wymagane.</p>}
+        {onlyWithGps && selectedPeriod &&
+            <p className="mx-auto w-fit mt-2">Znalezionych lokalizacji: {countOperationsWithGps}</p>}
     </div>
 };

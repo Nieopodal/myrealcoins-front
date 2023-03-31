@@ -5,8 +5,8 @@ import {useContext} from "react";
 import {AllOperationsContext} from "../../contexts/all-operations.context";
 import {OneMarker} from "./OneMarker";
 import 'leaflet/dist/leaflet.css';
-
 import ThreeDots from "../common/Loader";
+
 interface Props {
     centerLat?: number | null;
     centerLon?: number | null;

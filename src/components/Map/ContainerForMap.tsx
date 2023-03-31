@@ -16,7 +16,6 @@ export const ContainerForMap = () => {
     });
 
     useEffect(() => {
-
         navigator.geolocation.watchPosition((position) => {
                 setUserGeolocation({
                     lat: position.coords.latitude,
@@ -37,9 +36,9 @@ export const ContainerForMap = () => {
                 enableHighAccuracy: true,
                 timeout: 5000,
             });
-    }, [userGeolocation, setUserGeolocation]);
+    }, [userGeolocation]);
 
-    return <AllOperations>
+    return <AllOperations onlyWithGps>
         {userGeolocation && <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/> }
     </AllOperations>
 };

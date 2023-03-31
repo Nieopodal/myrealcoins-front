@@ -8,16 +8,22 @@ import {AllOperationsContext} from "../../contexts/all-operations.context";
 
 interface Props {
     children: React.ReactNode;
+    onlyWithGps?: boolean;
 }
 
-export const AllOperations = ({children}: Props) => {
+export const AllOperations = ({children, onlyWithGps}: Props) => {
 
     const [periodsList, , loadingPeriods] = usePeriods();
+    const [countOperationsWithGps, setCountOperationsWithGps] = useState<number>(0);
     const [selectedPeriod, setSelectedPeriod] = useState<string>('');
     const [operations, setOperations] = useState<OperationEntity[] | null>(null);
     const [data, error, loading] = useFetch(`operation/get-period-operations/${selectedPeriod}`);
 
     useEffect(() => {
+        if (onlyWithGps) {
+            if (operations) setCountOperationsWithGps(() => (operations as OperationEntity[]).filter(operation => operation.lat && operation.lon).length);
+        }
+
         if (error) {
             showToast(Toast.Error, error as string);
         }
@@ -26,7 +32,7 @@ export const AllOperations = ({children}: Props) => {
         }
         setOperations(data as OperationEntity[]);
 
-    }, [data, error, loading, loadingPeriods, selectedPeriod]);
+    }, [data, error, loading, loadingPeriods, selectedPeriod, countOperationsWithGps, operations]);
 
     return <div className="pt-10 pb:10 xl:pb-0">
 
@@ -35,6 +41,8 @@ export const AllOperations = ({children}: Props) => {
                 selectedPeriod={selectedPeriod}
                 setSelectedPeriod={setSelectedPeriod}
                 periodsList={periodsList as PeriodEntity[]}
+                onlyWithGps={onlyWithGps}
+                countOperationsWithGps={countOperationsWithGps}
             />
         }
 
