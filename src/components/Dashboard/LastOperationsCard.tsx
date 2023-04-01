@@ -38,6 +38,6 @@ export const LastOperationsCard = ({periodId, isPast}: Props) => {
     }, [data, error, loading, dispatch]);
 
 
-    return <OperationsTable operations={operations ? operations.slice(0, 3) : []} title={`Ostatnie operacje ${isPast && `okresu`}`}
+    return <OperationsTable operations={operations ? operations.slice(0, 3) : []} title={`Ostatnie operacje ${isPast ? `okresu` : ``}`}
                             btnAction={() => routeChange(`/operation-list`)} loading={loading as boolean} btnDescription="Pełna lista operacji"/>;
 };

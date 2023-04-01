@@ -12,6 +12,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
     const [actualPeriod, loading, error] = useActualPeriod();
 
+
     if (loading) {
         return <PageContainer classes="min-h-[60vh] content-center flex">
             <ThreeDots/>
