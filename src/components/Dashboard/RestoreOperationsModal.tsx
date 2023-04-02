@@ -30,7 +30,7 @@ export const RestoreOperationsModal = ({open, operations}: Props) => {
                     if (data.success) {
                         setRestoreResults(prev => [...prev, 1]);
                     } else {
-                        showToast(Toast.Error, `Nie udało się dodać operacji. ${data.error}`);
+                        showToast(Toast.Error, `Jedna z operacji nie została dodana. ${data.error}`);
                         setRestoreResults(prev => [...prev, 0]);
                     }
                 } catch {
@@ -44,7 +44,7 @@ export const RestoreOperationsModal = ({open, operations}: Props) => {
 
     return <Modal open={open} biggerSize>
         <h3 className="font-bold text-lg w-fit mx-auto pb-6">
-            Cykliczne operacje do dodania do nowego okresu
+            Czy do nowego okresu dodać poniższe schematy?
         </h3>
         <table className="table table-zebra w-full">
             <tbody>
@@ -56,7 +56,7 @@ export const RestoreOperationsModal = ({open, operations}: Props) => {
         {operations.length === 0 && <div className="mx-auto w-fit">Brak operacji.</div>}
         <div className="modal-action justify-center">
             <button className="btn btn-primary" onClick={handleAddOperations} disabled={operations.length === 0 || loading || finishedOperation}>Dodaj</button>
-            <button className="btn btn-outline" onClick={handleCloseModal} disabled={loading}>
+            <button className={`btn ${finishedOperation ? `btn-primary` : `btn-outline`}`} onClick={handleCloseModal} disabled={loading}>
                 {finishedOperation ? 'Zakończ' : 'Anuluj'}
             </button>
         </div>
