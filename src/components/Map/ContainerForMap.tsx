@@ -16,11 +16,11 @@ export const ContainerForMap = () => {
     });
 
     useEffect(() => {
-        navigator.geolocation.watchPosition((position) => {
+        navigator.geolocation.getCurrentPosition((position) => {
                 setUserGeolocation({
                     lat: position.coords.latitude,
                     lon: position.coords.longitude,
-                })
+                });
             },
             (error) => {
                 switch (error.code) {
@@ -36,9 +36,9 @@ export const ContainerForMap = () => {
                 enableHighAccuracy: true,
                 timeout: 5000,
             });
-    }, [userGeolocation]);
+    }, []);
 
     return <AllOperations onlyWithGps>
-        {userGeolocation && <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/> }
+        {userGeolocation && <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/>}
     </AllOperations>
 };
