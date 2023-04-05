@@ -4,9 +4,8 @@ import {Progress} from "./Progress";
 import {PageHeader} from "../common/PageHeader";
 import {PageContainer} from "../common/PageContainer";
 import {AddForm} from "./AddForm";
-import {useSelector} from "react-redux";
-import {RootState} from "../../store";
-import { LocalizationSource } from "types";
+import {LocalizationSource, UserEntity} from "types";
+import ThreeDots from "../common/Loader";
 
 export interface FormData {
     type: string;
@@ -24,9 +23,11 @@ export interface FormData {
     lonFromImage: number;
 }
 
-export const AddOperation = () => {
+interface Props {
+    actualUser: UserEntity | null;
+}
 
-    const {actualUser} = useSelector((state: RootState) => state.user);
+export const AddOperation = ({actualUser}: Props) => {
 
     const methods = useForm<FormData>({
         defaultValues: {
@@ -36,8 +37,8 @@ export const AddOperation = () => {
             amount: 0,
             description: '',
             isRepetitive: false,
-            localization: actualUser.addLocalizationByDefault,
-            localizationSource: actualUser.localizationSource,
+            localization: actualUser ? actualUser.addLocalizationByDefault : false,
+            localizationSource: actualUser ? actualUser.localizationSource : LocalizationSource.None,
             image: [] as File[],
             latFromDevice: 0,
             lonFromDevice: 0,
@@ -46,26 +47,28 @@ export const AddOperation = () => {
         },
     });
 
-    const { getValues, watch} = methods;
+    const {getValues, watch} = methods;
 
     watch(["type", "localization", "localizationSource", "amount"]);
     const [progress, setProgress] = useState<number>(1);
+
 
     useEffect(() => {
         if (!getValues("type") && !getValues("amount")) setProgress(1);
         if (getValues("type") && !getValues("amount")) setProgress(2);
         if (getValues("type") && getValues("amount")) setProgress(3);
-        // if (getValues("localization") === false) {
-        //     setValue("localization-from-photo", false);
-        // }
     }, [getValues("localization"), getValues("localizationSource"), getValues("type"), getValues("amount")])
 
     return <FormProvider {...methods}>
 
         <PageContainer>
+
             <PageHeader text="Dodaj operację"/>
-            <Progress progress={progress}/>
-            <AddForm/>
+            {!actualUser && <ThreeDots/>}
+            {actualUser && <>
+                <Progress progress={progress}/>
+                <AddForm/>
+            </>}
         </PageContainer>
     </FormProvider>
 };

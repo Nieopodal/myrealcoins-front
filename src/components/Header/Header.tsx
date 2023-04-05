@@ -3,7 +3,9 @@ import {MainMenu} from "./MainMenu";
 import {AddOperation} from "./AddOperation";
 import {UserNavigation} from "./UserNavigation";
 
+
 export const Header = () => {
+
     return <>
         <nav className="navbar bg-base-100 border-b-[1px] w-screen md:w-full">
             <MainMenu/>

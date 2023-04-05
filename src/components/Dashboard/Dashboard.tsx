@@ -1,32 +1,28 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import {ArcElement, Chart as ChartJS, Legend, Tooltip} from 'chart.js';
 import {PeriodEntity} from 'types';
 import ThreeDots from "../common/Loader";
-import {PageHeader} from "../common/PageHeader";
 import {PageContainer} from "../common/PageContainer";
-import {useActualPeriod} from "../../hooks/useActualPeriod";
-import {ErrorMessage} from "../common/ErrorMessage";
 import {AllMainCards} from "./AllMainCards";
+import {UserContext} from "../../contexts/user.context";
+import {showToast, Toast} from "../../utils/show-toast";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
-    const [actualPeriod, loading, error] = useActualPeriod();
 
+    const {actualPeriod, isLoading, user, error} = useContext(UserContext);
 
-    if (loading) {
+    useEffect(() => {
+        if (error) showToast(Toast.Error, error);
+    }, [error]);
+
+    if (isLoading) {
         return <PageContainer classes="min-h-[60vh] content-center flex">
             <ThreeDots/>
         </PageContainer>
     }
 
-    if (error) {
-        return <PageContainer>
-            <PageHeader text="Aktualny okres"/>
-            <ErrorMessage/>
-        </PageContainer>
-    }
-
-    if (actualPeriod) {
+    if (actualPeriod && user) {
         return <PageContainer>
                     <AllMainCards actualPeriod={actualPeriod as PeriodEntity}/>
             </PageContainer>

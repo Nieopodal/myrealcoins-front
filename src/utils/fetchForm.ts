@@ -20,6 +20,7 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
         try {
             const res = await fetch(`http://localhost:3001/operation/${editedOperationId}`, {
                 method: 'PUT',
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -69,6 +70,7 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
 
             const res = await fetch(`http://localhost:3001/operation${inputData.isRepetitive ? `/repetitive-operation` : `/`}`, {
                 method: 'POST',
+                credentials: "include",
                 headers: {},
                 body: formData,
             });

@@ -29,4 +29,4 @@ export const StepOneForm = () => {
         {typeInputValue === "9" && <OperationOtherTypeSelectInput/>}
         {typeInputValue === '1' && <PaymentCategoryRadios/>}
     </div>
-}
+};

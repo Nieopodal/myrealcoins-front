@@ -3,15 +3,15 @@ import React, {useEffect, useState} from "react";
 import {SelectPeriod} from "../common/SelectPeriod";
 import {ApiResponse, PeriodEntity} from "types";
 import {Card} from "../common/Card";
-import {useActualPeriod} from "../../hooks/useActualPeriod";
 import {PageHeader} from "../common/PageHeader";
 import {PageContainer} from "../common/PageContainer";
 import {AllMainCards} from "../Dashboard/AllMainCards";
 import ThreeDots from "../common/Loader";
 import {ErrorMessage} from "../common/ErrorMessage";
+import useFindUser from "../../hooks/useFindUser";
 
 export const PastPeriods = () => {
-    const [actualPeriod, loadingActualPeriod, errorActualPeriod] = useActualPeriod();
+    const {actualPeriod, isLoading, error: errorActualPeriod}= useFindUser();
 
     const [periodsList, , loadingPeriods] = usePeriods();
     const [selectedPeriodId, setSelectedPeriodId] = useState<string>('');
@@ -45,6 +45,8 @@ export const PastPeriods = () => {
         }
     }, [selectedPeriodId]);
 
+    if (!actualPeriod) return <ThreeDots/>
+
     return <PageContainer>
             <PageHeader text="Szczegóły minionego okresu"/>
             {!loadingPeriods &&
@@ -57,7 +59,7 @@ export const PastPeriods = () => {
                     additionalClasses="pt-4"
                 />
             }
-        {(loadingActualPeriod || loadingPeriods) && <ThreeDots/>}
+        {(isLoading || loadingPeriods) && <ThreeDots/>}
 
         {(error || errorActualPeriod) && <ErrorMessage/>}
 

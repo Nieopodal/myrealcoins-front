@@ -17,7 +17,6 @@ export const StepThreeForm = () => {
 
     useEffect(() => {
         clearErrors("localizationSource");
-        console.log(getValues("localizationSource"))
         if (latFromDevice && lonFromDevice) {
             setValue('latFromDevice', latFromDevice as number);
             setValue('lonFromDevice', lonFromDevice as number);
@@ -57,8 +56,6 @@ export const StepThreeForm = () => {
             <FileInput/>
 
             <HiddenCoordsInputs latName={`latFromDevice`} lonName={`lonFromDevice`}/>
-
-
         </div>}
     </div>
 };

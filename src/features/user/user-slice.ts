@@ -1,6 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {UserEntity} from 'types';
 import {LocalizationSource} from 'types';
+
 export const userInitialState = {
     actualUser: {
         id: '',
@@ -9,8 +10,8 @@ export const userInitialState = {
         name: '',
         financialCushion: 0,
         defaultBudgetAmount: 0,
-        localizationSource: LocalizationSource.UserDevice,
-        addLocalizationByDefault: true,
+        localizationSource: LocalizationSource.None,
+        addLocalizationByDefault: false,
     },
 };
 

@@ -14,7 +14,9 @@ export const useFetch = (url: string, reload?: boolean): [FetchedData | null, st
         (async () => {
             try {
                 setLoading(true);
-                const res = await fetch(`http://localhost:3001/${url}`);
+                const res = await fetch(`http://localhost:3001/${url}`, {
+                    credentials: 'include',
+                });
                 const fetchedData: ApiResponse<FetchedData | null> = await res.json();
 
                 if (fetchedData.success) {

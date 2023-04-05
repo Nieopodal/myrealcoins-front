@@ -1,43 +1,53 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Route, Routes} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {Provider} from "react-redux";
 import {ToastContainer} from "react-toastify";
 import {Header} from "../Header/Header";
 import {Dashboard} from "../Dashboard/Dashboard";
 import {Footer} from "../Footer/Footer";
 import {OneOperation} from "../OneOperation/OneOperation";
 import {AddOperation} from "../AddOperation/AddOperation";
-import {setDefaultBudgetAmount, setFinancialCushion} from "../../features/user/user-slice";
 import {AllOperationList} from "../AllOperations/AllOperationList";
 import {ContainerForMap} from "../Map/ContainerForMap";
+import {PastPeriods} from "../PastPeriods/PastPeriods";
+import useFindUser from "../../hooks/useFindUser";
+import {UserContext} from '../../contexts/user.context';
+import {PrivateRoute} from "../Auth/PrivateRoute";
+import {Home} from "../../views/Home";
+import {Login} from "../Login/Login";
+import {Register} from "../Auth/Register";
+import {store} from "../../store";
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import {PastPeriods} from "../PastPeriods/PastPeriods";
-
 export const App = () => {
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(setFinancialCushion(34543.44));
-        dispatch(setDefaultBudgetAmount(5000));
-    }, [dispatch]);
-
-    return <div className="">
-
-        <Header/>
-        <ToastContainer autoClose={10000}/>
-
-            <Routes>
-                <Route path="/" element={<Dashboard/>}/>
-                <Route path="/add-operation" element={<AddOperation/>}/>
-                <Route path="/operation-list" element={<AllOperationList/>}/>
-                <Route path="/map" element={<ContainerForMap/>}/>
-                <Route path="/operation/:operationId" element={<OneOperation/>}/>
-                <Route path="/past-periods" element={<PastPeriods/>}/>
-            </Routes>
+    const {user, setUser, isLoading, actualPeriod, setActualPeriod, error} = useFindUser();
 
 
-        <Footer/>
+    return <div>
+        <UserContext.Provider value={{user, setUser, isLoading, actualPeriod, setActualPeriod, error}}>
+
+            <Header/>
+
+            <ToastContainer autoClose={5000}/>
+            <Provider store={store}>
+                <Routes>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+
+                    <Route path="/dashboard" element={<PrivateRoute outlet={<Dashboard/>}/>}/>
+                    <Route path="/add-operation" element={<PrivateRoute outlet={<AddOperation actualUser={user}/>}/>}/>
+                    <Route path="/operation-list" element={<PrivateRoute outlet={<AllOperationList/>}/>}/>
+                    <Route path="/map" element={<PrivateRoute outlet={<ContainerForMap/>}/>}/>
+                    <Route path="/operation/:operationId" element={<PrivateRoute outlet={<OneOperation/>}/>}/>
+                    <Route path="/past-periods" element={<PrivateRoute outlet={<PastPeriods/>}/>}/>
+
+                </Routes>
+            </Provider>
+            <Footer/>
+
+        </UserContext.Provider>
     </div>
 };

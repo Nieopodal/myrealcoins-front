@@ -4,16 +4,16 @@ import {StepTwoForm} from "./StepTwoForm";
 import {StepThreeForm} from "./StepThreeForm";
 import React, {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
-import {useActualPeriod} from "../../hooks/useActualPeriod";
 import ThreeDots from "../common/Loader";
 import {ErrorMessage} from "../common/ErrorMessage";
 import {fetchForm} from "../../utils/fetchForm";
 import {showToast, Toast} from "../../utils/show-toast";
 import {useNavigate} from "react-router-dom";
+import useFindUser from "../../hooks/useFindUser";
 
 export const AddForm = () => {
     const {handleSubmit, formState: {errors: formErrors}} = useFormContext();
-    const [actualPeriod, loading] = useActualPeriod();
+    const {actualPeriod, isLoading} = useFindUser();
 
     const [output, setOutput] = useState<string | null>(null);
     const [errors, setErrors] = useState<string | null>(null);
@@ -38,7 +38,7 @@ export const AddForm = () => {
         if (output) navigate('/', {replace: true});
     }, [errors, output, Object.keys(formErrors)]);
 
-    if (loading || waitToSend || output) return (
+    if (isLoading || waitToSend || output) return (
         <Card additionalClasses="mt-10">
             <ThreeDots/>
         </Card>);
