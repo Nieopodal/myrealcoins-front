@@ -28,7 +28,7 @@ export const AllMainCards = ({actualPeriod, isPast}: Props) => {
 
     const handleToggle = () => {
         setLoading(true);
-        setOpenRestoreModal((prev) => !prev)
+        setOpenRestoreModal((prev) => !prev);
     };
 
     useEffect(() => {
@@ -51,6 +51,7 @@ export const AllMainCards = ({actualPeriod, isPast}: Props) => {
         try {
             const res = await fetch('http://localhost:3001/period', {
                 method: 'POST',
+                credentials: 'include',
             });
 
             const data: ApiResponse<OperationEntity[]> = await res.json();
@@ -59,7 +60,7 @@ export const AllMainCards = ({actualPeriod, isPast}: Props) => {
                 console.log('data payload', data.payload)
                 setOperationsToRestore(data.payload);
                 showToast(Toast.Success, 'Utworzono nowy okres.');
-                navigate('/', {replace: true});
+                navigate('/dashboard', {replace: true});
             } else {
                 setError(data.error);
             }

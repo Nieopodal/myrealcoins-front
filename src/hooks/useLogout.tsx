@@ -4,7 +4,6 @@ import {showToast, Toast} from "../utils/show-toast";
 import {useContext} from "react";
 import {UserContext} from "../contexts/user.context";
 
-
 export const useLogout = () => {
     let navigate = useNavigate();
     const {setUser} = useContext(UserContext);

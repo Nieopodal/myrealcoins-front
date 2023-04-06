@@ -1,16 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import {MainMenu} from "./MainMenu";
 import {AddOperation} from "./AddOperation";
 import {UserNavigation} from "./UserNavigation";
-
+import {UserContext} from "../../contexts/user.context";
 
 export const Header = () => {
 
+    const {user, isLoading} = useContext(UserContext);
+
     return <>
         <nav className="navbar bg-base-100 border-b-[1px] w-screen md:w-full">
-            <MainMenu/>
-            <AddOperation/>
-            <UserNavigation/>
+            {!isLoading && <>
+            <MainMenu user={user}/>
+            <AddOperation user={user}/>
+            <UserNavigation user={user}/>
+            </>}
         </nav>
     </>
 };

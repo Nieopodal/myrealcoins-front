@@ -20,10 +20,10 @@ import {store} from "../../store";
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import {UserSettings} from "../Dashboard/UserSettings";
 export const App = () => {
 
     const {user, setUser, isLoading, actualPeriod, setActualPeriod, error} = useFindUser();
-
 
     return <div>
         <UserContext.Provider value={{user, setUser, isLoading, actualPeriod, setActualPeriod, error}}>
@@ -38,6 +38,7 @@ export const App = () => {
                     <Route path="/register" element={<Register/>}/>
 
                     <Route path="/dashboard" element={<PrivateRoute outlet={<Dashboard/>}/>}/>
+                    <Route path="/settings" element={<PrivateRoute outlet={<UserSettings/>}/>}/>
                     <Route path="/add-operation" element={<PrivateRoute outlet={<AddOperation actualUser={user}/>}/>}/>
                     <Route path="/operation-list" element={<PrivateRoute outlet={<AllOperationList/>}/>}/>
                     <Route path="/map" element={<PrivateRoute outlet={<ContainerForMap/>}/>}/>

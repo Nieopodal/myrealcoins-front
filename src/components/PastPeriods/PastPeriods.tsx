@@ -24,7 +24,9 @@ export const PastPeriods = () => {
         if (selectedPeriodId.length > 0) {
             (async () => {
                 try {
-                    const res = await fetch(`http://localhost:3001/period/${selectedPeriodId}`);
+                    const res = await fetch(`http://localhost:3001/period/${selectedPeriodId}`, {
+                        credentials: 'include',
+                    });
                     const data: ApiResponse<PeriodEntity | null> = await res.json();
                     if (data.success) {
                         if (data.payload === null) {

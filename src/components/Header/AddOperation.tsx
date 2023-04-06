@@ -1,9 +1,14 @@
 import React, {useContext} from "react";
 import {NavLink} from "react-router-dom";
+import { UserEntity } from "types";
 import {UserContext} from "../../contexts/user.context";
 
-export const AddOperation = () => {
-    const { user, actualPeriod } = useContext(UserContext);
+interface Props {
+    user: UserEntity | null;
+}
+
+export const AddOperation = ({user}: Props) => {
+    const {actualPeriod } = useContext(UserContext);
 
     return <div className="navbar-center lg:flex">
         {user && actualPeriod && <NavLink to="/add-operation">

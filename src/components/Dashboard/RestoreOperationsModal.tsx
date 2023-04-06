@@ -25,6 +25,7 @@ export const RestoreOperationsModal = ({open, operations}: Props) => {
                 try {
                     const res = await fetch(`http://localhost:3001/period/create-new-operation-from-schema/${operation.id}`, {
                         method: 'POST',
+                        credentials: 'include',
                     });
                     const data: ApiResponse<true> = await res.json();
                     if (data.success) {

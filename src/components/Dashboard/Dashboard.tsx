@@ -6,17 +6,19 @@ import {PageContainer} from "../common/PageContainer";
 import {AllMainCards} from "./AllMainCards";
 import {UserContext} from "../../contexts/user.context";
 import {showToast, Toast} from "../../utils/show-toast";
+import {InitConfig} from "./InitConfig";
+import useFindUser from "../../hooks/useFindUser";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const Dashboard = () => {
-
-    const {actualPeriod, isLoading, user, error} = useContext(UserContext);
+    const {user, actualPeriod, isLoading} = useFindUser();
+    const {isLoading: contextLoading, error} = useContext(UserContext);
 
     useEffect(() => {
         if (error) showToast(Toast.Error, error);
     }, [error]);
 
-    if (isLoading) {
+    if (isLoading || contextLoading) {
         return <PageContainer classes="min-h-[60vh] content-center flex">
             <ThreeDots/>
         </PageContainer>
@@ -28,8 +30,8 @@ export const Dashboard = () => {
             </PageContainer>
     }
 
-    if (actualPeriod === null) {
-        return <p>Zacznijmy konfigurację</p>
+    if (actualPeriod === null && !isLoading) {
+        return <InitConfig/>
     }
     return null;
 };

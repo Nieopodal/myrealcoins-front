@@ -1,10 +1,14 @@
 import React, {useContext} from "react";
 import {NavLink} from "react-router-dom";
+import { UserEntity } from "types";
 import {UserContext} from "../../contexts/user.context";
 import {HomeSvg} from "./HomeSvg";
 
-export const MainMenu = () => {
-    const {user, actualPeriod} = useContext(UserContext);
+interface Props {
+    user: UserEntity | null;
+}
+export const MainMenu = ({user}: Props) => {
+    const {actualPeriod} = useContext(UserContext);
 
     return <div className="navbar-start">
         {user && actualPeriod &&  <div className="dropdown">
@@ -20,9 +24,6 @@ export const MainMenu = () => {
                 <li><NavLink to="/operation-list">Lista operacji</NavLink></li>
                 <li><NavLink to="/map">Mapa</NavLink></li>
                 <li><NavLink to="/past-periods">Minione okresy</NavLink></li>
-                <li>
-                    <button>Konfiguracja budżetu</button>
-                </li>
             </ul>
         </div>}
         <NavLink to={user ? '/dashboard' : '/'}

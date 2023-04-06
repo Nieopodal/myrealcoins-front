@@ -1,19 +1,22 @@
-import React, {useContext} from "react";
+import React from "react";
 import {ThemeChangeSelector} from "./ThemeChangeSelector";
-import {UserContext} from "../../contexts/user.context";
 import {useLogout} from "../../hooks/useLogout";
 import {NavLink} from "react-router-dom";
 import {NewUserSvg} from "./NewUserSvg";
+import { UserEntity } from "types";
 
-export const UserNavigation = () => {
-    const {user} = useContext(UserContext);
+interface Props {
+    user: UserEntity | null;
+}
+
+export const UserNavigation = ({user}: Props) => {
     const { logoutUser } = useLogout();
 
     return <div className="navbar-end">
         <ThemeChangeSelector/>
         {!user &&  <NavLink to="/register">
             <button className="btn btn-success btn-sm md:btn md:bg-success  text-success-content hidden md:flex">Rejestracja</button>
-            <button className="btn btn-ghost rounded-box md:hidden"><NewUserSvg/></button>
+            <button className="btn btn-ghost rounded-box md:hidden overflow-hidden"><NewUserSvg/></button>
         </NavLink>}
 
         {user && <div className="dropdown dropdown-end">
@@ -27,7 +30,7 @@ export const UserNavigation = () => {
             <ul tabIndex={0}
                 className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                 <li>
-                    <button>Ustawienia profilu</button>
+                    <NavLink to="/settings">Ustawienia</NavLink>
                 </li>
                 <li>
                     <button onClick={logoutUser}>Wyloguj</button>
