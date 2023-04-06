@@ -15,7 +15,7 @@ export const UserNavigation = ({user}: Props) => {
     return <div className="navbar-end">
         <ThemeChangeSelector/>
         {!user &&  <NavLink to="/register">
-            <button className="btn btn-success btn-sm md:btn md:bg-success  text-success-content hidden md:flex">Rejestracja</button>
+            <button className="btn btn-accent btn-sm md:btn-md hidden md:flex">Rejestracja</button>
             <button className="btn btn-ghost rounded-box md:hidden overflow-hidden"><NewUserSvg/></button>
         </NavLink>}
 

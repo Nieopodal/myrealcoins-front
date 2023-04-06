@@ -1,9 +1,10 @@
-import {useState, useContext} from 'react';
+import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {UserContext} from '../contexts/user.context';
 import {RegisterFormData} from "../components/Auth/Register";
-import {ApiResponse, PeriodEntity, UserEntity, UserResponse} from 'types';
+import {ApiResponse, PeriodEntity, UserEntity} from 'types';
 import {LoginFormData} from "../components/Login/Login";
+import {showToast, Toast} from "../utils/show-toast";
 
 export default function useAuth() {
     const navigate = useNavigate();
@@ -49,10 +50,11 @@ export default function useAuth() {
                 },
             });
 
-            const responseData: UserResponse = await res.json();
+            const responseData: ApiResponse<string> = await res.json();
 
             if (responseData.success) {
-                await setUserContext();
+                showToast(Toast.Info, responseData.payload);
+                navigate('/', {replace: true});
             } else if (responseData.error) {
                 setError(responseData.error);
             } else {

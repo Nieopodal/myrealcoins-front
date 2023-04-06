@@ -3,7 +3,7 @@ import React, {useContext, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {ApiResponse, PeriodEntity, UserEntity} from "types";
 import {showToast, Toast} from "../../utils/show-toast";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {UserContext} from "../../contexts/user.context";
 import {InputErrorMessage} from "../Form/InputErrorMessage";
 
@@ -132,6 +132,10 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
                 <CheckboxInput name="addLocalizationByDefault"
                                title="Czy chcesz domyślnie dodawać lokalizację do płatności?"/>
             </FormProvider>
+
+            {actualPeriod && <div className="w-fit mx-auto pt-5">
+                <NavLink to="/reset-password" className="btn btn-outline">Zmiana hasła</NavLink>
+            </div>}
         </div>
         <button type='submit' className="btn btn-primary w-full" disabled={loading}>
             Zapisz

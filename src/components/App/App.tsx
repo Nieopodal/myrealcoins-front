@@ -21,6 +21,9 @@ import {store} from "../../store";
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {UserSettings} from "../Dashboard/UserSettings";
+import {EmailLink} from "../EmailLink/EmailLink";
+import {ResetPassword} from "../EmailLink/ResetPassword";
+import {ResetPasswordRequest} from "../EmailLink/ResetPasswordRequest";
 
 export const App = () => {
 
@@ -39,7 +42,9 @@ export const App = () => {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
-
+                        <Route path="/confirm/:code" element={<EmailLink/>}/>
+                        <Route path="/reset-password" element={<ResetPasswordRequest/>}/>
+                        <Route path="/reset/:userId/:code" element={<ResetPassword/>}/>
                         <Route path="/dashboard" element={<PrivateRoute outlet={<Dashboard/>}/>}/>
                         <Route path="/settings" element={<PrivateRoute outlet={<UserSettings/>}/>}/>
                         <Route path="/add-operation"

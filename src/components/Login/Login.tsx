@@ -60,8 +60,11 @@ export const Login = () => {
                         {...register('password')}
                         required
                     />
-                    <div className="pt-1">Nie masz konta? <NavLink to="/register" className="link-info">Zarejestruj
-                        się</NavLink></div>
+                    <div className="pt-1 flex justify-between"><span>Nie masz konta? <NavLink to="/register"
+                                                                                              className="link-info">Zarejestruj
+                        się</NavLink></span>
+                        <NavLink to="/reset-password" className="link-info">Zresetuj hasło</NavLink>
+                    </div>
                 </div>
                 <button type='submit' className="btn btn-primary w-full" disabled={loading || isLoading}>
                     Zaloguj
