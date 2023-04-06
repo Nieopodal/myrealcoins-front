@@ -9,6 +9,7 @@ import {InputErrorMessage} from "../Form/InputErrorMessage";
 import {useDeviceGeolocation} from "../../hooks/useDeviceGeolocation";
 import {FileInput} from "../Form/FileInput";
 import {HiddenCoordsInputs} from "../Form/HiddenCoordsInputs";
+import {QuestionSvg} from "../common/QuestionSvg";
 
 export const StepThreeForm = () => {
     const {register, getValues, formState: {errors}, clearErrors, setValue} = useFormContext();
@@ -17,7 +18,6 @@ export const StepThreeForm = () => {
 
     useEffect(() => {
         clearErrors("localizationSource");
-        console.log(getValues("localizationSource"))
         if (latFromDevice && lonFromDevice) {
             setValue('latFromDevice', latFromDevice as number);
             setValue('lonFromDevice', lonFromDevice as number);
@@ -28,11 +28,17 @@ export const StepThreeForm = () => {
     return <div className="pb-4 w-fit mx-auto">
         <StepHeader text="Krok 3: Dodatkowe"/>
         <DescriptionInput/>
-        <CheckboxInput name="isRepetitive" title="Czy operacja jest cykliczna?"/>
-
+        <div className="flex">
+            <CheckboxInput name="isRepetitive" title="Czy operacja jest cykliczna?"/>
+            <QuestionSvg
+                text="Zostanie utworzona operacja oraz schemat, na podstawie którego w kolejnych miesiącach automatycznie będzie można stworzyć taką samą operację (oprócz zdjęcia paragonu)."/>
+        </div>
         {chosenOperationType === '1' && <div>
+            <div className="flex">
             <CheckboxInput name="localization" title="Lokalizacja operacji"/>
-
+                <QuestionSvg
+                    text="Płatność zostanie oznaczona na mapie w postaci pinezki."/>
+            </div>
             <InputErrorMessage errorMessage={errors.localizationSource?.message as string}/>
 
             {chosenLocalization && <div>
@@ -57,8 +63,6 @@ export const StepThreeForm = () => {
             <FileInput/>
 
             <HiddenCoordsInputs latName={`latFromDevice`} lonName={`lonFromDevice`}/>
-
-
         </div>}
     </div>
 };

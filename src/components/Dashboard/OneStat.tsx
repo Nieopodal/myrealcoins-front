@@ -1,5 +1,5 @@
 import React from "react";
-import {BtnOutline} from "../common/BtnOutline";
+import {DescriptionBtn} from "./DescriptionBtn";
 
 interface Props {
     title: string;
@@ -15,7 +15,17 @@ interface Props {
 
 export const OneStat = (props: Props) => {
 
-    const {title, value, description, btnAction, btnDescription, ownClasses, ownTitleClasses, ownValueClasses, isPast} = props;
+    const {
+        title,
+        value,
+        description,
+        btnAction,
+        btnDescription,
+        ownClasses,
+        ownTitleClasses,
+        ownValueClasses,
+        isPast
+    } = props;
 
     return <>
         <div className={ownClasses ? ownClasses : "sm:px-auto p-2 sm:stat "}>
@@ -26,9 +36,11 @@ export const OneStat = (props: Props) => {
                     className={ownValueClasses ? ownValueClasses : "stat-value text-base md:text-xl xl:text-2xl"}>{typeof value === 'number' ? value.toFixed(2) : value}</div>
                 {description && <div className="stat-desc">{description}</div>}
 
-                {!isPast && btnAction && btnDescription && <div className="stat-desc pt-2">
-                    <BtnOutline btnAction={btnAction} btnDescription={btnDescription}/>
-                </div>
+                {
+                    !isPast && btnAction && btnDescription && <div className="stat-desc pt-2">
+                        {/*<BtnOutline btnAction={btnAction} btnDescription={btnDescription}/>*/}
+                    <DescriptionBtn text={btnDescription}/>
+                    </div>
                 }
             </div>
         </div>

@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 import {BtnOutline} from "./BtnOutline";
+import {UserContext} from "../../contexts/user.context";
 
 interface CardProps {
     children: React.ReactNode;
@@ -9,12 +10,12 @@ interface CardProps {
 }
 export const Card = (props: CardProps) => {
     const {children, additionalClasses, btnDescription, btnAction} = props;
+    const {user} = useContext(UserContext);
 
-    return <div className={`card border-[1px] shadow-md mb-10 xl:mb-0 overflow-hidden overflow-x-auto ${additionalClasses}`}>
+    return <div className={`${additionalClasses} card border-[1px] shadow-md mb-10 ${user ? 'xl:mb-0' : ''} overflow-hidden overflow-x-auto `}>
         {children}
         {btnDescription && btnAction && <div className="card-actions justify-end p-5">
             <BtnOutline btnAction={btnAction} btnDescription={btnDescription}/>
         </div>}
-        {/*{!btnDescription && !btnAction && <div className="p-5"></div>}*/}
     </div>;
 };

@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const QuestionSvg = ({text}: Props) => (
-    <div className="tooltip flex justify-center absolute z-20 overflow-x-visible" data-tip={text}>
+    <div className="tooltip tooltip-left flex z-20 overflow-x-visible mr-1" data-tip={text}>
         <button>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5}
                  stroke="currentColor" className="w-6 h-6 font-bold">

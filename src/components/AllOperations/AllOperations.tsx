@@ -34,7 +34,7 @@ export const AllOperations = ({children, onlyWithGps}: Props) => {
 
     }, [data, error, loading, loadingPeriods, selectedPeriod, countOperationsWithGps, operations]);
 
-    return <div className="pt-10 pb:10 xl:pb-0">
+    return <div className="pt-10 pb:10 xl:pb-0 h-full mt-0 min-h-[70vh]">
 
         {!loadingPeriods &&
             <SelectPeriod

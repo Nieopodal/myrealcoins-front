@@ -1,6 +1,5 @@
 .map {
     height: calc( 100vh - 300px );
-    /*    calc używamy, aby na desktopie! mapa była na 100% ekranu, są lepsze sposoby!*/
 }
 
 .leaflet-container {
