@@ -27,7 +27,7 @@ export const MainMenu = ({user}: Props) => {
             </ul>
         </div>}
         <NavLink to={user ? '/dashboard' : '/'}
-                 className={`btn btn-ghost ${user ? 'hidden' : ''} sm:inline-flex normal-case text-sm sm:text-2xl`}>MyRealCoins</NavLink>
-        {user && <button className="inline-flex sm:hidden btn btn-ghost rounded-box"><HomeSvg/></button>}
+                 className={`btn btn-ghost ${user ? 'hidden' : ''} btn-sm sm:btn-md sm:inline-flex normal-case text-sm sm:text-2xl`}>MyRealCoins</NavLink>
+        {user && <NavLink to={user ? '/dashboard' : '/'} className="inline-flex sm:hidden btn btn-ghost rounded-box"><HomeSvg/></NavLink>}
     </div>
 };
