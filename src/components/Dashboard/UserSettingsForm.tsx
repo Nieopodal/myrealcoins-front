@@ -5,6 +5,7 @@ import {ApiResponse, PeriodEntity, UserEntity} from "types";
 import {showToast, Toast} from "../../utils/show-toast";
 import {useNavigate} from "react-router-dom";
 import {UserContext} from "../../contexts/user.context";
+import {InputErrorMessage} from "../Form/InputErrorMessage";
 
 interface SettingsFormData {
     defaultBudgetAmount: number;
@@ -20,7 +21,7 @@ interface Props {
 export const UserSettingsForm = ({user, actualPeriod}: Props) => {
 
     const navigate = useNavigate();
-    const {setActualPeriod} = useContext(UserContext);
+    const {setActualPeriod, setUser} = useContext(UserContext);
 
     const methods = useForm<SettingsFormData>({
         defaultValues: {
@@ -31,7 +32,7 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
     });
 
     const [loading, setLoading] = useState<boolean>(false);
-    const {register, handleSubmit} = methods;
+    const {register, handleSubmit, formState: {errors}} = methods;
 
     return <form onSubmit={handleSubmit((data: SettingsFormData) => {
         console.log(user, {actualPeriod});
@@ -47,8 +48,9 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
                     body: JSON.stringify(data),
                 });
 
-                const responseData: ApiResponse<true> = await res.json();
+                const responseData: ApiResponse<UserEntity> = await res.json();
                 if (responseData.success) {
+                    setUser(responseData.payload);
                     if (!actualPeriod) {
 
                         try {
@@ -89,10 +91,21 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
                     disabled={loading}
                     type='number'
                     className='input input-bordered w-full mb-4'
-                    {...register('defaultBudgetAmount')}
+                    {...register('defaultBudgetAmount', {
+                        min: {
+                            value: 100,
+                            message: 'Minimalna kwota to 100 PLN.',
+                        },
+                        max: {
+                            value: 999999.99,
+                            message: 'Maksymalna kwota to 999 999.99 PLN.',
+                        }
+                    })}
                     required
+                    min={0}
                 />
             </label>
+            {errors?.defaultBudgetAmount && <InputErrorMessage errorMessage={errors?.defaultBudgetAmount.message}/>}
 
             {!actualPeriod && <label>Kwota dotychczasowej poduszki finansowej
                 <input
@@ -100,10 +113,21 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
                     disabled={loading}
                     type='number'
                     className='input input-bordered w-full mb-4t'
-                    {...register('financialCushion')}
+                    {...register('financialCushion', {
+                        min: {
+                            value: 0,
+                            message: 'Minimalna kwota to 0.00 PLN.',
+                        },
+                        max: {
+                            value: 1000000,
+                            message: 'Maksymalna kwota to 1 000 000.00 PLN.',
+                        }
+                    })}
                     required
+                    min={0}
                 />
             </label>}
+            {errors?.financialCushion && <InputErrorMessage errorMessage={errors?.financialCushion.message}/>}
             <FormProvider {...methods}>
                 <CheckboxInput name="addLocalizationByDefault"
                                title="Czy chcesz domyślnie dodawać lokalizację do płatności?"/>
