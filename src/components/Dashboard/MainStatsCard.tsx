@@ -29,15 +29,15 @@ export const MainStatsCard = ({actualPeriod, isPast}: Props) => {
                      description={convertDateToMonthAndYearHandler(starts, ends)}
                      btnAction={() => {
                      }}
-                     btnDescription="Więcej"/>
+                     btnDescription={`Jeśli chcesz zmienić kwotę dostępnego budżetu - dodaj operację "Wpłata do budżetu" lub "Redukcja budżetu". Aby zmienić domyślną kwotę w przyszłych miesiącach - przejdź do Ustawień.`}/>
             <OneStat title="Wydatki [PLN]" value={pricifyHandler(paymentsAmount)}
                      isPast={isPast}
                      description={convertToPercentageHandler(paymentsAmount, budgetAmount)} btnAction={() => {
-            }} btnDescription="Więcej"/>
+            }} btnDescription={`Jest to suma wszystkich płatności w danym okresie. Szczegółowy podział płatności ze względu na kategorię otworzysz klikając "Zobacz strukturę wydatków".`}/>
             <OneStat title="Oszczędności [PLN]" value={pricifyHandler(savingsAmount)}
                      isPast={isPast}
                      description={convertToPercentageHandler(savingsAmount, budgetAmount)} btnAction={() => {
-            }} btnDescription="Więcej"/>
+            }} btnDescription={`Aktualnie zaoszczędzona kwota w danym okresie. Możesz zwiększyć ją poprzez dodanie operacji "Oszczędzanie". Uwaga! Po zakończeniu każdego z okresów kwota ta wraz z saldem bieżącym zostanie dodana do Twojej poduszki finansowej.`}/>
         </div>
 
         <div className="flex justify-center card-body pb-0">

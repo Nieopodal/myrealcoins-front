@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const PageContainer = ({children, classes}: Props) => (
-    <div className={classes ?? `container mx-auto pt-8 text-justify md:px-4 block`}>{children}</div>
+    <div className={classes ?? `container mx-auto pt-8 text-justify md:px-4 block min-h-[70vh]`}>{children}</div>
 );

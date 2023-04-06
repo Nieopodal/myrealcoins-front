@@ -1,22 +1,21 @@
 import React, {useState} from "react";
-import {OperationEntity} from "types";
-import {MapModal} from "./MapModal";
 import {BtnOutline} from "../common/BtnOutline";
+import {DescriptionModal} from "./DescriptionModal";
 
 interface Props {
-    operation: OperationEntity;
+    text: string
 }
 
-export const OperationMap = ({operation}: Props) => {
+export const DescriptionBtn = ({text}: Props) => {
     const [openMap, setOpenMap] = useState<boolean>(false);
 
     const handleToggleMap = () => setOpenMap((prev) => !prev);
 
     return <>
         <BtnOutline
-            btnDescription="Lokalizacja"
+            btnDescription="Więcej"
             btnAction={handleToggleMap}
         />
-        {openMap && <MapModal operation={operation} open={openMap} handleToggle={handleToggleMap}/>}
+        {openMap && <DescriptionModal text={text} open={openMap} handleToggle={handleToggleMap}/>}
     </>;
 };

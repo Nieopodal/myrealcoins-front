@@ -19,7 +19,7 @@ export const Dashboard = () => {
     }, [error]);
 
     if (isLoading || contextLoading) {
-        return <PageContainer classes="min-h-[60vh] content-center flex">
+        return <PageContainer classes="content-center flex">
             <ThreeDots/>
         </PageContainer>
     }

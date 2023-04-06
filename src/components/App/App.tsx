@@ -21,34 +21,39 @@ import {store} from "../../store";
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {UserSettings} from "../Dashboard/UserSettings";
+
 export const App = () => {
 
     const {user, setUser, isLoading, actualPeriod, setActualPeriod, error} = useFindUser();
 
     return <div>
         <UserContext.Provider value={{user, setUser, isLoading, actualPeriod, setActualPeriod, error}}>
-
+            <div className="AppContainer">
             <Header/>
 
             <ToastContainer autoClose={5000}/>
-            <Provider store={store}>
-                <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/login" element={<Login/>}/>
-                    <Route path="/register" element={<Register/>}/>
 
-                    <Route path="/dashboard" element={<PrivateRoute outlet={<Dashboard/>}/>}/>
-                    <Route path="/settings" element={<PrivateRoute outlet={<UserSettings/>}/>}/>
-                    <Route path="/add-operation" element={<PrivateRoute outlet={<AddOperation actualUser={user}/>}/>}/>
-                    <Route path="/operation-list" element={<PrivateRoute outlet={<AllOperationList/>}/>}/>
-                    <Route path="/map" element={<PrivateRoute outlet={<ContainerForMap/>}/>}/>
-                    <Route path="/operation/:operationId" element={<PrivateRoute outlet={<OneOperation/>}/>}/>
-                    <Route path="/past-periods" element={<PrivateRoute outlet={<PastPeriods/>}/>}/>
+                <Provider store={store}>
+                    <main className=".Main my-auto">
+                    <Routes>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/register" element={<Register/>}/>
 
-                </Routes>
-            </Provider>
-            <Footer/>
+                        <Route path="/dashboard" element={<PrivateRoute outlet={<Dashboard/>}/>}/>
+                        <Route path="/settings" element={<PrivateRoute outlet={<UserSettings/>}/>}/>
+                        <Route path="/add-operation"
+                               element={<PrivateRoute outlet={<AddOperation actualUser={user}/>}/>}/>
+                        <Route path="/operation-list" element={<PrivateRoute outlet={<AllOperationList/>}/>}/>
+                        <Route path="/map" element={<PrivateRoute outlet={<ContainerForMap/>}/>}/>
+                        <Route path="/operation/:operationId" element={<PrivateRoute outlet={<OneOperation/>}/>}/>
+                        <Route path="/past-periods" element={<PrivateRoute outlet={<PastPeriods/>}/>}/>
 
+                    </Routes>
+                </main>
+                </Provider>
+                <Footer/>
+            </div>
         </UserContext.Provider>
     </div>
 };
