@@ -17,6 +17,5 @@ export const Card = (props: CardProps) => {
         {btnDescription && btnAction && <div className="card-actions justify-end p-5">
             <BtnOutline btnAction={btnAction} btnDescription={btnDescription}/>
         </div>}
-        {/*{!btnDescription && !btnAction && <div className="p-5"></div>}*/}
     </div>;
 };
