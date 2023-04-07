@@ -23,7 +23,6 @@ export const checkLocalization = (localization: boolean, localizationSource: Loc
 
     if (localization) {
         if (Number(localizationSource) === LocalizationSource.UserDevice) {
-            console.log(localizationSource,latFromDevice, lonFromDevice)
             return {
                 latFromForm: latFromDevice,
                 lonFromForm: lonFromDevice,

@@ -1,7 +1,7 @@
-import {useFetch} from "./useFetch";
 import {useEffect, useState} from "react";
 import { PeriodEntity } from "types";
 import {showToast, Toast} from "../utils/show-toast";
+import {useFetch} from "./useFetch";
 
 export const usePeriods = () => {
     const [data, error, loading] = useFetch(`period`);
@@ -19,7 +19,7 @@ export const usePeriods = () => {
                 setLoadingPeriods(false);
             }
         })();
-    }, [data, error, loading]);
+    }, [error, loading]);
 
     return [periodList, setPeriodList, loadingPeriods];
 };

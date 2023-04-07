@@ -5,7 +5,7 @@ import {OperationEntity} from "types";
 import {Card} from "../../components/common/Card";
 import ThreeDots from "../../components/common/Loader";
 import {showToast, Toast} from "../../utils/show-toast";
-import {operationColorHandler} from "../../utils/operation-color-handler";
+import {operationColorHandler} from "../../utils/handlers/operation-color-handler";
 import {OneOperationTable} from "../../components/OneOperation/OneOperationTable";
 
 export const OneOperationView = () => {

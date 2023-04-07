@@ -1,5 +1,5 @@
 import exif from 'exifr'
-export const getLocationFromImage = async (file: File): Promise<{
+export const getLocationFromImageHandler = async (file: File): Promise<{
     outputLat: number;
     outputLon: number;
 } | null> => {

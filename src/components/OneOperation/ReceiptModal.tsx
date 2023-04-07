@@ -20,7 +20,6 @@ export const ReceiptModal = ({operationId, handleToggle, open}: Props) => {
         {loading && <ThreeDots smallerDisplay/>}
 
         {error && <ErrorMessage text={error as string}/>}
-
         {
             image &&
             <img
@@ -29,9 +28,7 @@ export const ReceiptModal = ({operationId, handleToggle, open}: Props) => {
                 alt="paragon fiskalny"
             />
         }
-
         <div className="modal-action justify-center">
-
             <button className="btn btn-outline" onClick={handleToggle}>Zamknij</button>
         </div>
     </Modal>;

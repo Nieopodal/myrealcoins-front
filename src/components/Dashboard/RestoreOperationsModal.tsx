@@ -3,6 +3,7 @@ import {ApiResponse, OperationEntity} from "types";
 import {showToast, Toast} from "../../utils/show-toast";
 import {Modal} from "../common/Modal/Modal";
 import {TableRow} from "./TableRow";
+import {fetchHandler} from "../../utils/fetch/fetch-handler";
 
 interface Props {
     open: boolean;
@@ -23,10 +24,7 @@ export const RestoreOperationsModal = ({open, operations}: Props) => {
         setLoading(true);
         for (const operation of operations) {
             try {
-                const res = await fetch(`http://localhost:3001/period/create-new-operation-from-schema/${operation.id}`, {
-                    method: 'POST',
-                    credentials: 'include',
-                });
+                const res = await fetchHandler(`http://localhost:3001/period/create-new-operation-from-schema/${operation.id}`, "POST");
                 const data: ApiResponse<true> = await res.json();
                 if (data.success) {
                     setRestoreResults(prev => [...prev, 1]);

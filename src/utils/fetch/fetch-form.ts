@@ -1,11 +1,12 @@
-import {ApiResponse} from "types";
 import {FieldValues} from "react-hook-form";
+import {ApiResponse} from "types";
 import {
     checkAmountSign,
     checkLocalization,
     checkOperationType,
     isPayment
-} from "./check-values-before-fetching-handlers";
+} from "../handlers/check-values-before-fetching-handlers";
+import {fetchHandler} from "./fetch-handler";
 
 export const fetchForm = async (inputData: FieldValues, editForm: boolean, editedOperationId?: string) => {
     if (editForm) {
@@ -15,18 +16,9 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
             category: isPayment(inputData.type) ? Number(inputData.category[0]) : null,
             subcategory: isPayment(inputData.type) ? Number(inputData.category[2]) : null,
         };
-        console.log(inputDataObj);
 
         try {
-            const res = await fetch(`http://localhost:3001/operation/${editedOperationId}`, {
-                method: 'PUT',
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(inputDataObj),
-            });
-
+            const res = await fetchHandler(`http://localhost:3001/operation/${editedOperationId}`, "PUT", inputDataObj, true, "application/json");
             const data: ApiResponse<string> = await res.json();
 
             if (data) {
@@ -44,7 +36,7 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
             inputData.latFromDevice,
             inputData.lonFromDevice,
             inputData.latFromImage,
-            inputData.lonFromImage
+            inputData.lonFromImage,
         );
 
         const inputDataObj = {
@@ -57,7 +49,6 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
             lat: isPayment(inputData.type) ? (latFromForm ?? '') : '',
             lon: isPayment(inputData.type) ? (lonFromForm ?? '') : '',
         };
-
         try {
             const formData = new FormData();
             if (inputData.image[0]) {
@@ -68,13 +59,7 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
                 formData.append(key, value);
             }
 
-            const res = await fetch(`http://localhost:3001/operation${inputData.isRepetitive ? `/repetitive-operation` : `/`}`, {
-                method: 'POST',
-                credentials: "include",
-                headers: {},
-                body: formData,
-            });
-
+            const res = await fetchHandler(`http://localhost:3001/operation${inputData.isRepetitive ? `/repetitive-operation` : `/`}`, "POST", formData, false);
             const data: ApiResponse<string> = await res.json();
 
             if (data) {

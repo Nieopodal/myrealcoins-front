@@ -1,6 +1,6 @@
 import React from "react";
 import {Card} from "../common/Card";
-import {pricifyHandler} from "../../utils/pricify-handler";
+import {pricifyHandler} from "../../utils/handlers/pricify-handler";
 import {PeriodEntity} from "types";
 import useFindUser from "../../hooks/useFindUser";
 

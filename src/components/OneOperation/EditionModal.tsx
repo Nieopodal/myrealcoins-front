@@ -9,7 +9,7 @@ import {useFetch} from "../../hooks/useFetch";
 import {PaymentCategoryRadios} from "../Form/PaymentCategoryRadios";
 import {StepTwoForm} from "../AddOperation/StepTwoForm";
 import {DescriptionInput} from "../Form/DescriptionInput";
-import {fetchForm} from "../../utils/fetchForm";
+import {fetchForm} from "../../utils/fetch/fetch-form";
 import {CollapseContent} from "../common/CollapseContent";
 import {ModalAction} from "../common/Modal/ModalAction";
 

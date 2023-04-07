@@ -2,7 +2,7 @@ import React, {ChangeEvent, useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import {InputErrorMessage} from "./InputErrorMessage";
 import {HiddenCoordsInputs} from "./HiddenCoordsInputs";
-import {getLocationFromImage} from "../../utils/get-location-from-image";
+import {getLocationFromImageHandler} from "../../utils/handlers/get-location-from-image-handler";
 import {LocalizationSource} from "types";
 
 export const FileInput = () => {
@@ -13,7 +13,7 @@ export const FileInput = () => {
     const imageChangedHandler = async (e: ChangeEvent<HTMLInputElement>) => {
         clearErrors("image");
         if (e.target.files && Number(watchLocalizationSource) === LocalizationSource.Receipt) {
-            const coords = await getLocationFromImage(e.target.files[0]);
+            const coords = await getLocationFromImageHandler(e.target.files[0]);
             if (coords) {
                 setCoords(coords);
                 setValue("latFromImage", coords.outputLat);

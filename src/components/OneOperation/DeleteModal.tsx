@@ -5,7 +5,7 @@ import {showToast, Toast} from "../../utils/show-toast";
 import {ModalAction} from "../common/Modal/ModalAction";
 import {SuccessSvg} from "../common/Svg/SuccessSvg";
 import {ErrorSvg} from "../common/Svg/ErrorSvg";
-import {fetchDelete} from "../../utils/fetch-delete";
+import {fetchDelete} from "../../utils/fetch/fetch-delete";
 
 interface Props {
     id: string;
@@ -25,6 +25,7 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
             try {
                 if (outputSchema) {
                     if (outputSchema.success) {
+                        showToast(Toast.Success, 'Pomyślnie usunięto schemat.');
                         setOutputSchema(outputSchema.payload);
                     } else if (outputSchema.error) {
                         setSchemaError(outputSchema.error);
@@ -45,6 +46,7 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
                 if (outputData) {
                     if (outputData.success) {
                         setOutput(outputData.payload);
+                        showToast(Toast.Success, 'Pomyślnie usunięto operację.');
                     } else if (outputData.error) {
                         setError(outputData.error);
                     } else {
@@ -68,9 +70,7 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
     useEffect(() => {
         setLoading(false);
         if (error) showToast(Toast.Error, error);
-        if (output) showToast(Toast.Success, 'Pomyślnie usunięto operację.');
         if (errorSchema) showToast(Toast.Error, errorSchema);
-        if (outputSchema) showToast(Toast.Success, 'Pomyślnie usunięto schemat.');
 
         if (deleteOperation && !deleteSchema) {
             if (output) setTimeout(() => {

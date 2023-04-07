@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {ApiResponse, OperationEntity, PeriodEntity} from "types";
 import {PageHeader} from "../common/PageHeader";
-import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
+import {convertDateToMonthAndYearHandler} from "../../utils/handlers/convert-date-to-month-and-year-handler";
 import {MainStatsCard} from "./MainStatsCard";
 import {MainChartCard} from "./MainChartCard";
 import {FinancialCushionCard} from "./FinancialCushionCard";
@@ -11,6 +11,7 @@ import {isAfter} from "date-fns";
 import {showToast, Toast} from "../../utils/show-toast";
 import ThreeDots from "../common/Loader";
 import {RestoreOperationsModal} from "./RestoreOperationsModal";
+import {fetchHandler} from "../../utils/fetch/fetch-handler";
 
 interface Props {
     actualPeriod: PeriodEntity;
@@ -46,15 +47,9 @@ export const AllMainCards = ({actualPeriod, isPast}: Props) => {
     const createNewPeriodHandler = async () => {
         setLoading(true);
         try {
-            const res = await fetch('http://localhost:3001/period', {
-                method: 'POST',
-                credentials: 'include',
-            });
-
+            const res = await fetchHandler('http://localhost:3001/period', "POST");
             const data: ApiResponse<OperationEntity[]> = await res.json();
-
             if (data.success) {
-                console.log('data payload', data.payload)
                 setOperationsToRestore(data.payload);
                 showToast(Toast.Success, 'Utworzono nowy okres.');
                 navigate('/dashboard', {replace: true});

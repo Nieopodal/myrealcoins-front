@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {ApiResponse, PeriodEntity, UserEntity} from 'types';
+import {fetchHandler} from "../utils/fetch/fetch-handler";
 
 export default function useFindUser() {
     const [user, setUser] = useState<UserEntity | null>(null);
@@ -9,10 +10,7 @@ export default function useFindUser() {
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetch('http://localhost:3001/user/check-user', {
-                    credentials: "include",
-                });
-
+                const res = await fetchHandler('http://localhost:3001/user/check-user');
                 const responseData: ApiResponse<{
                     user: UserEntity,
                     actualPeriod: PeriodEntity | null;
@@ -27,7 +25,6 @@ export default function useFindUser() {
                     setError(responseData.error);
                 }
             } catch (e) {
-                console.log(e);
                 setError('Wystąpił błąd podczas próby wykonania zapytania.');
 
             } finally {

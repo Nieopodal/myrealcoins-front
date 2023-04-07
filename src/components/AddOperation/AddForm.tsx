@@ -6,7 +6,7 @@ import React, {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import ThreeDots from "../common/Loader";
 import {ErrorMessage} from "../common/ErrorMessage";
-import {fetchForm} from "../../utils/fetchForm";
+import {fetchForm} from "../../utils/fetch/fetch-form";
 import {showToast, Toast} from "../../utils/show-toast";
 import {useNavigate} from "react-router-dom";
 import useFindUser from "../../hooks/useFindUser";
@@ -64,7 +64,6 @@ export const AddForm = () => {
                 } finally {
                     setWaitToSend(false);
                 }
-
             })();
         })
         }>

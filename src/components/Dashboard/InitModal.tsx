@@ -8,7 +8,6 @@ export const InitModal = () => {
 
     const navigate = useNavigate();
     const [disableBtn, setDisableBtn] = useState<boolean>(true);
-
     const listOfFunctions = [
         'Aplikacja ułatwia zarządzanie budżetem poprzez m.in.:',
         'Automatyczne tworzenie miesięcznych budżetów',

@@ -11,7 +11,6 @@ interface Props {
 }
 
 export const EditOperation = ({operationId, originId, handleSetReload}: Props) => {
-
     const [openEdit, setOpenEdit] = useState<boolean>(false);
     const [isOperationSchema, setIsOperationSchema] = useState<boolean>(false);
     const [editingOperationId, setEditingOperationId] = useState<string>('');
@@ -22,8 +21,8 @@ export const EditOperation = ({operationId, originId, handleSetReload}: Props) =
         handleToggleEditModal();
     };
     const handleToggleEditModal = () => setOpenEdit((prev) => !prev);
-    return <>
 
+    return <>
         {!originId &&
             <BtnOutline
                 btnDescription="Edytuj"
@@ -52,5 +51,4 @@ export const EditOperation = ({operationId, originId, handleSetReload}: Props) =
             />
         }
     </>
-
-}
+};

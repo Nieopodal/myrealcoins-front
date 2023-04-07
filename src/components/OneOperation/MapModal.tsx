@@ -24,6 +24,5 @@ export const MapModal = ({open, operation, handleToggle}: Props) => {
                 Zamknij
             </button>
         </div>
-
     </Modal>
 };

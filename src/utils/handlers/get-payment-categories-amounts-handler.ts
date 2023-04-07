@@ -1,5 +1,5 @@
 import { OperationEntity, OperationType, PaymentCategory } from "types";
-import {decodePaymentType} from "./decode-payment-type";
+import {decodePaymentType} from "../decode-payment-type";
 
 const filterPayments = (paymentOperations: OperationEntity[], condition: number) => {
     return paymentOperations.filter(op => op.category === condition);

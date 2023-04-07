@@ -3,9 +3,9 @@ import {useNavigate} from "react-router-dom";
 import {OneStat} from "./OneStat";
 import {Card} from "../common/Card";
 import {PeriodEntity} from 'types';
-import {convertToPercentageHandler} from "../../utils/convert-to-percentage-handler";
-import {pricifyHandler} from "../../utils/pricify-handler";
-import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
+import {convertToPercentageHandler} from "../../utils/handlers/convert-to-percentage-handler";
+import {pricifyHandler} from "../../utils/handlers/pricify-handler";
+import {convertDateToMonthAndYearHandler} from "../../utils/handlers/convert-date-to-month-and-year-handler";
 
 interface Props {
     actualPeriod: PeriodEntity;

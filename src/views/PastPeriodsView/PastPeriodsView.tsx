@@ -33,7 +33,6 @@ export const PastPeriodsView = () => {
                             setError('Wystąpił błąd.');
                         }
                         if (data.payload) {
-                            console.log(data.payload)
                             setSelectedPeriod(data.payload as PeriodEntity);
                         }
                     } else {

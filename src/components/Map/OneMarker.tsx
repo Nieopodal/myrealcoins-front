@@ -3,8 +3,8 @@ import {Marker, Popup} from "react-leaflet";
 import {OperationEntity, PaymentCategory, PaymentSubcategory} from "types";
 import {decodeOperationType} from "../../utils/decode-operation-type";
 import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-payment-type";
-import {operationColorHandler} from "../../utils/operation-color-handler";
-import {pricifyHandler} from "../../utils/pricify-handler";
+import {operationColorHandler} from "../../utils/handlers/operation-color-handler";
+import {pricifyHandler} from "../../utils/handlers/pricify-handler";
 import {BtnOutline} from "../common/BtnOutline";
 import {ReceiptModal} from "../OneOperation/ReceiptModal";
 

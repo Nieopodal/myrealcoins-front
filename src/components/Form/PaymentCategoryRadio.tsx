@@ -23,7 +23,6 @@ export const PaymentCategoryRadio = ({title, btnClass, paymentSubcategoryList, p
         <h4 className="font-semibold py-2">{title}</h4>
         <div>
             {paymentSubcategoryList.map(subcategory => (
-
                 <label key={subcategory}>
                     <input className="peer hidden"
                            type="radio"
@@ -32,7 +31,6 @@ export const PaymentCategoryRadio = ({title, btnClass, paymentSubcategoryList, p
                                validate: (value) => validationHandler(value),
                            })}
                     />
-
                     <span
                         className={`btn ${btnClass} btn-xs m-0.5 peer-checked:btn-outline`}>
                             {decodeOperationSubtype(paymentCategory, subcategory)}

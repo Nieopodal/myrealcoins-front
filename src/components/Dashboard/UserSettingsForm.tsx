@@ -6,6 +6,7 @@ import {ApiResponse, PeriodEntity, UserEntity} from "types";
 import {showToast, Toast} from "../../utils/show-toast";
 import {UserContext} from "../../contexts/user.context";
 import {InputErrorMessage} from "../Form/InputErrorMessage";
+import {fetchHandler} from "../../utils/fetch/fetch-handler";
 
 interface SettingsFormData {
     defaultBudgetAmount: number;
@@ -35,32 +36,18 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
     const {register, handleSubmit, formState: {errors}} = methods;
 
     return <form onSubmit={handleSubmit((data: SettingsFormData) => {
-        console.log(user, {actualPeriod});
         setLoading(true);
         (async () => {
             try {
-                const res = await fetch('http://localhost:3001/user', {
-                    method: "PUT",
-                    credentials: 'include',
-                    headers: {
-                        "Content-type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-
+                const res = await fetchHandler('http://localhost:3001/user', "PUT", data, true, "application/json");
                 const responseData: ApiResponse<UserEntity> = await res.json();
                 if (responseData.success) {
                     setUser(responseData.payload);
                     if (!actualPeriod) {
 
                         try {
-                            const res = await fetch('http://localhost:3001/period', {
-                                method: 'POST',
-                                credentials: 'include',
-                            });
-
+                            const res = await fetchHandler('http://localhost:3001/period', "POST");
                             const data: ApiResponse<PeriodEntity> = await res.json();
-
                             if (data.success) {
                                 setActualPeriod(data.payload);
                             } else {

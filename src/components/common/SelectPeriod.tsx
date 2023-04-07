@@ -1,5 +1,5 @@
 import React from "react";
-import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
+import {convertDateToMonthAndYearHandler} from "../../utils/handlers/convert-date-to-month-and-year-handler";
 import {PeriodEntity} from "types";
 
 interface Props {

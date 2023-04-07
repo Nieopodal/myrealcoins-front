@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import { ApiResponse, OperationEntity, PeriodEntity } from "types";
+import {fetchHandler} from "../utils/fetch/fetch-handler";
 
 type FetchedData = OperationEntity | OperationEntity[] | PeriodEntity[] | PeriodEntity;
 
@@ -10,31 +11,27 @@ export const useFetch = (url: string, reload?: boolean): [FetchedData | null, st
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
-        console.log('reloaded usefetch');
         (async () => {
-            try {
-                setLoading(true);
-                const res = await fetch(`http://localhost:3001/${url}`, {
-                    credentials: 'include',
-                });
-                const fetchedData: ApiResponse<FetchedData | null> = await res.json();
-
-                if (fetchedData.success) {
-                    if (fetchedData.payload === null) {
-                        setData(null);
-                    } else {
-                        setData(fetchedData.payload);
-                    }
-                } else if (fetchedData.error) {
-                    setError(fetchedData.error);
+        try {
+            setLoading(true);
+            const res = await fetchHandler(`http://localhost:3001/${url}`);
+            const fetchedData: ApiResponse<FetchedData | null> = await res.json();
+            if (fetchedData.success) {
+                if (fetchedData.payload === null) {
+                    setData(null);
                 } else {
-                    setError('Wystąpił nieznany błąd serwera. Spróbuj później.');
+                    setData(fetchedData.payload);
                 }
-            } catch (e) {
-                setError(`Wystąpił błąd podczas próby wykonania zapytania.`);
-            } finally {
-                setLoading(false);
+            } else if (fetchedData.error) {
+                setError(fetchedData.error);
+            } else {
+                setError('Wystąpił nieznany błąd serwera. Spróbuj później.');
             }
+        } catch (e) {
+            setError(`Wystąpił błąd podczas próby wykonania zapytania.`);
+        } finally {
+            setLoading(false);
+        }
         })();
     }, [url, reload]);
 

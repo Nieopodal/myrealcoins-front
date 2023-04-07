@@ -3,6 +3,7 @@ import {ApiResponse} from 'types';
 import {showToast, Toast} from "../utils/show-toast";
 import {useContext} from "react";
 import {UserContext} from "../contexts/user.context";
+import {fetchHandler} from "../utils/fetch/fetch-handler";
 
 export const useLogout = () => {
     let navigate = useNavigate();
@@ -10,11 +11,7 @@ export const useLogout = () => {
 
     const logoutUser = async () => {
         try {
-            const res = await fetch('http://localhost:3001/user/session', {
-                method: "DELETE",
-                credentials: 'include',
-            });
-
+            const res = await fetchHandler('http://localhost:3001/user/session', "DELETE");
             const data: ApiResponse<string> = await res.json();
             if (data.success) {
                 showToast(Toast.Success, data.payload);
@@ -28,7 +25,7 @@ export const useLogout = () => {
         } catch {
             showToast(Toast.Error, 'Wystąpił błąd podczas wykonywania zapytania.');
         }
-    }
+    };
 
     return {
         logoutUser,

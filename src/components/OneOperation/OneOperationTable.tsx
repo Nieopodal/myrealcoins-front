@@ -2,7 +2,7 @@ import React from "react";
 import {DetailsTableRow} from "./DetailsTableRow";
 import {decodeOperationType} from "../../utils/decode-operation-type";
 import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-payment-type";
-import {pricifyHandler} from "../../utils/pricify-handler";
+import {pricifyHandler} from "../../utils/handlers/pricify-handler";
 import {Receipt} from "./Receipt";
 import {EditOperation} from "./EditOperation";
 import {DeleteOperation} from "./DeleteOperation";

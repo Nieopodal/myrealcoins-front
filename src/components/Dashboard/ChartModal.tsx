@@ -3,9 +3,9 @@ import {Modal} from "../common/Modal/Modal";
 import {Chart} from "../common/Chart";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
-import {getPaymentsCategoriesAndAmountsHandler} from "../../utils/get-payment-categories-amounts-handler";
+import {getPaymentsCategoriesAndAmountsHandler} from "../../utils/handlers/get-payment-categories-amounts-handler";
 import ThreeDots from "../common/Loader";
-import {chartColorHandler} from "../../utils/chart-color-handler";
+import {chartColorHandler} from "../../utils/handlers/chart-color-handler";
 
 interface Props {
     open: boolean;
