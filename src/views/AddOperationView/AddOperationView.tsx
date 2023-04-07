@@ -3,7 +3,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {Progress} from "../../components/AddOperation/Progress";
 import {PageHeader} from "../../components/common/PageHeader";
 import {PageContainer} from "../../components/common/PageContainer";
-import {AddForm} from "../../components/AddOperation/AddForm";
+import {AddOperationForm} from "../../components/AddOperation/AddOperationForm";
 import {LocalizationSource, UserEntity} from "types";
 import ThreeDots from "../../components/common/Loader";
 
@@ -67,7 +67,7 @@ export const AddOperationView = ({actualUser}: Props) => {
             {!actualUser && <ThreeDots/>}
             {actualUser && <>
                 <Progress progress={progress}/>
-                <AddForm/>
+                <AddOperationForm/>
             </>}
         </PageContainer>
     </FormProvider>

@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Card} from "../../components/common/Card";
 import {UserContext} from "../../contexts/user.context";
-import {UserSettingsForm} from "../../components/Dashboard/UserSettingsForm";
+import {UserSettingsForm} from "../../components/UserSettingsForm/UserSettingsForm";
 import ThreeDots from "../../components/common/Loader";
 
 export const UserSettingsView = () => {

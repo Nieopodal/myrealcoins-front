@@ -3,10 +3,10 @@ import {ArcElement, Chart as ChartJS, Legend, Tooltip} from 'chart.js';
 import {PeriodEntity} from 'types';
 import ThreeDots from "../../components/common/Loader";
 import {PageContainer} from "../../components/common/PageContainer";
-import {AllMainCards} from "../../components/Dashboard/AllMainCards";
+import {AllMainCards} from "../../components/Dashboard/AllMainCards/AllMainCards";
 import {UserContext} from "../../contexts/user.context";
 import {showToast, Toast} from "../../utils/show-toast";
-import {InitConfig} from "../../components/Dashboard/InitConfig";
+import {InitConfig} from "../../components/InitConfig/InitConfig";
 import useFindUser from "../../hooks/useFindUser";
 
 ChartJS.register(ArcElement, Tooltip, Legend);

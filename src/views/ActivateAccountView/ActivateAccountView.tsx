@@ -42,6 +42,5 @@ export const ActivateAccountView = () => {
             </div></div>}
 
         {!loading && error && <div className="mx-auto w-fit font-semibold"><ErrorMessage text={error}/></div>}
-
     </Card>
 };

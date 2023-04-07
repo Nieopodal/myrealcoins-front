@@ -6,7 +6,7 @@ import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-paym
 import {operationColorHandler} from "../../utils/handlers/operation-color-handler";
 import {pricifyHandler} from "../../utils/handlers/pricify-handler";
 import {BtnOutline} from "../common/BtnOutline";
-import {ReceiptModal} from "../OneOperation/ReceiptModal";
+import {ReceiptModal} from "../OneOperation/Receipt/ReceiptModal";
 
 interface Props {
     operation: OperationEntity;

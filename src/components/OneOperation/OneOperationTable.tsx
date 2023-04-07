@@ -3,11 +3,11 @@ import {DetailsTableRow} from "./DetailsTableRow";
 import {decodeOperationType} from "../../utils/decode-operation-type";
 import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-payment-type";
 import {pricifyHandler} from "../../utils/handlers/pricify-handler";
-import {Receipt} from "./Receipt";
-import {EditOperation} from "./EditOperation";
-import {DeleteOperation} from "./DeleteOperation";
+import {Receipt} from "./Receipt/Receipt";
+import {EditOperation} from "./EditOperation/EditOperation";
+import {DeleteOperation} from "./DeleteOperation/DeleteOperation";
 import {OperationEntity, OperationType, PaymentCategory, PaymentSubcategory} from "types";
-import {OperationMap} from "./OperationMap";
+import {OperationMap} from "./OperationMap/OperationMap";
 import {SmallReceiptContext} from "../../contexts/small-receipt.context";
 
 interface Props {

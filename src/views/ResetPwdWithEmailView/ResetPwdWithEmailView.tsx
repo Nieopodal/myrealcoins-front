@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {useForm} from "react-hook-form";
+import {FormProvider, useForm} from "react-hook-form";
 import {Card} from "../../components/common/Card";
 import ThreeDots from "../../components/common/Loader";
-import {InputErrorMessage} from "../../components/Form/InputErrorMessage";
+import {InputErrorMessage} from "../../components/common/form/InputErrorMessage";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
 import {ResetPwdFormData} from "../ResetPwdWithTokenView/ResetPwdWithTokenView";
 import {ApiResponse} from "types";
+import {EmailInput} from "../../components/common/form/inputs/EmailInput";
 
 export const ResetPwdWithEmailView = () => {
 
@@ -13,11 +14,13 @@ export const ResetPwdWithEmailView = () => {
     const [finishedInfo, setFinishedInfo] = useState<null | string>(null);
     const [error, setError] = useState<string | null>(null);
 
-    const {register, handleSubmit, getValues, setError: setErrors, formState: {errors}} = useForm<ResetPwdFormData>({
+    const methods = useForm<ResetPwdFormData>({
         defaultValues: {
             email: ''
         },
     });
+
+    const {handleSubmit, getValues, setError: setErrors, formState: {errors}} = methods;
 
     const handleResetPwd = async (data: ResetPwdFormData) => {
         setLoading(true);
@@ -56,20 +59,11 @@ export const ResetPwdWithEmailView = () => {
             })}
             >
                 <div className="pb-6 w-fit mx-auto">Na podany adres prześlemy link do zmiany hasła.</div>
-                <input
-                    placeholder="E-mail"
-                    disabled={loading}
-                    type='email'
-                    className='input input-bordered w-full mb-4'
-                    {...register('email', {
-                        pattern: {
-                            value: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                            message: 'Podany email jest nieprawidłowy.',
-                        }
-                    })}
-                    required
-                />
-                {errors?.email && <InputErrorMessage errorMessage={errors?.email.message}/>}
+
+                <FormProvider {...methods}>
+                    <EmailInput loading={loading}/>
+                    {errors?.email && <InputErrorMessage errorMessage={errors?.email.message}/>}
+                </FormProvider>
 
                 <button type='submit' className="btn btn-primary w-full" disabled={loading}>
                     Zmień hasło
@@ -77,6 +71,6 @@ export const ResetPwdWithEmailView = () => {
             </form>}
         {!loading && error && <div className="mx-auto w-fit font-semibold"><ErrorMessage text={error}/></div>}
         {!loading && !error && finishedInfo &&
-            <div className="py-4 px-2 mx-auto w-fit font-semibold text-justify">{finishedInfo}</div>}
+            <div className="py-4 px-2 mx-auto w-fit text-justify">{finishedInfo}</div>}
     </Card>
 }

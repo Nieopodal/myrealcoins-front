@@ -5,7 +5,7 @@ import {ApiResponse, PeriodEntity} from "types";
 import {Card} from "../../components/common/Card";
 import {PageHeader} from "../../components/common/PageHeader";
 import {PageContainer} from "../../components/common/PageContainer";
-import {AllMainCards} from "../../components/Dashboard/AllMainCards";
+import {AllMainCards} from "../../components/Dashboard/AllMainCards/AllMainCards";
 import ThreeDots from "../../components/common/Loader";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
 import useFindUser from "../../hooks/useFindUser";
