@@ -14,7 +14,7 @@ export default function useAuth() {
 
     const setUserContext = async () => {
         try {
-            const res = await fetchHandler('http://localhost:3001/user/check-user');
+            const res = await fetchHandler('http://localhost:3001/session/check-user');
             const responseData: ApiResponse<{
                 user: UserEntity,
                 actualPeriod: PeriodEntity,
@@ -54,7 +54,7 @@ export default function useAuth() {
 
     const loginUser = async (data: LoginFormData) => {
         try {
-            const res = await fetchHandler('http://localhost:3001/user/session', "POST", data, true, "application/json");
+            const res = await fetchHandler('http://localhost:3001/session', "POST", data, true, "application/json");
             const responseData: ApiResponse<UserEntity> = await res.json();
             if (responseData.success) {
                 await setUserContext();

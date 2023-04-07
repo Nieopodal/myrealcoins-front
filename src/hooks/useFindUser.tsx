@@ -10,7 +10,7 @@ export default function useFindUser() {
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetchHandler('http://localhost:3001/user/check-user');
+                const res = await fetchHandler('http://localhost:3001/session/check-user');
                 const responseData: ApiResponse<{
                     user: UserEntity,
                     actualPeriod: PeriodEntity | null;
