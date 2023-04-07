@@ -1,5 +1,5 @@
-import {BtnOutline} from "../common/BtnOutline";
 import React, {useState} from "react";
+import {BtnOutline} from "../common/BtnOutline";
 import {ReceiptModal} from "./ReceiptModal";
 
 interface Props {
@@ -9,11 +9,18 @@ interface Props {
 export const Receipt = ({operationId}: Props) => {
     const [openReceipt, setOpenReceipt] = useState(false);
     const handleToggleReceiptModal = () => setOpenReceipt((prev) => !prev);
-    return<>
+    return <>
         {openReceipt &&
-            <ReceiptModal operationId={operationId!} handleToggle={handleToggleReceiptModal} open={openReceipt}/>}
+            <ReceiptModal
+                operationId={operationId!}
+                handleToggle={handleToggleReceiptModal}
+                open={openReceipt}
+            />
+        }
 
         <BtnOutline
-            btnAction={handleToggleReceiptModal} btnDescription="Wyświetl"/>
+            btnAction={handleToggleReceiptModal}
+            btnDescription="Wyświetl"
+        />
     </>
 };

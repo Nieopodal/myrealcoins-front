@@ -3,62 +3,57 @@ import {Route, Routes} from "react-router-dom";
 import {Provider} from "react-redux";
 import {ToastContainer} from "react-toastify";
 import {Header} from "../Header/Header";
-import {Dashboard} from "../Dashboard/Dashboard";
+import {DashboardView} from "../../views/DashboardView/DashboardView";
 import {Footer} from "../Footer/Footer";
-import {OneOperation} from "../OneOperation/OneOperation";
-import {AddOperation} from "../AddOperation/AddOperation";
-import {AllOperationList} from "../AllOperations/AllOperationList";
-import {ContainerForMap} from "../Map/ContainerForMap";
-import {PastPeriods} from "../PastPeriods/PastPeriods";
+import {OneOperationView} from "../../views/OneOperationView/OneOperationView";
+import {AddOperationView} from "../../views/AddOperationView/AddOperationView";
+import {AllOperationsView} from "../../views/AllOperationsView/AllOperationsView";
+import {MapView} from "../../views/MapView/MapView";
+import {PastPeriodsView} from "../../views/PastPeriodsView/PastPeriodsView";
 import useFindUser from "../../hooks/useFindUser";
 import {UserContext} from '../../contexts/user.context';
-import {PrivateRoute} from "../Auth/PrivateRoute";
-import {Home} from "../../views/Home";
-import {Login} from "../Login/Login";
-import {Register} from "../Auth/Register";
+import {PrivateRoute} from "../PrivateRoute/PrivateRoute";
+import {HomeView} from "../../views/HomeView/HomeView";
+import {LoginView} from "../../views/LoginView/LoginView";
+import {RegisterView} from "../../views/RegisterView/RegisterView";
 import {store} from "../../store";
+import {UserSettingsView} from "../../views/UserSettingsView/UserSettingsView";
+import {ActivateAccountView} from "../../views/ActivateAccountView/ActivateAccountView";
+import {ResetPwdWithTokenView} from "../../views/ResetPwdWithTokenView/ResetPwdWithTokenView";
+import {ResetPwdWithEmailView} from "../../views/ResetPwdWithEmailView/ResetPwdWithEmailView";
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import {UserSettings} from "../Dashboard/UserSettings";
-import {EmailLink} from "../EmailLink/EmailLink";
-import {ResetPassword} from "../EmailLink/ResetPassword";
-import {ResetPasswordRequest} from "../EmailLink/ResetPasswordRequest";
 
 export const App = () => {
-
     const {user, setUser, isLoading, actualPeriod, setActualPeriod, error} = useFindUser();
 
-    return <div>
-        <UserContext.Provider value={{user, setUser, isLoading, actualPeriod, setActualPeriod, error}}>
-            <div className="AppContainer">
+    return <UserContext.Provider value={{user, setUser, isLoading, actualPeriod, setActualPeriod, error}}>
+        <div className="AppContainer">
             <Header/>
-
             <ToastContainer autoClose={5000}/>
-
-                <Provider store={store}>
-                    <main className=".Main my-auto">
+            <Provider store={store}>
+                <main className=".Main my-auto">
                     <Routes>
-                        <Route path="/" element={<Home/>}/>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/confirm/:code" element={<EmailLink/>}/>
-                        <Route path="/reset-password" element={<ResetPasswordRequest/>}/>
-                        <Route path="/reset/:userId/:code" element={<ResetPassword/>}/>
-                        <Route path="/dashboard" element={<PrivateRoute outlet={<Dashboard/>}/>}/>
-                        <Route path="/settings" element={<PrivateRoute outlet={<UserSettings/>}/>}/>
+                        <Route path="/" element={<HomeView/>}/>
+                        <Route path="/login" element={<LoginView/>}/>
+                        <Route path="/register" element={<RegisterView/>}/>
+                        <Route path="/confirm/:code" element={<ActivateAccountView/>}/>
+                        <Route path="/reset-password" element={<ResetPwdWithEmailView/>}/>
+                        <Route path="/reset/:userId/:code" element={<ResetPwdWithTokenView/>}/>
+                        <Route path="/dashboard" element={<PrivateRoute outlet={<DashboardView/>}/>}/>
+                        <Route path="/settings" element={<PrivateRoute outlet={<UserSettingsView/>}/>}/>
                         <Route path="/add-operation"
-                               element={<PrivateRoute outlet={<AddOperation actualUser={user}/>}/>}/>
-                        <Route path="/operation-list" element={<PrivateRoute outlet={<AllOperationList/>}/>}/>
-                        <Route path="/map" element={<PrivateRoute outlet={<ContainerForMap/>}/>}/>
-                        <Route path="/operation/:operationId" element={<PrivateRoute outlet={<OneOperation/>}/>}/>
-                        <Route path="/past-periods" element={<PrivateRoute outlet={<PastPeriods/>}/>}/>
-
+                               element={<PrivateRoute outlet={<AddOperationView actualUser={user}/>}/>}/>
+                        <Route path="/operation-list" element={<PrivateRoute outlet={<AllOperationsView/>}/>}/>
+                        <Route path="/map" element={<PrivateRoute outlet={<MapView/>}/>}/>
+                        <Route path="/operation/:operationId"
+                               element={<PrivateRoute outlet={<OneOperationView/>}/>}/>
+                        <Route path="/past-periods" element={<PrivateRoute outlet={<PastPeriodsView/>}/>}/>
                     </Routes>
                 </main>
-                </Provider>
-                <Footer/>
-            </div>
-        </UserContext.Provider>
-    </div>
+            </Provider>
+            <Footer/>
+        </div>
+    </UserContext.Provider>
 };

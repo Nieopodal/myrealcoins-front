@@ -4,7 +4,7 @@ import {useFormContext} from "react-hook-form";
 interface Props {
     name: string;
     title: string;
-    validation?: () =>{};
+    validation?: () => {};
 }
 
 export const CheckboxInput = ({name, title}: Props) => {

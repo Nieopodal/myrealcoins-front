@@ -1,5 +1,5 @@
-import {Modal} from "../common/Modal";
 import React, {useEffect, useRef, useState} from "react";
+import {Modal} from "../common/Modal/Modal";
 import {Chart} from "../common/Chart";
 import {useSelector} from "react-redux";
 import {RootState} from "../../store";
@@ -34,7 +34,6 @@ export const ChartModal = ({open, handleToggle}: Props) => {
         const result = getPaymentsCategoriesAndAmountsHandler(operations);
         setCategories(result.categories);
         setAmounts(result.amounts);
-
         try {
             if (neutralRef.current &&
                 primaryRef.current &&
@@ -53,7 +52,6 @@ export const ChartModal = ({open, handleToggle}: Props) => {
         } finally {
             setLoading(false);
         }
-
     }, [operations]);
 
     return (

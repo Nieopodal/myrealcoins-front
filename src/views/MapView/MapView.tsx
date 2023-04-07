@@ -1,6 +1,6 @@
-import {AllOperations} from "../AllOperations/AllOperations";
-import {Map} from "./Map";
 import React, {useEffect, useState} from "react";
+import {AllOperations} from "../../components/AllOperations/AllOperations";
+import {Map} from "../../components/Map/Map";
 import {showToast, Toast} from "../../utils/show-toast";
 
 interface UserGeolocation {
@@ -8,7 +8,7 @@ interface UserGeolocation {
     lon: null | number;
 }
 
-export const ContainerForMap = () => {
+export const MapView = () => {
 
     const [userGeolocation, setUserGeolocation] = useState<UserGeolocation>({
         lat: null,

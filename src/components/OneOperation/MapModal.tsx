@@ -1,8 +1,8 @@
-import {AllOperationsContext} from "../../contexts/all-operations.context";
-import { OperationEntity } from "types";
-import {Modal} from "../common/Modal";
-import {Map} from "../Map/Map";
 import React from "react";
+import {AllOperationsContext} from "../../contexts/all-operations.context";
+import {OperationEntity} from "types";
+import {Modal} from "../common/Modal/Modal";
+import {Map} from "../Map/Map";
 
 interface Props {
     open: boolean;
@@ -16,7 +16,7 @@ export const MapModal = ({open, operation, handleToggle}: Props) => {
             operations: [operation],
             loading: false,
         }}>
-        <Map centerLat={operation.lat} centerLon={operation.lon}/>
+            <Map centerLat={operation.lat} centerLon={operation.lon}/>
         </AllOperationsContext.Provider>
 
         <div className="modal-action justify-center">

@@ -1,5 +1,5 @@
-import {PageContainer} from "../common/PageContainer";
 import React from "react";
+import {PageContainer} from "../common/PageContainer";
 import {InitModal} from "./InitModal";
 
 export const InitConfig = () => {

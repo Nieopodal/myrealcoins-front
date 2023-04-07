@@ -1,7 +1,7 @@
-import {decodeOperationSubtype} from "../../utils/decode-payment-type";
-import {Card} from "../common/Card";
 import React from "react";
 import {useFormContext} from "react-hook-form";
+import {decodeOperationSubtype} from "../../utils/decode-payment-type";
+import {Card} from "../common/Card";
 import {PaymentCategory} from "types";
 
 interface Props {

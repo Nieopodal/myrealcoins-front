@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import { PeriodEntity } from "types";
+import {PeriodEntity} from "types";
 import {Card} from "../common/Card";
-
 import {ChartModal} from "./ChartModal";
 import {Chart} from "../common/Chart";
 
 interface Props {
     actualPeriod: PeriodEntity,
 }
+
 export const MainChartCard = ({actualPeriod}: Props) => {
 
     const [open, setOpen] = useState(false);
@@ -15,7 +15,11 @@ export const MainChartCard = ({actualPeriod}: Props) => {
     const {paymentsAmount, freeCashAmount, savingsAmount} = actualPeriod;
 
     return <Card btnAction={handleToggle} btnDescription="Zobacz strukturę wydatków">
-        <Chart labels={['Wydatki', 'Oszczędności', 'Wolna gotówka']} amounts={[paymentsAmount, savingsAmount, freeCashAmount]} backgroundColors={['#9D3482', '#560df6', '#37cbbd']}/>
+        <Chart
+            labels={['Wydatki', 'Oszczędności', 'Wolna gotówka']}
+            amounts={[paymentsAmount, savingsAmount, freeCashAmount]}
+            backgroundColors={['#9D3482', '#560df6', '#37cbbd']}
+        />
         {open && <ChartModal open={open} handleToggle={handleToggle}/>}
     </Card>
 };

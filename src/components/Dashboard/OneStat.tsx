@@ -27,22 +27,25 @@ export const OneStat = (props: Props) => {
         isPast
     } = props;
 
-    return <>
-        <div className={ownClasses ? ownClasses : "sm:px-auto p-2 sm:stat "}>
-            <div className="mx-auto sm:mx-0 w-fit sm:w-auto">
-                <div
-                    className={ownTitleClasses ? ownTitleClasses : "stat-title text-xs md:text-base font-semibold"}>{title}</div>
-                <div
-                    className={ownValueClasses ? ownValueClasses : "stat-value text-base md:text-xl xl:text-2xl"}>{typeof value === 'number' ? value.toFixed(2) : value}</div>
-                {description && <div className="stat-desc">{description}</div>}
-
-                {
-                    !isPast && btnAction && btnDescription && <div className="stat-desc pt-2">
-                        {/*<BtnOutline btnAction={btnAction} btnDescription={btnDescription}/>*/}
-                    <DescriptionBtn text={btnDescription}/>
-                    </div>
-                }
+    return <div className={ownClasses ? ownClasses : "sm:px-auto p-2 sm:stat "}>
+        <div className="mx-auto sm:mx-0 w-fit sm:w-auto">
+            <div
+                className={ownTitleClasses ? ownTitleClasses : "stat-title text-xs md:text-base font-semibold"}>
+                {title}
             </div>
+
+            <div
+                className={ownValueClasses ? ownValueClasses : "stat-value text-base md:text-xl xl:text-2xl"}>
+                {typeof value === 'number' ? value.toFixed(2) : value}
+            </div>
+
+            {description && <div className="stat-desc">{description}</div>}
+
+            {
+                !isPast && btnAction && btnDescription && <div className="stat-desc pt-2">
+                    <DescriptionBtn text={btnDescription}/>
+                </div>
+            }
         </div>
-    </>
+    </div>
 };

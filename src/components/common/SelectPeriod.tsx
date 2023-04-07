@@ -1,5 +1,5 @@
-import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
 import React from "react";
+import {convertDateToMonthAndYearHandler} from "../../utils/convert-date-to-month-and-year-handler";
 import {PeriodEntity} from "types";
 
 interface Props {
@@ -35,13 +35,15 @@ export const SelectPeriod = ({
                     .map(period =>
                         <option key={period.id}
                                 disabled={disableActual ? period.id === actualPeriodId : false}
-                                value={period.id}>{convertDateToMonthAndYearHandler(period.starts, period.ends)}
+                                value={period.id}>
+                            {convertDateToMonthAndYearHandler(period.starts, period.ends)}
                         </option>)
             }
         </select>
 
         {selectedPeriod === '' && <p className="text-red-600 font-semibold mx-auto w-fit mt-2">Wymagane.</p>}
         {onlyWithGps && selectedPeriod &&
-            <p className="mx-auto w-fit mt-2">Znalezionych lokalizacji: {countOperationsWithGps}</p>}
+            <p className="mx-auto w-fit mt-2">Znalezionych lokalizacji: {countOperationsWithGps}</p>
+        }
     </div>
 };

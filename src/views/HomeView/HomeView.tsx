@@ -1,10 +1,10 @@
-import useFindUser from "../hooks/useFindUser";
+import useFindUser from "../../hooks/useFindUser";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useEffect} from "react";
 
-import './Home.css';
+import './HomeView.css';
 
-export const Home = () => {
+export const HomeView = () => {
     const navigate = useNavigate();
     const {user} = useFindUser();
 

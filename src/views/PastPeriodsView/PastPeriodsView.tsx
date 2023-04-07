@@ -1,17 +1,17 @@
-import {usePeriods} from "../../hooks/usePeriods";
 import React, {useEffect, useState} from "react";
-import {SelectPeriod} from "../common/SelectPeriod";
+import {usePeriods} from "../../hooks/usePeriods";
+import {SelectPeriod} from "../../components/common/SelectPeriod";
 import {ApiResponse, PeriodEntity} from "types";
-import {Card} from "../common/Card";
-import {PageHeader} from "../common/PageHeader";
-import {PageContainer} from "../common/PageContainer";
-import {AllMainCards} from "../Dashboard/AllMainCards";
-import ThreeDots from "../common/Loader";
-import {ErrorMessage} from "../common/ErrorMessage";
+import {Card} from "../../components/common/Card";
+import {PageHeader} from "../../components/common/PageHeader";
+import {PageContainer} from "../../components/common/PageContainer";
+import {AllMainCards} from "../../components/Dashboard/AllMainCards";
+import ThreeDots from "../../components/common/Loader";
+import {ErrorMessage} from "../../components/common/ErrorMessage";
 import useFindUser from "../../hooks/useFindUser";
 
-export const PastPeriods = () => {
-    const {actualPeriod, isLoading, error: errorActualPeriod}= useFindUser();
+export const PastPeriodsView = () => {
+    const {actualPeriod, isLoading, error: errorActualPeriod} = useFindUser();
 
     const [periodsList, , loadingPeriods] = usePeriods();
     const [selectedPeriodId, setSelectedPeriodId] = useState<string>('');
@@ -36,8 +36,7 @@ export const PastPeriods = () => {
                             console.log(data.payload)
                             setSelectedPeriod(data.payload as PeriodEntity);
                         }
-                    }
-                    else {
+                    } else {
                         setError('Wystąpił nieznany błąd serwera.')
                     }
                 } catch {
@@ -50,24 +49,22 @@ export const PastPeriods = () => {
     if (!actualPeriod) return <ThreeDots/>
 
     return <PageContainer>
-            <PageHeader text="Szczegóły minionego okresu"/>
-            {!loadingPeriods &&
-                <SelectPeriod
-                    selectedPeriod={selectedPeriodId}
-                    setSelectedPeriod={setSelectedPeriodId}
-                    periodsList={periodsList as PeriodEntity[]}
-                    disableActual
-                    actualPeriodId={(actualPeriod as PeriodEntity).id}
-                    additionalClasses="pt-4"
-                />
-            }
+        <PageHeader text="Szczegóły minionego okresu"/>
+        {!loadingPeriods &&
+            <SelectPeriod
+                selectedPeriod={selectedPeriodId}
+                setSelectedPeriod={setSelectedPeriodId}
+                periodsList={periodsList as PeriodEntity[]}
+                disableActual
+                actualPeriodId={(actualPeriod as PeriodEntity).id}
+                additionalClasses="pt-4"
+            />
+        }
         {(isLoading || loadingPeriods) && <ThreeDots/>}
-
         {(error || errorActualPeriod) && <ErrorMessage/>}
-
-            {!selectedPeriodId && !loadingPeriods && <Card additionalClasses="text-center mx-auto xl:w-[90%] 2xl:w-[80%] py-8 xl:px-2 text-xs md:text-base">Nie wybrano okresu.</Card>}
-
-            {selectedPeriod !== null && <AllMainCards actualPeriod={selectedPeriod} isPast/>}
-
-        </PageContainer>
+        {!selectedPeriodId && !loadingPeriods &&
+            <Card additionalClasses="text-center mx-auto xl:w-[90%] 2xl:w-[80%] py-8 xl:px-2 text-xs md:text-base">Nie
+                wybrano okresu.</Card>}
+        {selectedPeriod !== null && <AllMainCards actualPeriod={selectedPeriod} isPast/>}
+    </PageContainer>
 };

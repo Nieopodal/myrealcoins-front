@@ -16,6 +16,10 @@ export const DescriptionBtn = ({text}: Props) => {
             btnDescription="Więcej"
             btnAction={handleToggleMap}
         />
-        {openMap && <DescriptionModal text={text} open={openMap} handleToggle={handleToggleMap}/>}
+        {openMap && <DescriptionModal
+            text={text}
+            open={openMap}
+            handleToggle={handleToggleMap}/>
+        }
     </>;
 };

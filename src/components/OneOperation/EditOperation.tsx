@@ -1,5 +1,5 @@
-import {BtnOutline} from "../common/BtnOutline";
 import React, {useState} from "react";
+import {BtnOutline} from "../common/BtnOutline";
 import {Dropdown} from "../common/Dropdown";
 import {DropdownButton} from "../common/DropdownButton";
 import {EditionModal} from "./EditionModal";
@@ -24,19 +24,23 @@ export const EditOperation = ({operationId, originId, handleSetReload}: Props) =
     const handleToggleEditModal = () => setOpenEdit((prev) => !prev);
     return <>
 
-        {!originId && <BtnOutline
-            btnDescription="Edytuj"
-            btnAction={() => editOperationHandler(operationId, false)}
-        />}
+        {!originId &&
+            <BtnOutline
+                btnDescription="Edytuj"
+                btnAction={() => editOperationHandler(operationId, false)}
+            />
+        }
 
         {originId && <Dropdown title="Opcje edycji">
             <DropdownButton
                 btnTitle="Edytuj tę operację"
                 handler={() => editOperationHandler(operationId, false)
-                }/>
+                }
+            />
 
             <DropdownButton btnTitle="Edytuj schemat"
-                            handler={() => editOperationHandler(originId as string, true)}/>
+                            handler={() => editOperationHandler(originId as string, true)}
+            />
         </Dropdown>}
 
         {openEdit &&
@@ -44,7 +48,8 @@ export const EditOperation = ({operationId, originId, handleSetReload}: Props) =
                           operationId={editingOperationId}
                           open={openEdit}
                           handleToggle={handleToggleEditModal}
-                          reloadHandler={handleSetReload}/>
+                          reloadHandler={handleSetReload}
+            />
         }
     </>
 

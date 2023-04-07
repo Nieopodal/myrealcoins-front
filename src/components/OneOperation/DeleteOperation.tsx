@@ -1,5 +1,5 @@
-import {BtnOutline} from "../common/BtnOutline";
 import React, {useState} from "react";
+import {BtnOutline} from "../common/BtnOutline";
 import {Dropdown} from "../common/Dropdown";
 import {DropdownButton} from "../common/DropdownButton";
 import {DeleteModal} from "./DeleteModal";

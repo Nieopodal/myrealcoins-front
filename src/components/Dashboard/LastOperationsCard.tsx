@@ -26,7 +26,6 @@ export const LastOperationsCard = ({periodId, isPast}: Props) => {
     const [data, error, loading] = useFetch(`operation/get-period-operations/${periodId}`);
 
     useEffect(() => {
-
         if (error) {
             showToast(Toast.Error, error as string);
         }
@@ -34,10 +33,13 @@ export const LastOperationsCard = ({periodId, isPast}: Props) => {
             dispatch(setOperations([]));
         }
         dispatch(setOperations(data as OperationEntity[]));
-
     }, [data, error, loading, dispatch]);
 
-
-    return <OperationsTable operations={operations ? operations.slice(0, 3) : []} title={`Ostatnie operacje ${isPast ? `okresu` : ``}`}
-                            btnAction={() => routeChange(`/operation-list`)} loading={loading as boolean} btnDescription="Pełna lista operacji"/>;
+    return (
+        <OperationsTable operations={operations ? operations.slice(0, 3) : []}
+                         title={`Ostatnie operacje ${isPast ? `okresu` : ``}`}
+                         btnAction={() => routeChange(`/operation-list`)} loading={loading as boolean}
+                         btnDescription="Pełna lista operacji"
+        />
+    );
 };

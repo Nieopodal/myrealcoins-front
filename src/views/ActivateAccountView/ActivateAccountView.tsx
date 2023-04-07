@@ -1,12 +1,12 @@
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {ApiResponse} from "types";
-import ThreeDots from "../common/Loader";
-import {Card} from "../common/Card";
-import {MainHeaderBtn} from "../Header/MainHeaderBtn";
-import {ErrorMessage} from "../common/ErrorMessage";
+import ThreeDots from "../../components/common/Loader";
+import {Card} from "../../components/common/Card";
+import {MainHeaderBtn} from "../../components/Header/MainHeaderBtn";
+import {ErrorMessage} from "../../components/common/ErrorMessage";
 
-export const EmailLink = () => {
+export const ActivateAccountView = () => {
     const {code} = useParams();
 
     const [loading, setLoading] = useState<boolean>(false);

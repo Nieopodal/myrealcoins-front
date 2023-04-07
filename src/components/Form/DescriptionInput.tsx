@@ -3,6 +3,7 @@ import {useFormContext} from "react-hook-form";
 
 export const DescriptionInput = () => {
     const {register} = useFormContext();
+
     return <div>
         <label className="label">
             <span className="label-text text-base w-fit mx-auto">Opis operacji (opcjonalny)</span>

@@ -8,13 +8,11 @@ export const Header = () => {
 
     const {user, isLoading} = useContext(UserContext);
 
-    return <>
-        <nav className="navbar bg-base-100 border-b-[1px] w-screen md:w-full">
-            {!isLoading && <>
+    return <nav className="navbar bg-base-100 border-b-[1px] w-screen md:w-full">
+        {!isLoading && <>
             <MainMenu user={user}/>
             <MainHeaderBtn user={user}/>
             <UserNavigation user={user}/>
-            </>}
-        </nav>
-    </>
+        </>}
+    </nav>
 };

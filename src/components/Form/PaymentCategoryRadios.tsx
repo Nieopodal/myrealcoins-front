@@ -1,9 +1,9 @@
+import React from "react";
+import {useFormContext} from "react-hook-form";
 import {InputErrorMessage} from "./InputErrorMessage";
 import {PaymentCategoryRadio} from "./PaymentCategoryRadio";
 import {allPaymentCategories} from "../../utils/all-payment-categories";
-import React from "react";
-import {useFormContext} from "react-hook-form";
-import { PaymentCategory } from "types";
+import {PaymentCategory} from "types";
 
 export const PaymentCategoryRadios = () => {
     const {formState: {errors}} = useFormContext();

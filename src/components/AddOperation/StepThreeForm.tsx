@@ -1,6 +1,6 @@
-import {StepHeader} from "./StepHeader";
 import React, {useEffect} from "react";
 import {useFormContext} from "react-hook-form";
+import {StepHeader} from "./StepHeader";
 import {DescriptionInput} from "../Form/DescriptionInput";
 import {CheckboxInput} from "../Form/CheckboxInput";
 import {RadioInput} from "../Form/RadioInput";
@@ -9,7 +9,7 @@ import {InputErrorMessage} from "../Form/InputErrorMessage";
 import {useDeviceGeolocation} from "../../hooks/useDeviceGeolocation";
 import {FileInput} from "../Form/FileInput";
 import {HiddenCoordsInputs} from "../Form/HiddenCoordsInputs";
-import {QuestionSvg} from "../common/QuestionSvg";
+import {QuestionSvg} from "../common/Svg/QuestionSvg";
 
 export const StepThreeForm = () => {
     const {register, getValues, formState: {errors}, clearErrors, setValue} = useFormContext();
@@ -35,7 +35,7 @@ export const StepThreeForm = () => {
         </div>
         {chosenOperationType === '1' && <div>
             <div className="flex">
-            <CheckboxInput name="localization" title="Lokalizacja operacji"/>
+                <CheckboxInput name="localization" title="Lokalizacja operacji"/>
                 <QuestionSvg
                     text="Płatność zostanie oznaczona na mapie w postaci pinezki."/>
             </div>

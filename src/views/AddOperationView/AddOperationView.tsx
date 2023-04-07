@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {Progress} from "./Progress";
-import {PageHeader} from "../common/PageHeader";
-import {PageContainer} from "../common/PageContainer";
-import {AddForm} from "./AddForm";
+import {Progress} from "../../components/AddOperation/Progress";
+import {PageHeader} from "../../components/common/PageHeader";
+import {PageContainer} from "../../components/common/PageContainer";
+import {AddForm} from "../../components/AddOperation/AddForm";
 import {LocalizationSource, UserEntity} from "types";
-import ThreeDots from "../common/Loader";
+import ThreeDots from "../../components/common/Loader";
 
 export interface FormData {
     type: string;
@@ -27,7 +27,7 @@ interface Props {
     actualUser: UserEntity | null;
 }
 
-export const AddOperation = ({actualUser}: Props) => {
+export const AddOperationView = ({actualUser}: Props) => {
 
     const methods = useForm<FormData>({
         defaultValues: {
@@ -47,22 +47,22 @@ export const AddOperation = ({actualUser}: Props) => {
         },
     });
 
-    const {getValues, watch} = methods;
+    const {getValues} = methods;
+    const localizationInput = getValues("localization");
+    const localizationSourceInput = getValues("localizationSource");
+    const typeInput = getValues("type");
+    const amountInput = getValues("amount");
 
-    watch(["type", "localization", "localizationSource", "amount"]);
     const [progress, setProgress] = useState<number>(1);
-
 
     useEffect(() => {
         if (!getValues("type") && !getValues("amount")) setProgress(1);
         if (getValues("type") && !getValues("amount")) setProgress(2);
         if (getValues("type") && getValues("amount")) setProgress(3);
-    }, [getValues("localization"), getValues("localizationSource"), getValues("type"), getValues("amount")])
+    }, [localizationInput, localizationSourceInput, typeInput, amountInput, getValues]);
 
     return <FormProvider {...methods}>
-
         <PageContainer>
-
             <PageHeader text="Dodaj operację"/>
             {!actualUser && <ThreeDots/>}
             {actualUser && <>

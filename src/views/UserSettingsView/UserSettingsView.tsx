@@ -1,10 +1,10 @@
-import {Card} from "../common/Card";
 import React, {useContext} from "react";
+import {Card} from "../../components/common/Card";
 import {UserContext} from "../../contexts/user.context";
-import {UserSettingsForm} from "./UserSettingsForm";
-import ThreeDots from "../common/Loader";
+import {UserSettingsForm} from "../../components/Dashboard/UserSettingsForm";
+import ThreeDots from "../../components/common/Loader";
 
-export const UserSettings = () => {
+export const UserSettingsView = () => {
     const {actualPeriod, isLoading, user} = useContext(UserContext);
 
     return <Card additionalClasses="mt-10 mx-auto sm:w-[60%]  md:max-w-md py-4 xl:px-2 text-xs md:text-base">

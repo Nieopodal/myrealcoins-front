@@ -1,13 +1,13 @@
-import {Card} from "../common/Card";
-import ThreeDots from "../common/Loader";
-import {InputErrorMessage} from "../Form/InputErrorMessage";
-import {ErrorMessage} from "../common/ErrorMessage";
 import React, {useState} from "react";
-import {ResetPwdFormData} from "./ResetPassword";
 import {useForm} from "react-hook-form";
+import {Card} from "../../components/common/Card";
+import ThreeDots from "../../components/common/Loader";
+import {InputErrorMessage} from "../../components/Form/InputErrorMessage";
+import {ErrorMessage} from "../../components/common/ErrorMessage";
+import {ResetPwdFormData} from "../ResetPwdWithTokenView/ResetPwdWithTokenView";
 import {ApiResponse} from "types";
 
-export const ResetPasswordRequest = () => {
+export const ResetPwdWithEmailView = () => {
 
     const [loading, setLoading] = useState<boolean>(false);
     const [finishedInfo, setFinishedInfo] = useState<null | string>(null);
@@ -76,6 +76,7 @@ export const ResetPasswordRequest = () => {
                 </button>
             </form>}
         {!loading && error && <div className="mx-auto w-fit font-semibold"><ErrorMessage text={error}/></div>}
-        {!loading && !error && finishedInfo && <div className="py-4 px-2 mx-auto w-fit font-semibold text-justify">{finishedInfo}</div>}
+        {!loading && !error && finishedInfo &&
+            <div className="py-4 px-2 mx-auto w-fit font-semibold text-justify">{finishedInfo}</div>}
     </Card>
 }

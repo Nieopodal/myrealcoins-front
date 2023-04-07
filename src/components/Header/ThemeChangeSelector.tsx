@@ -12,12 +12,12 @@ export const ThemeChangeSelector = () => {
     }, []);
 
     return <select
-            className="select select-bordered select-xs md:select-sm max-w-[5rem] sm:max-w-fit text-[1.5vh] appearance-none mx-1"
-            data-choose-theme="">
-            {themeValues.map(value => <option
-                key={value.toLowerCase()}
-                value={value.toLowerCase()}
-                className="text-xs sm:text-sm">{value}
-            </option>)}
-        </select>
+        className="select select-bordered select-xs md:select-sm max-w-[5rem] sm:max-w-fit text-[1.5vh] appearance-none mx-1"
+        data-choose-theme="">
+        {themeValues.map(value => <option
+            key={value.toLowerCase()}
+            value={value.toLowerCase()}
+            className="text-xs sm:text-sm">{value}
+        </option>)}
+    </select>
 };

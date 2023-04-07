@@ -1,9 +1,9 @@
 import {useContext, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {UserContext} from '../contexts/user.context';
-import {RegisterFormData} from "../components/Auth/Register";
+import {RegisterFormData} from "../views/RegisterView/RegisterView";
 import {ApiResponse, PeriodEntity, UserEntity} from 'types';
-import {LoginFormData} from "../components/Login/Login";
+import {LoginFormData} from "../views/LoginView/LoginView";
 import {showToast, Toast} from "../utils/show-toast";
 
 export default function useAuth() {

@@ -1,12 +1,12 @@
+import React, {useState} from "react";
 import {useParams} from "react-router-dom";
-import React, { useState} from "react";
-import {ApiResponse} from "types";
-import ThreeDots from "../common/Loader";
-import {Card} from "../common/Card";
-import {ErrorMessage} from "../common/ErrorMessage";
-import {InputErrorMessage} from "../Form/InputErrorMessage";
 import {useForm} from "react-hook-form";
-import {MainHeaderBtn} from "../Header/MainHeaderBtn";
+import {ApiResponse} from "types";
+import ThreeDots from "../../components/common/Loader";
+import {Card} from "../../components/common/Card";
+import {ErrorMessage} from "../../components/common/ErrorMessage";
+import {InputErrorMessage} from "../../components/Form/InputErrorMessage";
+import {MainHeaderBtn} from "../../components/Header/MainHeaderBtn";
 
 export interface ResetPwdFormData {
     name: string;
@@ -15,7 +15,7 @@ export interface ResetPwdFormData {
     confirmPassword: string;
 }
 
-export const ResetPassword = () => {
+export const ResetPwdWithTokenView = () => {
     const {userId, code} = useParams();
     const [loading, setLoading] = useState<boolean>(false);
     const [changed, setChanged] = useState<boolean>(false);

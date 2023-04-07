@@ -1,6 +1,6 @@
-import {StepHeader} from "./StepHeader";
 import React, {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
+import {StepHeader} from "./StepHeader";
 import {InputErrorMessage} from "../Form/InputErrorMessage";
 import {pricifyHandler} from "../../utils/pricify-handler";
 import {PeriodEntity} from "types";

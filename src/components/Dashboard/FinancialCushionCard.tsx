@@ -14,12 +14,14 @@ export const FinancialCushionCard = ({previousPeriod}: Props) => {
     return <Card>
         <div className="pl-7 pt-7 pb-8 mx-auto my-auto sm:mx-0 w-fit sm:w-auto">
             <div className="stat-title xl:text-lg font-semibold ">
-                <h3 className="flex items-center mr-2">{previousPeriod ? `Zasilenie poduszki finansowej w danym okresie [PLN]` : `Poduszka finansowa [PLN]`} </h3>
+                <h3 className="flex items-center mr-2">
+                    {previousPeriod ? `Zasilenie poduszki finansowej w danym okresie [PLN]` : `Poduszka finansowa [PLN]`}
+                </h3>
             </div>
             {user && <div
-                className="stat-value">{previousPeriod ? pricifyHandler(previousPeriod.freeCashAmount + previousPeriod.savingsAmount) : pricifyHandler(user.financialCushion)}
+                className="stat-value">
+                {previousPeriod ? pricifyHandler(previousPeriod.freeCashAmount + previousPeriod.savingsAmount) : pricifyHandler(user.financialCushion)}
             </div>}
-
         </div>
     </Card>
 };

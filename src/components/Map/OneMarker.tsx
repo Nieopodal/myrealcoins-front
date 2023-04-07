@@ -1,8 +1,8 @@
-import {OperationEntity, PaymentCategory, PaymentSubcategory} from "types";
+import React, {useState} from "react";
 import {Marker, Popup} from "react-leaflet";
+import {OperationEntity, PaymentCategory, PaymentSubcategory} from "types";
 import {decodeOperationType} from "../../utils/decode-operation-type";
 import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-payment-type";
-import React, {useState} from "react";
 import {operationColorHandler} from "../../utils/operation-color-handler";
 import {pricifyHandler} from "../../utils/pricify-handler";
 import {BtnOutline} from "../common/BtnOutline";
@@ -26,15 +26,30 @@ export const OneMarker = ({operation}: Props) => {
             <Popup>
                 <h2 className="font-semibold text-xl">{decodeOperationType(type)}</h2>
                 <div
-                    className={`${operationColorHandler(operation)} mt-2 w-fit mx-auto text-sm whitespace-normal h-fit`}>{decodePaymentType(category as PaymentCategory)}: {
-                    decodeOperationSubtype(category as PaymentCategory, subcategory as PaymentSubcategory)}
+                    className={`${operationColorHandler(operation)} mt-2 w-fit mx-auto text-sm whitespace-normal h-fit`}>
+                    {decodePaymentType(category as PaymentCategory)}
+                    :
+                    {decodeOperationSubtype(category as PaymentCategory, subcategory as PaymentSubcategory)}
                 </div>
-                <div className="pt-2"><strong>Kwota:</strong> {pricifyHandler(amount)} PLN</div>
+
+                <div
+                    className="pt-2">
+                    <strong>Kwota:</strong> {pricifyHandler(amount)} PLN
+                </div>
+
                 {description && <div className="pt-2"><strong>Opis</strong>: {description}</div>}
-                {imgUrl && <span className="mr-1"><BtnOutline
-                    btnAction={handleToggleReceiptModal} btnDescription="Paragon"/></span>}
+
+                {imgUrl &&
+                    <span className="mr-1">
+                        <BtnOutline
+                            btnAction={handleToggleReceiptModal} btnDescription="Paragon"/>
+                    </span>
+                }
+
                 <a href={`/operation/${id}`}
-                   className='btn btn-outline btn-xs text-sm rounded-btn text-xs xl:text-sm mx-auto sm:mx-0 w-fit sm:w-auto mt-2'>Szczegóły</a>
+                   className='btn btn-outline btn-xs text-sm rounded-btn text-xs xl:text-sm mx-auto sm:mx-0 w-fit sm:w-auto mt-2'>
+                    Szczegóły
+                </a>
             </Popup>
         </Marker>
     </>

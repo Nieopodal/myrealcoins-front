@@ -1,3 +1,4 @@
+import React from "react";
 import {DetailsTableRow} from "./DetailsTableRow";
 import {decodeOperationType} from "../../utils/decode-operation-type";
 import {decodeOperationSubtype, decodePaymentType} from "../../utils/decode-payment-type";
@@ -5,7 +6,6 @@ import {pricifyHandler} from "../../utils/pricify-handler";
 import {Receipt} from "./Receipt";
 import {EditOperation} from "./EditOperation";
 import {DeleteOperation} from "./DeleteOperation";
-import React from "react";
 import {OperationEntity, OperationType, PaymentCategory, PaymentSubcategory} from "types";
 import {OperationMap} from "./OperationMap";
 import {SmallReceiptContext} from "../../contexts/small-receipt.context";
@@ -29,7 +29,9 @@ export const OneOperationTable = ({operation, color, handleSetReload}: Props) =>
             {operation.type === OperationType.Payment && color &&
                 <DetailsTableRow title="Kategoria">
                                     <span
-                                        className={`${color}`}>{decodePaymentType(operation.category as PaymentCategory)}: {
+                                        className={`${color}`}
+                                    >
+                                        {decodePaymentType(operation.category as PaymentCategory)}: {
                                         decodeOperationSubtype(operation.category as PaymentCategory, operation.subcategory as PaymentSubcategory)}
                                     </span>
                 </DetailsTableRow>
@@ -78,7 +80,10 @@ export const OneOperationTable = ({operation, color, handleSetReload}: Props) =>
                                    handleSetReload={handleSetReload}
                                    originId={operation.originId}/>
                     &nbsp;
-                    <DeleteOperation operationId={operation.id} originId={operation.originId}/>
+                    <DeleteOperation
+                        operationId={operation.id}
+                        originId={operation.originId}
+                    />
                 </div>
                 }
             </DetailsTableRow>

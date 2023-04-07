@@ -6,6 +6,7 @@ interface Props {
     amounts: number[];
     backgroundColors: string[];
 }
+
 export const Chart = ({labels, amounts, backgroundColors}: Props) => {
     const data = {
         labels: labels,
@@ -16,9 +17,7 @@ export const Chart = ({labels, amounts, backgroundColors}: Props) => {
         }],
     };
 
-    return (
-        <div className=" h-72 sm:h-80 items-center mx-auto pt-5">
-            <Doughnut data={data}/>
-        </div>
-    )
+    return <div className=" h-72 sm:h-80 items-center mx-auto pt-5">
+        <Doughnut data={data}/>
+    </div>
 };

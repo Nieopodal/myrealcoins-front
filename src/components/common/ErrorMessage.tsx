@@ -5,5 +5,7 @@ interface Props {
 }
 
 export const ErrorMessage = ({text}: Props) => (
-    <div className="mx-auto font-semibold w-fit text-red-500 my-20">{text ?? `Wystąpił błąd, prosimy spróbować później.`}</div>
+    <div
+        className="mx-auto font-semibold w-fit text-red-500 my-20">{text ?? `Wystąpił błąd, prosimy spróbować później.`}
+    </div>
 );

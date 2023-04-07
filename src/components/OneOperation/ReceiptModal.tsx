@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {Modal} from "../common/Modal";
+import {Modal} from "../common/Modal/Modal";
 import ThreeDots from "../common/Loader";
 import {useFetchImage} from "../../hooks/useFetchImage";
 import {ErrorMessage} from "../common/ErrorMessage";
@@ -21,13 +21,18 @@ export const ReceiptModal = ({operationId, handleToggle, open}: Props) => {
 
         {error && <ErrorMessage text={error as string}/>}
 
-        {image && <img className={`${smallReceipt && `h-[60vh]`} h-fit md:p-5 w-fit mx-auto`} src={image as string}
-                       alt="paragon fiskalny"/>}
+        {
+            image &&
+            <img
+                className={`${smallReceipt && `h-[60vh]`} h-fit md:p-5 w-fit mx-auto`}
+                src={image as string}
+                alt="paragon fiskalny"
+            />
+        }
 
         <div className="modal-action justify-center">
-            <button className="btn btn-outline" onClick={handleToggle}>
-                Zamknij
-            </button>
+
+            <button className="btn btn-outline" onClick={handleToggle}>Zamknij</button>
         </div>
     </Modal>;
 };

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Modal} from "../common/Modal";
+import {Modal} from "../common/Modal/Modal";
 import {showToast, Toast} from "../../utils/show-toast";
-import {ModalAction} from "../common/ModalAction";
-import {SuccessSvg} from "../common/SuccessSvg";
-import {ErrorSvg} from "../common/ErrorSvg";
+import {ModalAction} from "../common/Modal/ModalAction";
+import {SuccessSvg} from "../common/Svg/SuccessSvg";
+import {ErrorSvg} from "../common/Svg/ErrorSvg";
 import {fetchDelete} from "../../utils/fetch-delete";
 
 interface Props {

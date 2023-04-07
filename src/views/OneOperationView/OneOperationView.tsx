@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useFetch} from "../../hooks/useFetch";
 import {OperationEntity} from "types";
-import {Card} from "../common/Card";
-import ThreeDots from "../common/Loader";
+import {Card} from "../../components/common/Card";
+import ThreeDots from "../../components/common/Loader";
 import {showToast, Toast} from "../../utils/show-toast";
 import {operationColorHandler} from "../../utils/operation-color-handler";
-import {OneOperationTable} from "./OneOperationTable";
+import {OneOperationTable} from "../../components/OneOperation/OneOperationTable";
 
-export const OneOperation = () => {
+export const OneOperationView = () => {
     const {operationId} = useParams();
     const [operation, setOperation] = useState<OperationEntity | null>(null);
     const [color, setColor] = useState('');

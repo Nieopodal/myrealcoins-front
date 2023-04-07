@@ -1,8 +1,8 @@
-import {Modal} from "../common/Modal";
-import React, { useEffect, useState} from "react";
+import {Modal} from "../common/Modal/Modal";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import './InitModal.css'
+import './InitModal.css';
 
 export const InitModal = () => {
 
@@ -56,12 +56,12 @@ export const InitModal = () => {
             </ul>
         </div>
         <div className="modal-action justify-center ">
-
-                <button className={`btn btn-outline ${disableBtn ? 'hidden' : ''}`} onClick={() => navigate('/settings', {replace: true})} disabled={disableBtn}>
-                    Rozpocznij konfigurację
-                </button>
-
+            <button
+                className={`btn btn-outline ${disableBtn ? 'hidden' : ''}`}
+                onClick={() => navigate('/settings', {replace: true})}
+                disabled={disableBtn}>
+                Rozpocznij konfigurację
+            </button>
         </div>
-
     </Modal>
 };

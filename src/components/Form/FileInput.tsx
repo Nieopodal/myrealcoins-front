@@ -3,11 +3,11 @@ import {useFormContext} from "react-hook-form";
 import {InputErrorMessage} from "./InputErrorMessage";
 import {HiddenCoordsInputs} from "./HiddenCoordsInputs";
 import {getLocationFromImage} from "../../utils/get-location-from-image";
-import { LocalizationSource } from "types";
+import {LocalizationSource} from "types";
 
 export const FileInput = () => {
     const {register, getValues, formState: {errors}, watch, clearErrors, setValue} = useFormContext();
-    const [coords, setCoords] = useState<{outputLat: number, outputLon: number} | null>(null);
+    const [coords, setCoords] = useState<{ outputLat: number, outputLon: number } | null>(null);
     const watchLocalizationSource = watch("localizationSource");
 
     const imageChangedHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,8 +18,7 @@ export const FileInput = () => {
                 setCoords(coords);
                 setValue("latFromImage", coords.outputLat);
                 setValue("lonFromImage", coords.outputLon);
-            }
-            else {
+            } else {
                 setValue("latFromImage", 0);
                 setValue("lonFromImage", 0);
             }
@@ -51,7 +50,8 @@ export const FileInput = () => {
                            }
                        })}
                        onChange={async (e) => {
-                       await imageChangedHandler(e)}
+                           await imageChangedHandler(e)
+                       }
                        }/>
                 <span className="label-text-alt">.JPG, MAX 7MB</span>
                 {/*    @TODO how many bytes?*/}

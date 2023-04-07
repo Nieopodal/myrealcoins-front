@@ -1,6 +1,6 @@
-import {StepHeader} from "./StepHeader";
 import React from "react";
 import {useFormContext} from "react-hook-form";
+import {StepHeader} from "./StepHeader";
 import {RadioInput} from "../Form/RadioInput";
 import {InputErrorMessage} from "../Form/InputErrorMessage";
 import {OperationOtherTypeSelectInput} from "../Form/OperationOtherTypeSelectInput";

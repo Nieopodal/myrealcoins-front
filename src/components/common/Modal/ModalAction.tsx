@@ -23,7 +23,7 @@ export const ModalAction = ({
         <button disabled={primaryBtnDisabled}
                 className={`btn btn-primary ${loading ? 'loading' : ``}`}
                 type={isBtnSubmit ? `submit` : `button`}
-            onClick={primaryBtnHandler}>
+                onClick={primaryBtnHandler}>
             {loading ? `Proszę czekać` : primaryBtnTitle}
         </button>
         <button disabled={cancelBtnDisabled} className="btn btn-outline" onClick={cancelBtnHandler}>

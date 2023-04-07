@@ -1,17 +1,17 @@
-import {Modal} from "../common/Modal";
+import React, {useEffect, useState} from "react";
+import {FormProvider, useForm} from "react-hook-form";
+import {Modal} from "../common/Modal/Modal";
 import ThreeDots from "../common/Loader";
 import {ErrorMessage} from "../common/ErrorMessage";
-import React, {useEffect, useState} from "react";
 import {OperationEntity, OperationType} from "types";
 import {showToast, Toast} from "../../utils/show-toast";
 import {useFetch} from "../../hooks/useFetch";
-import {FormProvider, useForm} from "react-hook-form";
 import {PaymentCategoryRadios} from "../Form/PaymentCategoryRadios";
 import {StepTwoForm} from "../AddOperation/StepTwoForm";
 import {DescriptionInput} from "../Form/DescriptionInput";
 import {fetchForm} from "../../utils/fetchForm";
 import {CollapseContent} from "../common/CollapseContent";
-import {ModalAction} from "../common/ModalAction";
+import {ModalAction} from "../common/Modal/ModalAction";
 
 interface Props {
     isOperationSchema: boolean;
@@ -83,6 +83,7 @@ export const EditionModal = ({isOperationSchema, operationId, open, handleToggle
             <form className="w-fit mx-auto whitespace-normal" onSubmit={handleSubmit(async data => {
                 setError(null);
                 setLoading(true);
+
                 const outputData = (await fetchForm(data, true, operationId));
                 try {
                     if (outputData) {
@@ -121,8 +122,10 @@ export const EditionModal = ({isOperationSchema, operationId, open, handleToggle
                         {changeAmount && <div>
                             <StepTwoForm hideTitle additionalAmount={additionalAmount}/>
                             <p className="text-red-600 w-fit mx-auto">*włączając aktualną
-                                kwotę {isOperationSchema ? `schematu, która może się różnić od kwoty operacji` : `operacji`}</p>
-                        </div>}
+                                kwotę {isOperationSchema ? `schematu, która może się różnić od kwoty operacji` : `operacji`}
+                            </p>
+                        </div>
+                        }
                         {!changeAmount && <p>Brak możliwości zmiany kwoty dla wybranej operacji.</p>}
                     </CollapseContent>
 
@@ -141,7 +144,6 @@ export const EditionModal = ({isOperationSchema, operationId, open, handleToggle
                     cancelBtnHandler={handleToggle}
                     loading={loading}
                 />
-
             </form>
         </Modal>
     </FormProvider>
