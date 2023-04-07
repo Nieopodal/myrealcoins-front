@@ -32,7 +32,7 @@ export const PaymentCategoryRadio = ({title, btnClass, paymentSubcategoryList, p
                            })}
                     />
                     <span
-                        className={`btn ${btnClass} btn-xs m-0.5 peer-checked:btn-outline`}>
+                        className={`btn ${btnClass} btn-xs m-0.5 font-normal peer-checked:font-extrabold peer-checked:btn-outline`}>
                             {decodeOperationSubtype(paymentCategory, subcategory)}
                     </span>
                 </label>
