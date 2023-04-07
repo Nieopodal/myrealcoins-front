@@ -4,7 +4,7 @@ import React from "react";
 export const About = () => {
     return <Card additionalClasses="mt-10 mx-auto sm:w-[60%] md:max-w-md py-4 xl:px-2 text-xs md:text-base">
         <div>
-            <p className="w-fit mx-auto pb-2 font-semibold">
+            <p className="w-fit mx-auto pb-2 md:font-semibold text-lg">
                 Copyright by Niepodal - 2023
             </p>
 
