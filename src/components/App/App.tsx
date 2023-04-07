@@ -25,6 +25,7 @@ import {ResetPwdWithEmailView} from "../../views/ResetPwdWithEmailView/ResetPwdW
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 import {About} from "../../views/About/About";
+import {NotFoundView} from "../../views/NotFoundView/NotFoundView";
 
 export const App = () => {
     const {user, setUser, isLoading, actualPeriod, setActualPeriod, error} = useFindUser();
@@ -52,6 +53,7 @@ export const App = () => {
                         <Route path="/operation/:operationId"
                                element={<PrivateRoute outlet={<OneOperationView/>}/>}/>
                         <Route path="/past-periods" element={<PrivateRoute outlet={<PastPeriodsView/>}/>}/>
+                        <Route path="*" element={<NotFoundView/>}/>
                     </Routes>
                 </main>
             </Provider>
