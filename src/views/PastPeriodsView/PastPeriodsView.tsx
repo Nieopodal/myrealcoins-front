@@ -25,7 +25,7 @@ export const PastPeriodsView = () => {
         if (selectedPeriodId.length > 0) {
             (async () => {
                 try {
-                    const res = await fetch(`${apiUrl}/api/period/${selectedPeriodId}`, {
+                    const res = await fetch(`${apiUrl}/period/${selectedPeriodId}`, {
                         credentials: 'include',
                     });
                     const data: ApiResponse<PeriodEntity | null> = await res.json();

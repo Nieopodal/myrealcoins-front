@@ -35,7 +35,7 @@ export const ResetPwdWithTokenView = () => {
     const handleResetPwd = async (data: ResetPwdFormData) => {
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/api/user/reset/${userId}/${code}`, {
+            const res = await fetch(`${apiUrl}/user/reset/${userId}/${code}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

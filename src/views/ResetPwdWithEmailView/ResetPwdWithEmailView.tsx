@@ -26,7 +26,7 @@ export const ResetPwdWithEmailView = () => {
     const handleResetPwd = async (data: ResetPwdFormData) => {
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/api/user/reset`, {
+            const res = await fetch(`${apiUrl}/user/reset`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

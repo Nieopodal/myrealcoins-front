@@ -18,7 +18,7 @@ export const ActivateAccountView = () => {
         (async () => {
             setLoading(true);
             try {
-                const res = await fetch(`${apiUrl}/api/user/confirm/${code}`);
+                const res = await fetch(`${apiUrl}/user/confirm/${code}`);
                 const data: ApiResponse<string> = await res.json();
                 if (data.success) {
                     setActivated(true);

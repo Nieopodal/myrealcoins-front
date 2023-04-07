@@ -15,7 +15,7 @@ export const useFetch = (url: string, reload?: boolean): [FetchedData | null, st
         (async () => {
         try {
             setLoading(true);
-            const res = await fetchHandler(`${apiUrl}/api/${url}`);
+            const res = await fetchHandler(`${apiUrl}/${url}`);
             const fetchedData: ApiResponse<FetchedData | null> = await res.json();
             if (fetchedData.success) {
                 if (fetchedData.payload === null) {

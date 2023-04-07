@@ -11,7 +11,7 @@ export default function useFindUser() {
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetchHandler(`${apiUrl}/api/session/check-user`);
+                const res = await fetchHandler(`${apiUrl}/session/check-user`);
                 const responseData: ApiResponse<{
                     user: UserEntity,
                     actualPeriod: PeriodEntity | null;

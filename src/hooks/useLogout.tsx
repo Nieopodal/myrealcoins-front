@@ -12,7 +12,7 @@ export const useLogout = () => {
 
     const logoutUser = async () => {
         try {
-            const res = await fetchHandler(`${apiUrl}/api/session`, "DELETE");
+            const res = await fetchHandler(`${apiUrl}/session`, "DELETE");
             const data: ApiResponse<string> = await res.json();
             if (data.success) {
                 showToast(Toast.Success, data.payload);

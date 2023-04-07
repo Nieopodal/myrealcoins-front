@@ -19,7 +19,7 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
         };
 
         try {
-            const res = await fetchHandler(`${apiUrl}/api/operation/${editedOperationId}`, "PUT", inputDataObj, true, "application/json");
+            const res = await fetchHandler(`${apiUrl}/operation/${editedOperationId}`, "PUT", inputDataObj, true, "application/json");
             const data: ApiResponse<string> = await res.json();
 
             if (data) {
@@ -60,7 +60,7 @@ export const fetchForm = async (inputData: FieldValues, editForm: boolean, edite
                 formData.append(key, value);
             }
 
-            const res = await fetchHandler(`${apiUrl}/api/operation${inputData.isRepetitive ? `/repetitive-operation` : `/`}`, "POST", formData, false);
+            const res = await fetchHandler(`${apiUrl}/operation${inputData.isRepetitive ? `/repetitive-operation` : `/`}`, "POST", formData, false);
             const data: ApiResponse<string> = await res.json();
 
             if (data) {

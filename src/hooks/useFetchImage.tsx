@@ -12,7 +12,7 @@ export const useFetchImage = (operationId: string) => {
         (async () => {
             setLoading(true);
             try {
-                const res = await fetchHandler(`${apiUrl}/api/operation/image/${operationId}`);
+                const res = await fetchHandler(`${apiUrl}/operation/image/${operationId}`);
                 if (!res.ok) {
                     setError("Podczas pobierania pliku wystąpił błąd.");
                 }
