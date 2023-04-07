@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import {ApiResponse, PeriodEntity, UserEntity} from 'types';
 import {fetchHandler} from "../utils/fetch/fetch-handler";
+import {apiUrl} from "../config/api";
 
 export default function useFindUser() {
     const [user, setUser] = useState<UserEntity | null>(null);
@@ -10,7 +11,7 @@ export default function useFindUser() {
     useEffect(() => {
         (async () => {
             try {
-                const res = await fetchHandler('http://localhost:3001/session/check-user');
+                const res = await fetchHandler(`${apiUrl}/api/session/check-user`);
                 const responseData: ApiResponse<{
                     user: UserEntity,
                     actualPeriod: PeriodEntity | null;

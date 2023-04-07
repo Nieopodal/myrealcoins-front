@@ -1,6 +1,6 @@
 {
   "name": "financials-front",
-  "version": "0.51.0",
+  "version": "0.52.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "set REACT_APP_API_URL=/api&& react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },

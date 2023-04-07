@@ -8,6 +8,7 @@ import {ErrorMessage} from "../../components/common/ErrorMessage";
 import {InputErrorMessage} from "../../components/common/form/InputErrorMessage";
 import {MainHeaderBtn} from "../../components/Header/MainHeaderBtn";
 import {PasswordInput} from "../../components/common/form/inputs/PasswordInput";
+import {apiUrl} from "../../config/api";
 
 export interface ResetPwdFormData {
     name: string;
@@ -34,7 +35,7 @@ export const ResetPwdWithTokenView = () => {
     const handleResetPwd = async (data: ResetPwdFormData) => {
         setLoading(true);
         try {
-            const res = await fetch(`http://localhost:3001/user/reset/${userId}/${code}`, {
+            const res = await fetch(`${apiUrl}/api/user/reset/${userId}/${code}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

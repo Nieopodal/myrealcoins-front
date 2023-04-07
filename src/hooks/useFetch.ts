@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import { ApiResponse, OperationEntity, PeriodEntity } from "types";
 import {fetchHandler} from "../utils/fetch/fetch-handler";
+import {apiUrl} from "../config/api";
 
 type FetchedData = OperationEntity | OperationEntity[] | PeriodEntity[] | PeriodEntity;
 
@@ -14,7 +15,7 @@ export const useFetch = (url: string, reload?: boolean): [FetchedData | null, st
         (async () => {
         try {
             setLoading(true);
-            const res = await fetchHandler(`http://localhost:3001/${url}`);
+            const res = await fetchHandler(`${apiUrl}/api/${url}`);
             const fetchedData: ApiResponse<FetchedData | null> = await res.json();
             if (fetchedData.success) {
                 if (fetchedData.payload === null) {

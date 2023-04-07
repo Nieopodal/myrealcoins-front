@@ -6,6 +6,7 @@ import {ApiResponse, PeriodEntity, UserEntity} from 'types';
 import {LoginFormData} from "../views/LoginView/LoginView";
 import {showToast, Toast} from "../utils/show-toast";
 import {fetchHandler} from "../utils/fetch/fetch-handler";
+import {apiUrl} from "../config/api";
 
 export default function useAuth() {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function useAuth() {
 
     const setUserContext = async () => {
         try {
-            const res = await fetchHandler('http://localhost:3001/session/check-user');
+            const res = await fetchHandler(`${apiUrl}/api/session/check-user`);
             const responseData: ApiResponse<{
                 user: UserEntity,
                 actualPeriod: PeriodEntity,
@@ -36,7 +37,7 @@ export default function useAuth() {
     const registerUser = async (data: RegisterFormData) => {
 
         try {
-            const res = await fetchHandler('http://localhost:3001/user/signup', "POST", data, true,"application/json");
+            const res = await fetchHandler(`${apiUrl}/api/user/signup`, "POST", data, true,"application/json");
             const responseData: ApiResponse<string> = await res.json();
 
             if (responseData.success) {
@@ -54,7 +55,7 @@ export default function useAuth() {
 
     const loginUser = async (data: LoginFormData) => {
         try {
-            const res = await fetchHandler('http://localhost:3001/session', "POST", data, true, "application/json");
+            const res = await fetchHandler(`${apiUrl}/api/session`, "POST", data, true, "application/json");
             const responseData: ApiResponse<UserEntity> = await res.json();
             if (responseData.success) {
                 await setUserContext();

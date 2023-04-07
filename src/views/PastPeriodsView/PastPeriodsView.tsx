@@ -9,6 +9,7 @@ import {AllMainCards} from "../../components/Dashboard/AllMainCards/AllMainCards
 import ThreeDots from "../../components/common/Loader";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
 import useFindUser from "../../hooks/useFindUser";
+import {apiUrl} from "../../config/api";
 
 export const PastPeriodsView = () => {
     const {actualPeriod, isLoading, error: errorActualPeriod} = useFindUser();
@@ -24,7 +25,7 @@ export const PastPeriodsView = () => {
         if (selectedPeriodId.length > 0) {
             (async () => {
                 try {
-                    const res = await fetch(`http://localhost:3001/period/${selectedPeriodId}`, {
+                    const res = await fetch(`${apiUrl}/api/period/${selectedPeriodId}`, {
                         credentials: 'include',
                     });
                     const data: ApiResponse<PeriodEntity | null> = await res.json();

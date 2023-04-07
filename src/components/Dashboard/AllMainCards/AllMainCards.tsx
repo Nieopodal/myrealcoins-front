@@ -12,6 +12,7 @@ import {showToast, Toast} from "../../../utils/show-toast";
 import ThreeDots from "../../common/Loader";
 import {RestoreOperationsModal} from "../RestoreOperationsModal";
 import {fetchHandler} from "../../../utils/fetch/fetch-handler";
+import {apiUrl} from "../../../config/api";
 
 interface Props {
     actualPeriod: PeriodEntity;
@@ -47,7 +48,7 @@ export const AllMainCards = ({actualPeriod, isPast}: Props) => {
     const createNewPeriodHandler = async () => {
         setLoading(true);
         try {
-            const res = await fetchHandler('http://localhost:3001/period', "POST");
+            const res = await fetchHandler(`${apiUrl}/api/period`, "POST");
             const data: ApiResponse<OperationEntity[]> = await res.json();
             if (data.success) {
                 setOperationsToRestore(data.payload);

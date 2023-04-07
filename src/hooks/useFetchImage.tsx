@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {FileTransferResponse} from "types";
 import {fetchHandler} from "../utils/fetch/fetch-handler";
+import {apiUrl} from "../config/api";
 
 export const useFetchImage = (operationId: string) => {
     const [loading, setLoading] = useState<boolean>(false);
@@ -11,7 +12,7 @@ export const useFetchImage = (operationId: string) => {
         (async () => {
             setLoading(true);
             try {
-                const res = await fetchHandler(`http://localhost:3001/operation/image/${operationId}`);
+                const res = await fetchHandler(`${apiUrl}/api/operation/image/${operationId}`);
                 if (!res.ok) {
                     setError("Podczas pobierania pliku wystąpił błąd.");
                 }

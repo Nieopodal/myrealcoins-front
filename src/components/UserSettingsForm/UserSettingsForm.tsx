@@ -7,6 +7,7 @@ import {showToast, Toast} from "../../utils/show-toast";
 import {UserContext} from "../../contexts/user.context";
 import {InputErrorMessage} from "../common/form/InputErrorMessage";
 import {fetchHandler} from "../../utils/fetch/fetch-handler";
+import {apiUrl} from "../../config/api";
 
 interface SettingsFormData {
     defaultBudgetAmount: number;
@@ -39,14 +40,14 @@ export const UserSettingsForm = ({user, actualPeriod}: Props) => {
         setLoading(true);
         (async () => {
             try {
-                const res = await fetchHandler('http://localhost:3001/user', "PUT", data, true, "application/json");
+                const res = await fetchHandler(`${apiUrl}/api/user`, "PUT", data, true, "application/json");
                 const responseData: ApiResponse<UserEntity> = await res.json();
                 if (responseData.success) {
                     setUser(responseData.payload);
                     if (!actualPeriod) {
 
                         try {
-                            const res = await fetchHandler('http://localhost:3001/period', "POST");
+                            const res = await fetchHandler(`${apiUrl}/api/period`, "POST");
                             const data: ApiResponse<PeriodEntity> = await res.json();
                             if (data.success) {
                                 setActualPeriod(data.payload);

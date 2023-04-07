@@ -4,6 +4,7 @@ import {showToast, Toast} from "../utils/show-toast";
 import {useContext} from "react";
 import {UserContext} from "../contexts/user.context";
 import {fetchHandler} from "../utils/fetch/fetch-handler";
+import {apiUrl} from "../config/api";
 
 export const useLogout = () => {
     let navigate = useNavigate();
@@ -11,7 +12,7 @@ export const useLogout = () => {
 
     const logoutUser = async () => {
         try {
-            const res = await fetchHandler('http://localhost:3001/session', "DELETE");
+            const res = await fetchHandler(`${apiUrl}/api/session`, "DELETE");
             const data: ApiResponse<string> = await res.json();
             if (data.success) {
                 showToast(Toast.Success, data.payload);

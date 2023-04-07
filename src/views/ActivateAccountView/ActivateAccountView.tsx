@@ -5,6 +5,7 @@ import ThreeDots from "../../components/common/Loader";
 import {Card} from "../../components/common/Card";
 import {MainHeaderBtn} from "../../components/Header/MainHeaderBtn";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
+import {apiUrl} from "../../config/api";
 
 export const ActivateAccountView = () => {
     const {code} = useParams();
@@ -17,7 +18,7 @@ export const ActivateAccountView = () => {
         (async () => {
             setLoading(true);
             try {
-                const res = await fetch(`http://localhost:3001/user/confirm/${code}`);
+                const res = await fetch(`${apiUrl}/api/user/confirm/${code}`);
                 const data: ApiResponse<string> = await res.json();
                 if (data.success) {
                     setActivated(true);
