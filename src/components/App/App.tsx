@@ -24,6 +24,7 @@ import {ResetPwdWithEmailView} from "../../views/ResetPwdWithEmailView/ResetPwdW
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
+import {About} from "../../views/About/About";
 
 export const App = () => {
     const {user, setUser, isLoading, actualPeriod, setActualPeriod, error} = useFindUser();
@@ -36,6 +37,7 @@ export const App = () => {
                 <main className=".Main my-auto">
                     <Routes>
                         <Route path="/" element={<HomeView/>}/>
+                        <Route path="/about" element={<About/>}/>
                         <Route path="/login" element={<LoginView/>}/>
                         <Route path="/register" element={<RegisterView/>}/>
                         <Route path="/confirm/:code" element={<ActivateAccountView/>}/>
