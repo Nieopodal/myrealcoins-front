@@ -37,7 +37,7 @@ export const LoginView = () => {
         }
     }, [error, user]);
 
-    return <Card additionalClasses="my-10 mx-auto sm:w-[60%]  md:max-w-md py-4 xl:px-2 text-xs md:text-base">
+    return <Card additionalClasses="my-10 mx-auto sm:w-[60%]  md:max-w-md py-4 px-2 text-xs md:text-base">
         <h3 className="card-title mx-auto w-fit pt-4">Zaloguj się</h3>
         <form onSubmit={handleSubmit((data: LoginFormData) => {
             setLoading(true);

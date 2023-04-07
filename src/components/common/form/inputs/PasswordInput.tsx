@@ -27,7 +27,9 @@ export const PasswordInput = ({name, loading, placeholder, noPattern}: Props) =>
         })}
         required
     />
-        <button className=" absolute inset-y-0 right-0 flex items-center pb-4 px-2"
-                onClick={() => setShowPwd(prev => !prev)}><EyeSvg showPwd={showPwd}/></button>
+        <button type="button" autoFocus={false} tabIndex={-1}
+                className=" absolute inset-y-0 right-0 flex items-center pb-4 px-2"
+                onClick={() => setShowPwd(prev => !prev)}>
+            <EyeSvg showPwd={showPwd}/></button>
     </div>
 };
