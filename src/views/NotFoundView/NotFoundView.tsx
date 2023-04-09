@@ -1,4 +1,4 @@
-import {Card} from "../../components/common/Card";
+import {Card} from "../../components/common/Card/Card";
 import {NavLink} from "react-router-dom";
 
 export const NotFoundView = () => {

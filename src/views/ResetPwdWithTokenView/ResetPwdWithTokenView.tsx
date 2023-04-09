@@ -3,12 +3,12 @@ import {useParams} from "react-router-dom";
 import {FormProvider, useForm} from "react-hook-form";
 import {ApiResponse} from "types";
 import ThreeDots from "../../components/common/Loader";
-import {Card} from "../../components/common/Card";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
 import {InputErrorMessage} from "../../components/common/form/InputErrorMessage";
 import {MainHeaderBtn} from "../../components/Header/MainHeaderBtn";
 import {PasswordInput} from "../../components/common/form/inputs/PasswordInput";
 import {apiUrl} from "../../config/api";
+import {SmallCard} from "../../components/common/Card/SmallCard";
 
 export interface ResetPwdFormData {
     name: string;
@@ -55,8 +55,7 @@ export const ResetPwdWithTokenView = () => {
         }
     };
 
-    return <Card additionalClasses=" mx-auto sm:w-[60%] md:max-w-md py-4 xl:px-2 text-xs md:text-base">
-        <h3 className="card-title mx-auto w-fit pt-4">Zmień hasło</h3>
+    return <SmallCard title="Zmień hasło">
         {loading && <ThreeDots smallerDisplay/>}
 
         {!loading && !changed && !error &&
@@ -87,5 +86,5 @@ export const ResetPwdWithTokenView = () => {
             </div></div>}
 
         {!loading && error && <div className="mx-auto w-fit font-semibold"><ErrorMessage text={error}/></div>}
-    </Card>
+    </SmallCard>
 };

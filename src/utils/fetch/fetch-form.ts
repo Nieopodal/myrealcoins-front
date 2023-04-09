@@ -8,8 +8,22 @@ import {
 } from "../handlers/check-values-before-fetching-handlers";
 import {fetchHandler} from "./fetch-handler";
 import {apiUrl} from "../../config/api";
+import {showToast, Toast} from "../show-toast";
+import {getCoords} from "../handlers/device-geolocation-handler";
 
 export const fetchForm = async (inputData: FieldValues, editForm: boolean, editedOperationId?: string) => {
+    if (inputData.localization === true && (inputData.localizationSource === "1" )) {
+        if (inputData.latFromDevice === 0 && inputData.lonFromDevice === 0) {
+            try {
+                const {lat, lon} = await getCoords();
+                inputData.latFromDevice = lat;
+                inputData.lonFromDevice = lon;
+            } catch(e) {
+                showToast(Toast.Error, (e as string));
+            }
+        }
+    }
+
     if (editForm) {
         const inputDataObj = {
             description: inputData.description,

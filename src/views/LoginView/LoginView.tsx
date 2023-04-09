@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
 import {FormProvider, useForm} from 'react-hook-form';
 import {NavLink, useNavigate} from "react-router-dom";
-import {Card} from "../../components/common/Card";
 import useAuth from "../../hooks/useAuth";
 import {showToast, Toast} from "../../utils/show-toast";
 import {UserContext} from "../../contexts/user.context";
 import {EmailInput} from "../../components/common/form/inputs/EmailInput";
 import {PasswordInput} from "../../components/common/form/inputs/PasswordInput";
+import {SmallCard} from "../../components/common/Card/SmallCard";
 
 export interface LoginFormData {
     email: string;
@@ -37,8 +37,7 @@ export const LoginView = () => {
         }
     }, [error, user]);
 
-    return <Card additionalClasses="my-10 mx-auto sm:w-[60%]  md:max-w-md py-4 px-2 text-xs md:text-base">
-        <h3 className="card-title mx-auto w-fit pt-4">Zaloguj się</h3>
+    return <SmallCard title="Logowanie">
         <form onSubmit={handleSubmit((data: LoginFormData) => {
             setLoading(true);
             (async () => {
@@ -62,5 +61,5 @@ export const LoginView = () => {
                 Zaloguj
             </button>
         </form>
-    </Card>
+    </SmallCard>
 };

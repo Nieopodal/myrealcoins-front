@@ -2,7 +2,7 @@ import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {ApiResponse} from "types";
 import ThreeDots from "../../components/common/Loader";
-import {Card} from "../../components/common/Card";
+import {Card} from "../../components/common/Card/Card";
 import {MainHeaderBtn} from "../../components/Header/MainHeaderBtn";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
 import {apiUrl} from "../../config/api";

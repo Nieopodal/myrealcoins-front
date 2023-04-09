@@ -4,7 +4,7 @@ import {themeChange} from 'theme-change';
 export const ThemeChangeSelector = () => {
 
     const themeValues = [
-        "light", "corporate", "halloween", "forest", "luxury", "night", "coffee", "cyberpunk",
+        "light", "dark", "corporate", "halloween", "forest", "luxury", "night", "coffee", "cyberpunk",
     ];
 
     useEffect(() => {

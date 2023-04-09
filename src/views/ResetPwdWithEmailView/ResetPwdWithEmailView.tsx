@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {Card} from "../../components/common/Card";
 import ThreeDots from "../../components/common/Loader";
 import {InputErrorMessage} from "../../components/common/form/InputErrorMessage";
 import {ErrorMessage} from "../../components/common/ErrorMessage";
@@ -8,6 +7,7 @@ import {ResetPwdFormData} from "../ResetPwdWithTokenView/ResetPwdWithTokenView";
 import {ApiResponse} from "types";
 import {EmailInput} from "../../components/common/form/inputs/EmailInput";
 import {apiUrl} from "../../config/api";
+import {SmallCard} from "../../components/common/Card/SmallCard";
 
 export const ResetPwdWithEmailView = () => {
 
@@ -46,8 +46,7 @@ export const ResetPwdWithEmailView = () => {
         }
     };
 
-    return <Card additionalClasses=" mx-auto sm:w-[60%] md:max-w-md py-4 xl:px-2 text-xs md:text-base">
-        <h3 className="card-title mx-auto w-fit pt-4 pb-4">Zresetuj hasło</h3>
+    return <SmallCard title="Zresetuj hasło">
         {loading && <ThreeDots smallerDisplay/>}
 
         {!loading && !finishedInfo && !error &&
@@ -73,5 +72,5 @@ export const ResetPwdWithEmailView = () => {
         {!loading && error && <div className="mx-auto w-fit font-semibold"><ErrorMessage text={error}/></div>}
         {!loading && !error && finishedInfo &&
             <div className="py-4 px-2 mx-auto w-fit text-justify">{finishedInfo}</div>}
-    </Card>
-}
+    </SmallCard>
+};

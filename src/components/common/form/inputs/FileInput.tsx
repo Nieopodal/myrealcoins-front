@@ -54,7 +54,6 @@ export const FileInput = () => {
                        }
                        }/>
                 <span className="label-text-alt">.JPG, MAX 7MB</span>
-                {/*    @TODO how many bytes?*/}
             </label>
 
             <HiddenCoordsInputs latName="latFromImage" lonName="lonFromImage"/>

@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useFormContext} from "react-hook-form";
 import {LocalizationSource} from "types";
+import {getCoords} from "../utils/handlers/device-geolocation-handler";
 
 export const useDeviceGeolocation = () => {
     const {getValues} = useFormContext();
@@ -8,34 +9,17 @@ export const useDeviceGeolocation = () => {
     const [lon, setLon] = useState<number | null>(null);
     const [deviceGeolocationError, setDeviceGeolocationError] = useState<string | null>(null);
 
-    const getUserLocalization = () => {
-        navigator.geolocation.getCurrentPosition((position) => {
-                setLat(position.coords.latitude);
-                setLon(position.coords.longitude);
-            },
-            (error) => {
-                switch (error.code) {
-                    case error.PERMISSION_DENIED:
-                        setDeviceGeolocationError("Lokalizacja zablokowana przez użytkownika.");
-                        break;
-                    case error.POSITION_UNAVAILABLE:
-                        setDeviceGeolocationError("Lokalizacja jest niedostępna.");
-                        break;
-                    default: {
-                        setDeviceGeolocationError("Lokalizacja jest niedostępna.");
-                        break;
-                    }
-                }
-            },
-            {
-                enableHighAccuracy: true,
-                timeout: 5000,
-            });
-    };
-
     useEffect(() => {
         if (Number(getValues("localizationSource")) === LocalizationSource.UserDevice) {
-            getUserLocalization();
+            (async () => {
+                try {
+                    const {lat, lon} = await getCoords();
+                    setLat(lat);
+                    setLon(lon);
+                } catch(e){
+                    setDeviceGeolocationError(e as string);
+                }
+            })();
         }
     }, [getValues("localizationSource")]);
 

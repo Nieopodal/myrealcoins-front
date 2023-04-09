@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {usePeriods} from "../../hooks/usePeriods";
 import {SelectPeriod} from "../../components/common/SelectPeriod";
 import {ApiResponse, PeriodEntity} from "types";
-import {Card} from "../../components/common/Card";
+import {Card} from "../../components/common/Card/Card";
 import {PageHeader} from "../../components/common/PageHeader";
 import {PageContainer} from "../../components/common/PageContainer";
 import {AllMainCards} from "../../components/Dashboard/AllMainCards/AllMainCards";

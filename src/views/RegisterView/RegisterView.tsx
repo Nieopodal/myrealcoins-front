@@ -3,12 +3,12 @@ import {NavLink, useNavigate} from "react-router-dom";
 import {FormProvider, useForm} from 'react-hook-form';
 import useAuth from "../../hooks/useAuth";
 import {showToast, Toast} from "../../utils/show-toast";
-import {Card} from "../../components/common/Card";
 import {UserContext} from "../../contexts/user.context";
 import {InputErrorMessage} from "../../components/common/form/InputErrorMessage";
 import {EmailInput} from "../../components/common/form/inputs/EmailInput";
 import {NameInput} from "../../components/common/form/inputs/NameInput";
 import {PasswordInput} from "../../components/common/form/inputs/PasswordInput";
+import {SmallCard} from "../../components/common/Card/SmallCard";
 
 export interface RegisterFormData {
     name: string;
@@ -44,10 +44,7 @@ export const RegisterView = () => {
         }
     }, [error, user]);
 
-    return <Card additionalClasses="mt-10 mx-auto sm:w-[60%] md:max-w-md py-4 xl:px-2 text-xs md:text-base">
-
-        <h3 className="card-title mx-auto w-fit pt-4">Rejestracja</h3>
-
+    return <SmallCard title="Rejestracja">
         <form
             onSubmit={handleSubmit((data: RegisterFormData) => {
                 if (getValues("password") !== getValues("confirmPassword")) {
@@ -62,7 +59,7 @@ export const RegisterView = () => {
             })}
         >
 
-            <div className='py-10 mx-auto w-fit '>
+            <div className='py-10 mx-auto w-fit'>
                 <FormProvider {...methods}>
                     <NameInput loading={loading}/>
                     {errors?.name && <InputErrorMessage errorMessage={errors?.name.message}/>}
@@ -83,5 +80,5 @@ export const RegisterView = () => {
                 Zarejestruj się
             </button>
         </form>
-    </Card>
+    </SmallCard>
 };

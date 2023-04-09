@@ -64,7 +64,7 @@ export const decodeOperationSubtype = (category: PaymentCategory, subcategory: P
                 return "Jedzenie na mieście";
             }
             case (FreeTime.BarAndCoffee): {
-                return "Kawiarnia, bar"; //@TODO fix this name children
+                return "Kawiarnia, bar";
             }
             case (FreeTime.Tourism): {
                 return "Turystyka, wycieczki";

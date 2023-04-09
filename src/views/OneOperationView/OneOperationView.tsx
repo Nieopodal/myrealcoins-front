@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useFetch} from "../../hooks/useFetch";
 import {OperationEntity} from "types";
-import {Card} from "../../components/common/Card";
+import {Card} from "../../components/common/Card/Card";
 import ThreeDots from "../../components/common/Loader";
 import {showToast, Toast} from "../../utils/show-toast";
 import {operationColorHandler} from "../../utils/handlers/operation-color-handler";

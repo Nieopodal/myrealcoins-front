@@ -1,7 +1,7 @@
 import React from "react";
 import {useFormContext} from "react-hook-form";
 import {decodeOperationSubtype} from "../../../../utils/decode-payment-type";
-import {Card} from "../../Card";
+import {Card} from "../../Card/Card";
 import {PaymentCategory} from "types";
 
 interface Props {
