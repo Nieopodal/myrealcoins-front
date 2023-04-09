@@ -28,7 +28,7 @@ export const OneMarker = ({operation}: Props) => {
                 <div
                     className={`${operationColorHandler(operation)} mt-2 w-fit mx-auto text-sm whitespace-normal h-fit`}>
                     {decodePaymentType(category as PaymentCategory)}
-                    :
+                    : &nbsp;
                     {decodeOperationSubtype(category as PaymentCategory, subcategory as PaymentSubcategory)}
                 </div>
 
