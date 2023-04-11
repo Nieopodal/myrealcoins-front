@@ -23,7 +23,7 @@ export const ReceiptModal = ({operationId, handleToggle, open}: Props) => {
         {
             image && <div>
                 <img
-                    className={`${smallReceipt && `h-[60vh]`} h-fit md:p-5 w-fit mx-auto block`}
+                    className={`${smallReceipt && `h-[60vh]`} md:p-5 w-fit mx-auto block`}
                     src={image as string}
                     alt="paragon fiskalny"
                 />
