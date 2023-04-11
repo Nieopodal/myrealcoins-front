@@ -1,6 +1,6 @@
 # MyRealCoins - front-end
 
-![2.jpg](..%2F..%2F..%2F..%2F2.jpg)
+![2](https://user-images.githubusercontent.com/123494717/231288911-a7dddf12-7e41-4613-8cd4-0ab9e1acf9dc.jpg)
 
 ### 💰 Uporządkuj swój budżet. Zaplanuj przyszłość. Bogać się! Korzystaj za darmo. ###
 
@@ -76,4 +76,4 @@ Otwórz w przeglądarce:
 
 > [http://localhost:3000](http://localhost:3000)
 
-![1.jpg](..%2F..%2F..%2F..%2F1.jpg)
+![1](https://user-images.githubusercontent.com/123494717/231288940-56810172-024e-481b-9ba0-5a3f384cc31d.jpg)
