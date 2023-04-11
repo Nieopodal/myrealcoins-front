@@ -1,46 +1,79 @@
-# Getting Started with Create React App
+# MyRealCoins - front-end
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![2.jpg](..%2F..%2F..%2F..%2F2.jpg)
 
-## Available Scripts
+### 💰 Uporządkuj swój budżet. Zaplanuj przyszłość. Bogać się! Korzystaj za darmo. ###
 
-In the project directory, you can run:
+## 📖 Spis treści
 
-### `npm start`
+* [Opis](#-opis)
+* [Strona domowa aplikacji](#-strona-domowa-aplikacji)
+* [Prezentacja w formie video](#-prezentacja-w-formie-video)
+* [Wykorzystane technologie](#-wykorzystane-technologie)
+* [Cel aplikacji](#-cel-aplikacji)
+* [Instalacja i uruchamianie](#-instalacja-i-uruchamianie)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🛫 Opis
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**MyRealCoins to aplikacja ułatwiająca zarządzanie budżetem osobistym poprzez m.in.:**
++ Automatyczne tworzenie miesięcznych budżetów
++ Tworzenie szczegółowych analiz operacji z wykorzystaniem wykresów
++ Szybkie dodawanie operacji z podziałem na wiele kategorii
++ Dodawanie paragonów do płatności
++ Możliwość oznaczania płatności na mapie
++ Planowanie przyszłości poprzez dodawanie operacji cyklicznych (tzw. schematy)
++ Pomoc w tworzeniu poduszki finansowej
++ Możliwość przeglądania poprzednich okresów
 
-### `npm test`
+## 🏠 Strona domowa aplikacji
+*[https://myrealcoins.networkmanager.pl](https://myrealcoins.networkmanager.pl/)*
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📺 Prezentacja w formie video
+*[Prezentacja YouTube](https://www.youtube.com/watch?v=tmMuwFnOPEA)*
 
-### `npm run build`
+## 🔧 Wykorzystane technologie
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
++ typescript: 4.9.5
++ react: 18.2.0
++ react-router-dom: 6.8.2
++ react-hook-form: 7.43.5
++ react-redux: 8.0.5
++ react-leaflet: 4.2.1
++ react-chartjs-2
++ tailwindcss: 3.2.7
++ daisyui: 2.50.2
++ date-fns: 7.1.3
++ exifr: 7.1.3, 
++ react-content-loader: 6.2.0, 
++ react-toastify: 9.1.1, 
++ theme-change: 2.3.0,
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🧿 Cel aplikacji
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Głównym celem projektu było stworzenie prawdziwej full-stackowej aplikacji w oparciu o następujące technologie: Node.js, Express.js, React.js, Json Web Token, relacyjna baza MySQL.
 
-### `npm run eject`
+## ‍🔛 Instalacja i uruchamianie
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+> Instalacja aplikacji back-endowej: https://github.com/Nieopodal/myrealcoins-back.git
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Sklonuj projekt:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+> git clone https://github.com/Nieopodal/myrealcoins-front.git
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Przejdź do folderu aplikacji:
 
-## Learn More
+> cd myrealcoins-front
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Zainstaluj niezbędne dependencje:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> npm install
+
+Uruchom aplikację:
+
+> npm start
+
+Otwórz w przeglądarce:
+
+> [http://localhost:3000](http://localhost:3000)
+
+![1.jpg](..%2F..%2F..%2F..%2F1.jpg)
