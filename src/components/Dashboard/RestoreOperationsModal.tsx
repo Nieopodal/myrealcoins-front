@@ -25,7 +25,7 @@ export const RestoreOperationsModal = ({open, operations}: Props) => {
         setLoading(true);
         for (const operation of operations) {
             try {
-                const res = await fetchHandler(`${apiUrl}/api/period/create-new-operation-from-schema/${operation.id}`, "POST");
+                const res = await fetchHandler(`${apiUrl}/period/create-new-operation-from-schema/${operation.id}`, "POST");
                 const data: ApiResponse<true> = await res.json();
                 if (data.success) {
                     setRestoreResults(prev => [...prev, 1]);

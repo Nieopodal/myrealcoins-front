@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import {AllOperations} from "../../components/AllOperations/AllOperations";
 import {Map} from "../../components/Map/Map";
 import {showToast, Toast} from "../../utils/show-toast";
+import {getCoords} from "../../utils/handlers/device-geolocation-handler";
+import ThreeDots from "../../components/common/Loader";
 
 interface UserGeolocation {
     lat: null | number;
@@ -9,36 +11,33 @@ interface UserGeolocation {
 }
 
 export const MapView = () => {
-
+    const [loading, setLoading] = useState<boolean>(false);
     const [userGeolocation, setUserGeolocation] = useState<UserGeolocation>({
         lat: null,
         lon: null,
     });
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
+        (async () => {
+            try {
+                setLoading(true);
+                const {lat, lon} = await getCoords();
                 setUserGeolocation({
-                    lat: position.coords.latitude,
-                    lon: position.coords.longitude,
+                    lat: lat,
+                    lon: lon,
                 });
-            },
-            (error) => {
-                switch (error.code) {
-                    case error.PERMISSION_DENIED:
-                        showToast(Toast.Error, "Lokalizacja zablokowana przez użytkownika.");
-                        break;
-                    case error.POSITION_UNAVAILABLE:
-                        showToast(Toast.Error, "Lokalizacja jest niedostępna.");
-                        break;
-                }
-            },
-            {
-                enableHighAccuracy: true,
-                timeout: 5000,
-            });
+            } catch (e) {
+                showToast(Toast.Error, (e as string));
+            } finally {
+                setLoading(false);
+            }
+        })();
     }, []);
 
     return <AllOperations onlyWithGps>
-        {userGeolocation && <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/>}
+        {loading && <ThreeDots/>}
+        {!loading && <>
+            {userGeolocation && <Map centerLat={userGeolocation.lat} centerLon={userGeolocation.lon}/>}
+        </>}
     </AllOperations>
 };

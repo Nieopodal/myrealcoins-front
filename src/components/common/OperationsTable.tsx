@@ -1,6 +1,6 @@
 import React from "react";
 import {OperationEntity} from "types";
-import {Card} from "./Card";
+import {Card} from "./Card/Card";
 import {TableRow} from "../Dashboard/TableRow";
 import ThreeDots from "./Loader";
 

@@ -17,7 +17,7 @@ export const MainHeaderBtn = ({user}: Props) => {
         </NavLink>}
 
         {!user && <NavLink to="/login">
-            <button className="btn btn-primary btn-sm md:btn-md hidden md:flex">Zaloguj się</button>
+            <button className="btn btn-primary btn-sm md:btn-md md:flex">Zaloguj się</button>
         </NavLink>}
     </div>
 };

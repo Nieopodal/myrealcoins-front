@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {BtnOutline} from "./BtnOutline";
-import {UserContext} from "../../contexts/user.context";
+import {BtnOutline} from "../BtnOutline";
+import {UserContext} from "../../../contexts/user.context";
 
 interface CardProps {
     children: React.ReactNode;

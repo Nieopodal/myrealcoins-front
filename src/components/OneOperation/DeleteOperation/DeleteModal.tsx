@@ -74,16 +74,16 @@ export const DeleteModal = ({id, open, handleToggle, deleteSchema, deleteOperati
 
         if (deleteOperation && !deleteSchema) {
             if (output) setTimeout(() => {
-                navigate('/', {replace: true});
+                navigate('/dashboard', {replace: true});
             }, 500);
 
         } else if (!deleteOperation && deleteSchema) {
             if (outputSchema) setTimeout(() => {
-                navigate('/', {replace: true});
+                navigate('/dashboard', {replace: true});
             }, 500);
         } else if (deleteOperation && deleteSchema) {
             if (output && outputSchema) setTimeout(() => {
-                navigate('/', {replace: true});
+                navigate('/dashboard', {replace: true});
             }, 500);
         } else {
             handleToggle();

@@ -1,4 +1,4 @@
-import {Card} from "../common/Card";
+import {Card} from "../common/Card/Card";
 import {StepOneForm} from "./steps/StepOneForm";
 import {StepTwoForm} from "./steps/StepTwoForm";
 import {StepThreeForm} from "./steps/StepThreeForm";
@@ -21,8 +21,8 @@ export const AddOperationForm = () => {
     const [waitToSend, setWaitToSend] = useState<boolean>(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
 
+    useEffect(() => {
         const firstErrorKey = Object.keys(formErrors).find((key) => formErrors[key]);
         if (firstErrorKey) {
             (document.querySelector(
@@ -35,7 +35,7 @@ export const AddOperationForm = () => {
             setErrors(null);
         }
         if (output) showToast(Toast.Success, 'Pomyślnie dodano nową operację.');
-        if (output) navigate('/', {replace: true});
+        if (output) navigate('/dashboard', {replace: true});
     }, [errors, output, Object.keys(formErrors)]);
 
     if (isLoading || waitToSend || output) return (
@@ -46,6 +46,7 @@ export const AddOperationForm = () => {
     if (actualPeriod !== null) return <form
         noValidate className="mx-auto container justify-center xl:w-[80%]"
         onSubmit={handleSubmit((data) => {
+
             (async () => {
                 setWaitToSend(true);
                 const outputData = await fetchForm(data, false);

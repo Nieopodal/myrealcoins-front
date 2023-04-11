@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {PeriodEntity} from "types";
-import {Card} from "../../common/Card";
+import {Card} from "../../common/Card/Card";
 import {ChartModal} from "./ChartModal";
 import {Chart} from "../../common/Chart";
 

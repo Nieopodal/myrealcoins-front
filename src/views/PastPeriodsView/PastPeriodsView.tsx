@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {usePeriods} from "../../hooks/usePeriods";
 import {SelectPeriod} from "../../components/common/SelectPeriod";
 import {ApiResponse, PeriodEntity} from "types";
-import {Card} from "../../components/common/Card";
+import {Card} from "../../components/common/Card/Card";
 import {PageHeader} from "../../components/common/PageHeader";
 import {PageContainer} from "../../components/common/PageContainer";
 import {AllMainCards} from "../../components/Dashboard/AllMainCards/AllMainCards";
@@ -25,7 +25,7 @@ export const PastPeriodsView = () => {
         if (selectedPeriodId.length > 0) {
             (async () => {
                 try {
-                    const res = await fetch(`${apiUrl}/api/period/${selectedPeriodId}`, {
+                    const res = await fetch(`${apiUrl}/period/${selectedPeriodId}`, {
                         credentials: 'include',
                     });
                     const data: ApiResponse<PeriodEntity | null> = await res.json();

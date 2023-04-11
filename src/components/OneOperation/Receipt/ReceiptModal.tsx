@@ -21,12 +21,13 @@ export const ReceiptModal = ({operationId, handleToggle, open}: Props) => {
 
         {error && <ErrorMessage text={error as string}/>}
         {
-            image &&
-            <img
-                className={`${smallReceipt && `h-[60vh]`} h-fit md:p-5 w-fit mx-auto`}
-                src={image as string}
-                alt="paragon fiskalny"
-            />
+            image && <div>
+                <img
+                    className={`${smallReceipt && `h-[60vh]`} h-fit md:p-5 w-fit mx-auto block`}
+                    src={image as string}
+                    alt="paragon fiskalny"
+                />
+            </div>
         }
         <div className="modal-action justify-center">
             <button className="btn btn-outline" onClick={handleToggle}>Zamknij</button>
