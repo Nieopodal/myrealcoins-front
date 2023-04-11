@@ -4,7 +4,7 @@ import {themeChange} from 'theme-change';
 export const ThemeChangeSelector = () => {
 
     const themeValues = [
-        "light", "dark", "corporate", "halloween", "forest", "luxury", "night", "coffee", "cyberpunk",
+        "dark", "light", "corporate", "halloween", "forest", "luxury", "night", "coffee", "cyberpunk",
     ];
 
     useEffect(() => {
@@ -12,12 +12,12 @@ export const ThemeChangeSelector = () => {
     }, []);
 
     return <select
-        className="select select-bordered select-xs md:select-sm max-w-[5rem] sm:max-w-fit text-[1.5vh] appearance-none mx-1"
+        className="select-bordered select-xs md:select-sm max-w-[4rem] sm:max-w-fit text-[1vh] sm:text-[1.5vh] mx-1 select"
         data-choose-theme="">
         {themeValues.map(value => <option
             key={value.toLowerCase()}
             value={value.toLowerCase()}
-            className="text-xs sm:text-sm">{value}
+            className="text-xs sm:text-sm mx-auto">{value}
         </option>)}
     </select>
 };
