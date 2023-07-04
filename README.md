@@ -77,3 +77,8 @@ Otwórz w przeglądarce:
 > [http://localhost:3000](http://localhost:3000)
 
 ![1](https://user-images.githubusercontent.com/123494717/231288940-56810172-024e-481b-9ba0-5a3f384cc31d.jpg)
+
+![MM night](https://github.com/Nieopodal/myrealcoins-front/assets/123494717/68575248-d431-4712-b876-1d8b8b828258)
+
+![mm mobile](https://github.com/Nieopodal/myrealcoins-front/assets/123494717/b46a5f47-bd07-4b3f-a9ee-c3d4c968f585)
+
